@@ -22,12 +22,13 @@
     height: auto;
     margin-bottom: 20%;
     margin-right: 10px;
-    animation: logoAnimation 4s ease-in-out;
+    animation: logoAnimation 1.02s ease-in-out;
 }
 
 @keyframes logoAnimation{
     0%{
         opacity: 0;
+        transform: scale(.7);
     }
     100%{
         opacity: 1;
