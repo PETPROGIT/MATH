@@ -1,2 +1,3 @@
-The app is not available yet. 
+The app is not available yet.
+
 Sorry :(
