@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-seri;
+}
+
+body{
+    background-color: black;   
+}
+
+.bg{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+}
+
+.mainScreen{
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    animation: downloadAnimation .5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes downloadAnimation{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.wrongScreen{
+    color: white;
+    width: 100%;
+    height: 100vh;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+
+@media (min-width:950px), (min-height: 1000px){
+    .mainScreen{
+        display: none;
+    }
+    .wrongScreen{
+        visibility: visible;
+    }
+}
+
+
