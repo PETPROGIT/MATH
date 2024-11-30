@@ -1,0 +1,9 @@
+#tokenPage{
+    visibility: hidden;
+    background-color: black;
+    position: absolute;
+}
+
+.tokenPage .open{
+    visibility: visible;
+}
