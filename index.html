@@ -50,7 +50,7 @@
                 <div class="userInfo" id="userInfo">
                     <div style="text-align: center;">
                         -----
-                        <div class="userPhoto"><img src="img/userPhoto.png" class="photo"></div>
+                        <div class="userPhoto"><img src="img/userPhoto.png" class="photo" id="photo"></div>
                         <div class="userName" id="userName"></div>
                     </div>
                 </div>
@@ -167,7 +167,8 @@
         let telegram = window.Telegram.WebApp;
         telegram.expand();
 
-        document.getElementById("userName").textContent = telegram.initDataUnsafe.user.photo_url;
+        document.getElementById("userName").textContent = telegram.initDataUnsafe.user.username;
+        document.getElementById("photo").src = telegram.initDataUnsafe.user.photo_url;
 
         window.addEventListener('load', () => {
             document.getElementById("downloadScreen").style.visibility = "hidden";
