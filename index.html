@@ -166,7 +166,7 @@
         let telegram = window.Telegram.WebApp;
         telegram.expand();
 
-        document.getElementById("userName").textContent = telegram.initDataUnsafe.user.username;
+        document.getElementById("userName").textContent = telegram.initDataUnsafe.user.photo_url;
 
         window.addEventListener('load', () => {
             document.getElementById("downloadScreen").style.visibility = "hidden";
