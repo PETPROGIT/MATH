@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=calculate" />
+    <link rel="stylesheet" href="CSS/mainScreenCSS.css">
+    <link rel="stylesheet" href="CSS/homePageCSS.css">
+    <link rel="stylesheet" href="CSS/navCSS.css">
+    <link rel="stylesheet" href="CSS/infoPageCSS.css">
+    <link rel="stylesheet" href="CSS/messageCSS.css">
+<body>
+    
+    <!-- download screen-->
+    <div class="downloadScreen" id="downloadScreen">
+        <div class="spinner-border" role="status" style="width: 60px; height: 60px;">
+            <span class="visually-hidden"><span>
+        </div>
+    </div>
+
+    <!-- bg  ------------------------------------------------------------------------- -->
+    <div class="bg">
+        <canvas id="pixie"></canvas>
+        <div class="container"></div>
+    </div>
+
+    <!-- wrong screen  ------------------------------------------------------------------------- -->
+    <section class="wrongScreen">
+        The app is not supported on this screen yet.<br>Run $MATH on another device.
+    </section>
+
+    <!-- main screen  ------------------------------------------------------------------------- -->
+    <section class="mainScreen" id="mainScreen">
+        <div class="container">
+
+            <!-- message  ------------------------------------------------------------------------- -->
+            <div class="messageModal" id="messageModal">
+                <div class="messageForm" id="messageForm">Пока не доступно...</div>
+            </div>
+
+            
+            <!-- home-game page  ------------------------------------------------------------------------- -->
+            <div class="page" id="homePage">
+
+                <!-- gir  -->
+                <div class="gir_1" id="gir"></div>
+
+                <div class="userInfo" id="userInfo">
+                    <div style="text-align: center;">
+                        <div class="userPhoto"><img src="img/userPhoto.png" class="photo"></div>
+                        <div class="userName">iwbadm</div>
+                    </div>
+                </div>
+
+                <div class="balance" id="balance">
+                    20,148
+                </div>
+
+                <div class="play" id="play"> 
+
+                    
+                    
+                </div>
+            </div>
+
+            
+            <!-- info page  ------------------------------------------------------------------------- -->
+            <div class="page" id="infoPage">      
+                <div class="description">
+                    <div class="logoInfo">
+                        $MATH
+                    </div>
+                    <div style="text-align: justify;">
+                        <span style="color: white; font-weight: 600;">◯</span> <b>$MATH</b> - приложение, в котором ты можешь получать токены, решая простые математические задания.<br><br>
+                        <span style="color: white; font-weight: 600;">◯</span> Игра длиться 60 секунд, чем больше заданий ты решишь за это время, тем больше токенов ты заработаешь.<br><br>
+                        <span style="color: white; font-weight: 600;">◯</span> Ты также можешь получать токены, участвуя в различных событиях, приглашая в игру своих друзей и выполняя задания.<br><br>
+                        <span style="color: white; font-weight: 600;">◯</span> Накопленные токены ты можешь потратить в магазине на различные виртуальные товары.<br><br>
+                        <span style="color: white; font-weight: 600;">◯</span> Или ты можешь не тратить <b>$MATH</b> и получить их на свой кошелёк после <b>листинга</b>.
+                    </div>
+                </div>
+                <div class="connectWallet">
+                    <button class="connectWalletBtn" onmousedown="showMessage()">Подключить кошелёк</button>
+                </div>
+            </div>
+
+
+
+            <!--  Nav  ------------------------------------------------------------------------- -->
+            <div class="navigation" id="navigation">
+                <div class="nav2" style="position: absolute; width: 100%; height: 11vh; display: flex; z-index: 10000;">
+                    <div class="navElement" id="homeBtn2"></div>
+                    <div class="navElement" id="adventBtn2"></div>
+                    <div class="navElement" id="taskBtn2"></div>
+                    <div class="navElement" id="shopBtn2"></div>
+                    <div class="navElement" id="infoBtn2"></div>
+                </div>
+
+                <div class="navElement" id="homeBtn">
+                    <div style="text-align: center;">
+                        <img src="img/home.png" class="navIcon">
+                        <span class="textIcon">Главная</span>
+                    </div>
+                </div>
+
+                <div class="navElement" id="adventBtn">
+                    <div style="text-align: center;">
+                        <img src="img/calendar.png" class="navIcon">
+                        <span class="textIcon">Адвент</span>
+                    </div>
+                </div>
+
+                <div class="navElement" id="taskBtn">
+                   <div style="text-align: center;">
+                        <img src="img/task.png" class="navIcon">
+                        <span class="textIcon">Задания</span>
+                    </div>
+                </div>
+
+                <div class="navElement" id="shopBtn">
+                   <div style="text-align: center;">
+                        <img src="img/shopIcon.png" class="navIcon">
+                        <span class="textIcon">Магазин</span>
+                    </div>
+                </div>
+
+                <div class="navElement active" id="infoBtn">
+                    <div style="text-align: center;">
+                         <img src="img/info.png" class="navIcon">
+                         <span class="textIcon">Инфо</span>
+                     </div>
+                 </div>
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- download script-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/transitions.js"></script>
+    <script src="js/message.js"></script>
+
+    <script>
+
+        window.addEventListener('load', () => {
+            document.getElementById("downloadScreen").style.visibility = "hidden";
+            document.getElementById("mainScreen").style.animation = "downloadAnimation .5s ease-in-out";
+            document.querySelector(".bg").style.opacity = ".2";
+            document.getElementById("gir").style.opacity = '1';
+        })
+        function gir() {
+                let nums = document.getElementById('gir').className; 
+                if(nums == 'gir_1') {document.getElementById('gir').className='gir_2';}  
+                if(nums == 'gir_2') {document.getElementById('gir').className='gir_3';}  
+                if(nums == 'gir_3') {document.getElementById('gir').className='gir_1';} 
+            }  
+            setInterval(gir, 500);  
+    </script>
+
+</body>
+</html>
