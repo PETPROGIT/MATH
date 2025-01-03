@@ -4,7 +4,7 @@
 
 
 
-let energy = 0;
+let energy = 3;
 
 const energyProgressBar = document.getElementById("progress");
 const energyBar = document.getElementById("EnergyBar");
