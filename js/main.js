@@ -1,20 +1,5 @@
 
 
-
-let telegram = window.Telegram.WebApp;
-telegram.expand();
-telegram.disableVerticalSwipes();
-telegram.lockOrientation();
-telegram.header_bg_color = "#000000";
-const username = telegram.initDataUnsafe.username;
-if(username != undefined){
-    document.getElementById("userName").textContent = username;
-}
-else{
-    document.getElementById("userName").textContent = "USER";
-}
-
-
 let balance = 990;
 
 const balanceHTML = document.getElementById("balanceHTML");
