@@ -3,7 +3,7 @@
 
 let telegram = window.Telegram.WebApp;
 telegram.expand();
-const username = telegram.initDataUnsafe.username;
+const username = telegram.initDataUnsafe.user.username;
 if(username != undefined){
     document.getElementById("userName").textContent = username;
 }
@@ -11,10 +11,10 @@ else{
     document.getElementById("userName").textContent = "NEWUSER";
 }
 
-document.getElementById("userPhoto").src = telegram.initDataUnsafe.photo_url;	
+document.getElementById("userPhoto").src = telegram.initDataUnsafe.user.photo_url;	
 
 
-document.querySelector(".tg").textContent = telegram.initDataUnsafe;
+document.querySelector(".tg").textContent = telegram.user.initDataUnsafe;
 
 let balance = 990;
 
