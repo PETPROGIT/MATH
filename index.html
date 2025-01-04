@@ -110,7 +110,6 @@
                         <img src="img/arrow.png"  style="width: 28px; transform: rotate(270deg);">
                     </button>
 
-                    <button id="testBtn">TEST</button>
                 </div>
             </div>
 
@@ -142,10 +141,6 @@
                         </div>
                         <button class="statusTaskBtn" id="TONCommunity">Start</button>
                     </div>
-                </div>
-
-                <div class="tg">
-
                 </div>
             </div>
 
@@ -283,11 +278,6 @@
 
         let userName = user.username;
         let userPhoto = user.photo_url;
-        
-        document.getElementById("testBtn").addEventListener("click", () => {
-            tg.enableClosingConfirmation();
-
-        })
 
         document.getElementById("userName").textContent = userName;
         document.getElementById("userPhoto").src = userPhoto;
