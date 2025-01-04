@@ -46,6 +46,8 @@ function stopDancing(){
     balanceHTML.style.animation = "none";
     energyProgressBar.style.transition = 'none';
     energyCheck();
+
+    tg.disableClosingConfirmation();
 }
 
 
@@ -54,9 +56,13 @@ let mining;
 let playStop = false;
 function play(){
     if(playStop == false && energy != 0){
+        
+        tg.enableClosingConfirmation();
 
         music.play();
+        
         volumeBtn.innerHTML = '<span class="material-symbols-outlined">volume_up</span>';
+        
         energyProgressBar.style.transition = 'all 243s';
 
 
