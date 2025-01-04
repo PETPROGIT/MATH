@@ -280,14 +280,19 @@
         let user = tg.initDataUnsafe.user;
 
         let userName = user.username;
+        let userPhoto = user.photo_url;
 
         tg.unlockOrientation();
 
         document.getElementById("testBtn").addEventListener("click", () => {
-            tg.openInvoice();
+            tg.addToHomeScreen();
 
         })
-        document.write("UN: ", userName);
+
+        d
+        document.getElementById("userName").textContent = userName;
+        document.getElementById("userPhoto").src = userPhoto;
+
         document.write("|| USER: ", JSON.stringify(user));
 
     </script>
