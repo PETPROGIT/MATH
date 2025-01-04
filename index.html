@@ -68,7 +68,7 @@
                         <div class="userPhoto"><img src="img/userPhoto.png" class="photo" id="userPhoto"></div>
                     </div>
                     <div style="width: 68%; text-align: left; color: white; font-size: 16px;">
-                        <div class="userName" id="userName">iwbadm</div>
+                        <div class="userName" id="userName">NEWUSER</div>
                         Energy:
                         <div class="EnergyBar" id="EnergyBar"><div class="progress" id="progress"></div></div>
                     </div>
@@ -270,8 +270,6 @@
     <script src="js/friend.js"></script>
 
     <script>
-
-        
         let telegram = window.Telegram.WebApp;
         telegram.expand();
         telegram.disableVerticalSwipes();
@@ -287,7 +285,9 @@
         
         
         document.querySelector(".tg").textContent = telegram.initDataUnsafe;
+    </script>
 
+    <script>
         window.addEventListener('load', () => {
             document.getElementById("downloadScreen").style.visibility = "hidden";
             document.getElementById("mainScreen").style.animation = "downloadAnimation .5s ease-in-out";
