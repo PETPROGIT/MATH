@@ -95,7 +95,7 @@
 
                     <button class="inviteFriends" onmousedown="showIniteFriendsWind()">
                         <div style="display: flex; align-items: center;">
-                            <img src="img/friend.png" style="width: 34px; margin-right: 15px;">
+                            <img src="img/friend.png" style="width: 64px; margin-right: 15px;">
                             Invite friends
                         </div>
                         <img src="img/arrow.png"  style="width: 28px; transform: rotate(20deg);">
@@ -134,14 +134,11 @@
         tg.expand();
         tg.bottom_bar_bg_color = "#000000";
         tg.header_bg_color = "#000000";
-        
+        tg.disableVerticalSwipes();
         let user = tg.initDataUnsafe.user;
 
         let userName = user.username;
         let userPhoto = user.photo_url;
-
-        tg.lockOrientation();
-        tg.DeviceOrientation.start();
         
         document.getElementById("testBtn").addEventListener("click", () => {
             tg.enableClosingConfirmation();
@@ -154,7 +151,7 @@
         document.getElementById("userName").textContent = userName;
         document.getElementById("userPhoto").src = userPhoto;
 
-        document.write("|| chat: ", JSON.stringify(tg.DeviceOrientation));
+        document.write("||", tg.checkHomeScreenStatus());
 
     </script>
 
