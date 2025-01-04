@@ -16,7 +16,7 @@ document.getElementById("userPhoto").src = telegram.initDataUnsafe.user.photo_ur
 
 document.querySelector(".tg").textContent = telegram.user.initDataUnsafe;
 
-let balance = 0;
+let balance = 90;
 
 const balanceHTML = document.getElementById("balanceHTML");
 
