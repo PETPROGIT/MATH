@@ -141,8 +141,8 @@
         let userPhoto = user.photo_url;
 
         tg.lockOrientation();
-
-
+        tg.Accelerometer.start();
+        
         document.getElementById("testBtn").addEventListener("click", () => {
             tg.enableClosingConfirmation();
 
