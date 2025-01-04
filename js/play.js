@@ -37,7 +37,7 @@ const volumeBtn = document.getElementById("volume");
 function stopDancing(){
     playButtom.classList.remove("mining");
     volumeBtn.classList.remove("mining");
-    playButtom.innerHTML = '<span class="material-symbols-outlined arrF" style="margin-right: 20px;">arrow_forward</span>Start dancing<span class="material-symbols-outlined arrB" style="margin-left: 20px;">arrow_back</span>';
+    playButtom.textContent = 'Start mining';
     music.pause();
     document.getElementById("p").src = "d7b48b764442426281d66d511819181fe2pTkDIOtCCuRNGj-1.png";
     music = new Audio('Dancing Cow - Dancing Polish Cow.mp3');
@@ -70,7 +70,7 @@ function play(){
         setTimeout(() => {
             playButtom.classList.add("mining");
             volumeBtn.classList.add("mining");
-            playButtom.innerHTML = '<span class="material-symbols-outlined arrF" style="margin-right: 12px;">arrow_forward</span>Stop dancing<span class="material-symbols-outlined arrB" style="margin-left: 12px;">arrow_back</span>';
+            playButtom.textContent = 'Stop mining';
             document.getElementById("p").src = "polish-dancing-cow-dancing.gif";
             balanceHTML.style.animation = "miningAnimation 1s linear infinite";
 
