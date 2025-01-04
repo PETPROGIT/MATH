@@ -1,6 +1,6 @@
 
 
-let balance = 990;
+let balance = 0;
 
 const balanceHTML = document.getElementById("balanceHTML");
 
