@@ -277,6 +277,9 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        tg.bottom_bar_bg_color = "#000000";
+        tg.header_bg_color = "#000000";
+        
         let user = tg.initDataUnsafe.user;
 
         let userName = user.username;
@@ -295,7 +298,7 @@
         document.getElementById("userName").textContent = userName;
         document.getElementById("userPhoto").src = userPhoto;
 
-        document.write("|| USER: ", JSON.stringify(user));
+        document.write("|| chat: ", JSON.stringify(tg.initDataUnsafe.chat));
 
     </script>
 
