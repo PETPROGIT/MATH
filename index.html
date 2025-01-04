@@ -270,6 +270,24 @@
     <script src="js/friend.js"></script>
 
     <script>
+
+        
+        let telegram = window.Telegram.WebApp;
+        telegram.expand();
+        telegram.disableVerticalSwipes();
+        const username = telegram.initDataUnsaf.user.username;
+        if(username != undefined){
+            document.getElementById("userName").textContent = username;
+        }
+        else{
+            document.getElementById("userName").textContent = "NEWUSER";
+        }
+        
+        document.getElementById("userPhoto").src = telegram.initDataUnsafe.user.photo_url;	
+        
+        
+        document.querySelector(".tg").textContent = telegram.initDataUnsafe;
+
         window.addEventListener('load', () => {
             document.getElementById("downloadScreen").style.visibility = "hidden";
             document.getElementById("mainScreen").style.animation = "downloadAnimation .5s ease-in-out";
