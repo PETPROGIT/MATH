@@ -18,12 +18,39 @@
 
     
 <body>
+    
+    <!-- download screen-->
+    <div class="downloadScreen" id="downloadScreen">
+        <div class="spinner-border" role="status" style="width: 60px; height: 60px;">
+            <span class="visually-hidden"><span>
+        </div>
+    </div>
 
+
+    <!-- wrong screen  ------------------------------------------------------------------------- -->
+    <section class="wrongScreen">
+        <span style="color: white;">This app is not optimized for this screen yet.</span>
+    </section>
+
+    <div class="bg">
+        <canvas id="pixie"></canvas>
+        <div class="container"></div>
+    </div>
+    
     <!-- main screen  ------------------------------------------------------------------------- -->
     <section class="mainScreen" id="mainScreen">
         <div class="container">
 
 
+
+
+
+
+
+            <!-- message  ------------------------------------------------------------------------- -->
+            <div class="messageModal" id="messageModal">
+                <div class="messageForm" id="messageForm">Not available yet</div>
+            </div>
 
 
 
@@ -83,6 +110,120 @@
 
 
 
+            <!-- tasks page  ------------------------------------------------------------------------- -->
+            <div class="page" id="taskPage">
+                <div class="tasksSection">
+                    
+                    <div class="task" id="task1">
+                        <div class="taskDescription">
+                            <img src="img/taskDurov.jpg" class="taskImg">
+                            <div style="text-align: left;">
+                                <div class="taskToDo">Add to home screen</div>
+                                <div class="taskReward">+100 $COWS</div>
+                            </div>
+                        </div>
+                        <button class="statusTaskBtn" id="DuRovesChannel">Start</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- info page  ------------------------------------------------------------------------- -->
+            <div class="page" id="infoPage">      
+                <div class="description">
+                    <div class="logoInfo">
+                        $COWS
+                    </div>
+                    <div style="text-align: justify; font-size: 17px;">
+                        <span style="color: white; font-weight: 900;">&#8226</span> $MATH - приложение, в котором ты можешь получать токены, решая простые математические задания.<br><br>
+                        <span style="color: white; font-weight: 900;">&#8226</span> Игра длиться 60 секунд, чем больше заданий ты решишь за это время, тем больше токенов ты заработаешь.<br><br>
+                        <span style="color: white; font-weight: 900;">&#8226</span> Ты также можешь получать токены, участвуя в различных событиях, приглашая в игру своих друзей и выполняя задания.<br><br>
+                        <span style="color: white; font-weight: 900;">&#8226</span> Накопленные токены ты можешь потратить в магазине на различные виртуальные товары.<br><br>
+                        <span style="color: white; font-weight: 900;">&#8226</span> Или ты можешь не тратить $MATH и получить токены на свой кошелёк после листинга.
+                    </div>
+                </div>
+                <div class="connectWallet">
+                    <button class="connectWalletBtn" onmousedown="showMessage('--')">Connect wallet <span class="material-symbols-outlined" style="margin-left: 12px; font-size: 26px; margin-top: 1px;">wallet</span></button>
+                </div>
+            </div>
+
+        
+
+
+
+
+
+
+            <!--  Nav  ------------------------------------------------------------------------- -->
+            <div class="navigation" id="navigation">
+                <div class="nav2" style="position: absolute; width: 100%; height: 11vh; display: flex; z-index: 10000;">
+                    <div class="navElement" id="homeBtn2"></div>
+                    <!--<div class="navElement" id="adventBtn2"></div>-->
+                    <div class="navElement" id="taskBtn2"></div>
+                    <div class="navElementdNotWork" id="shopBtn2"></div>
+                    <div class="navElement" id="infoBtn2"></div>
+                </div>
+
+                <div class="navElement active" id="homeBtn">
+                    <div style="text-align: center;">
+                        <img src="img/home.png" class="navIcon">
+                        <span class="textIcon">Home</span>
+                    </div>
+                </div>
+
+                <!--<div class="navElement" id="adventBtn">
+                    <div style="text-align: center;">
+                        <img src="img/calendar.png" class="navIcon">
+                        <span class="textIcon">Advent</span>
+                    </div>
+                </div>-->
+
+                <div class="navElement" id="taskBtn">
+                   <div style="text-align: center;">
+                        <img src="img/task.png" class="navIcon">
+                        <span class="textIcon">Tasks</span>
+                    </div>
+                </div>
+
+                <div class="navElement" id="shopBtn">
+                   <div style="text-align: center;">
+                        <img src="img/shop.png" class="navIcon">
+                        <span class="textIcon">Shop</span>
+                    </div>
+                </div>
+
+                <div class="navElement" id="infoBtn">
+                    <div style="text-align: center;">
+                         <img src="img/info.png" class="navIcon">
+                         <span class="textIcon">Info</span>
+                     </div>
+                 </div>
+            </div>
+
+
+
+
+            <div class="friendsModal" id="friendsModal">
+                <div class="closeZone" onmousedown="showIniteFriendsWind()"></div>
+                <div class="friendsWind" id="friendsWind">
+                    <div class="header">
+                        Invite friends<img src="img/close.png" onmousedown="showIniteFriendsWind()" style="width: 28px; transform: rotate(90deg);">
+
+                    </div>
+
+                    <div class="body">
+                        <button class="inviteButtot" id="copyLinkBtn" onmousedown="copyLink()">Copy link<span class="material-symbols-outlined" style="font-size: 26px;">content_copy</span></button>
+                        <button class="inviteButtot" onmousedown="shareLink()">Share link<span class="material-symbols-outlined" style="font-size: 26px;">send</span></button>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -122,13 +263,14 @@
 
         document.getElementById("userName").textContent = userName;
         document.getElementById("userPhoto").src = userPhoto;
+
         document.write("---");
 
         function handleCheckHomeScreenStatus(status){
             document.write(status);
         }
-
         tg.checkHomeScreenStatus(handleCheckHomeScreenStatus);
+
 
 
     </script>
