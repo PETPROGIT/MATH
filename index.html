@@ -268,11 +268,14 @@
         document.getElementById("userPhoto").src = userPhoto;
 
         function handleCheckHomeScreenStatus(result){
-            document.write(result);
+            if(result == "added"){
+                document.write("ffkfjnf");
+            }
         }
 
 
         document.getElementById("t").addEventListener("click", ()=>{
+            
             tg.checkHomeScreenStatus(handleCheckHomeScreenStatus);
         })
         
