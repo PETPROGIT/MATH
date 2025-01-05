@@ -265,6 +265,11 @@
         document.getElementById("userName").textContent = userName;
         document.getElementById("userPhoto").src = userPhoto;
 
+        function handleCheckHomeScreenStatus(result){
+            document.write(result);
+            alert(result);
+        }
+        tg.checkHomeScreenStatus(handleCheckHomeScreenStatus);
 
     </script>
 
