@@ -105,6 +105,8 @@
                         <img src="img/arrow.png"  style="width: 28px; transform: rotate(270deg);">
                     </button>
 
+                    <button id="t">TESt</button>
+
                 </div>
             </div>
 
@@ -268,8 +270,12 @@
         function handleCheckHomeScreenStatus(result){
             document.write(result);
         }
-        tg.checkHomeScreenStatus(handleCheckHomeScreenStatus);
 
+
+        document.getElementById("t").addEventListener("click", ()=>{
+            tg.checkHomeScreenStatus(handleCheckHomeScreenStatus);
+        })
+        
     </script>
 
     <script>
