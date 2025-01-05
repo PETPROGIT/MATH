@@ -223,7 +223,6 @@
 
                     <div class="body">
                         <button class="inviteButtot" id="copyLinkBtn" onmousedown="copyLink()">Copy link<span class="material-symbols-outlined" style="font-size: 26px;">content_copy</span></button>
-                        <button class="inviteButtot" onmousedown="shareLink()">Share link<span class="material-symbols-outlined" style="font-size: 26px;">send</span></button>
                     </div>
                 </div>
             </div>
@@ -268,11 +267,12 @@
         document.getElementById("userPhoto").src = userPhoto;
 
         function handleCheckHomeScreenStatus(result){
-            document.write("ffkfjnf");
             alert("ef");
             location.reload();
         }
 
+        localStorage.setItem('test', 120);
+        document.write(localStorage.getItem('test'));
 
         document.getElementById("t").addEventListener("click", ()=>{
             
