@@ -1,0 +1,91 @@
+
+#taskPage{
+    display: none;
+    text-align: center;
+    min-height: auto;
+}
+
+.tasksSection{
+    color: black;
+    padding: 5% 0;
+    text-align: center;
+}
+
+.task{
+    width: 100%;
+    height: 7vh;
+    min-height: 64px;
+    max-height: 74px;
+    border: 1.5px solid rgb(70, 70, 70);
+    background-color: rgb(10, 10, 10);
+    border-radius: 14px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-bottom: 8px;
+}
+
+.task.done{
+    opacity: .75;
+}
+
+.taskDescription{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.taskImg{
+    width: 46px;
+    min-height: 46px;
+    border-radius: 25%;
+    border: 3px solid;
+    margin-right: 6px;
+    border: none;
+}
+
+.taskToDo{
+    font-size: 15.5px;
+    margin-bottom: .5px;
+}
+
+.taskReward{
+    font-size: 14px;
+    color: rgb(135, 135, 135);
+    word-spacing: -1px;
+}
+
+.statusTaskBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 70px;
+    padding: 0 10px;
+    height: 33px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 90, 110);
+    border: 2px solid rgb(0, 90, 110);
+    border-radius: 9px 9px;
+    font-size: 18px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+
+
+@media (max-width: 355px){
+    .statusTaskBtn{
+        padding: 0 5px;
+    }
+    
+    .taskToDo{
+        font-size: 14.5px;
+        margin-bottom: 2px;
+    }
+    
+    .taskReward{
+        font-size: 13px;
+    }
+
+}
