@@ -1,0 +1,220 @@
+#homePage{
+    display: none;
+    text-align: center;
+    min-height: 720px;
+    position: relative;
+}
+
+
+/*    user info    */
+.userInfo{
+    margin-top: 5px;
+    width: 98%;
+    height: 11vh;
+    min-height: 88px;
+    max-height: 98px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: rgb(10, 10, 10);
+    border: 1.5px solid rgb(70, 70, 70);
+    border-radius: 18px 18px;
+    margin-bottom: 2vh;
+}
+.userPhoto{
+    display: inline-block;
+    width: 98%;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 15px;
+
+}
+.userPhoto .photo{
+    width: 8vh;
+    height: 8vh;
+    min-height: 70px;
+    min-width: 70px;
+    max-height: 99px;
+    max-width: 99px;
+    border-radius: 22%; 
+}
+.userName{
+    font-size: 20px;
+    font-weight: 550;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: -2px;
+}
+
+.EnergyBar{
+    height: 12px;
+    border-radius: 8px 8px;
+    border: 1px solid rgb(200, 200, 200);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+
+.progress{
+    width: 0%;
+    height: 100%;
+    background-color: rgb(200, 200, 200);
+    /*rgb(105, 197, 123)  rgb(197, 105, 105)*/
+    border-radius: 4px 4px;
+    transition: all 0 ease-in-out;
+}
+
+/*    balance    */
+.balance{
+    width: 100%;
+    height: 17vh;
+    min-height: 124px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 1vh;
+    margin-top: 1.5vh;
+}
+
+@keyframes balanceMining {
+    0%{
+        opacity: 1;
+
+    }
+    50%{
+        opacity: 0;
+        transform: scale(.9);
+    }
+    100%{
+        opacity: 1;
+
+    }
+}
+
+.cowMining{
+    margin-top: 2vh;
+    height: 24vh;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vh;
+}
+
+/*    play    */
+.play{
+    height: 24vh;
+    min-height: 160px;
+    width: 100%;
+    justify-content: center;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding-top: 7vh;
+}
+
+
+
+
+.startMining{
+    width: 98%;
+    height: 7vh;
+    min-height: 56px;
+    max-height: 74px;
+    border-radius: 15px 15px;
+    border: none;
+    background-color: rgb(10, 10, 10);
+    color: rgb(255, 255, 255);
+    border: 1.5px solid rgb(70, 70, 70);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 1vh;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    transition: all .2s ease-in-out;
+    
+}
+
+
+.startMining.mining{
+    width: 78%;
+    margin-left: 20%;
+}
+
+.volume{
+    position: absolute;
+    width: 5%;
+    height: 7vh;
+    min-height: 56px;
+    max-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgb(70, 70, 70);
+    background-color: rgb(10, 10, 10);
+    color: white;
+    border-radius: 15px 15px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s ease-in-out;
+}
+
+.volume.mining{
+    visibility: visible;
+    opacity: 1;
+    width: 20%;
+}
+
+
+
+
+.inviteFriends{
+    margin-top: 1vh;
+    width: 98%;
+    height: 7vh;
+    min-height: 56px;
+    max-height: 74px;
+    background-color: rgb(10, 10, 10);
+    padding:0 20px;
+    color: rgba(255, 255, 255);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid rgb(70, 70, 70);
+    border-radius: 15px 15px;
+    font-size: 18px;
+
+}
+
+
+
+
+
+
+/*  media    */
+@media (max-height: 530px), (max-width: 326px){
+
+    .userName{
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width: 415px){
+
+    .userName{
+        font-size: 21px;
+    }
+}
