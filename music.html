@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+</head>
+
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Unbounded", serif;
+        }
+
+        .main{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(12, 12, 12);
+        }
+
+        .cover{
+            display: block;
+            width: 82vw;
+            height: 82vw;
+            max-width: 360px;
+            max-height: 360px;
+            background-color: white;
+            border-radius: 8%;
+        }
+        .controls{
+            text-align: center;
+        }
+
+
+        .about{
+            text-align: center;
+            color: white;
+            margin-bottom: 16px;
+            margin-top: 54px;
+
+        }
+        .name{
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 2px;
+        }
+        .author{
+            font-size: 14px;
+        }
+        .progressBar{
+            display: inline-block;
+            width: 94%;
+            height: 10px;
+            border: 1px solid white;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            margin-top: 5px;
+
+        }
+        .progress{
+            width: 0;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+
+            transition: all .2s ease-in-out;
+        }
+        .playerBtns{
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .playerBtn{
+            font-size: 34px;
+        }
+
+        #playBtn{
+            font-size: 44px;
+        }
+
+        .moodBlock{
+            width: 100%;
+            height: 7vh;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            padding: 0 10px;
+            margin-bottom: 30px;
+            background-color: rgb(30, 30, 30);
+
+        }
+
+        .changeMood{
+            width: 70%;
+            height: 5vh;
+            padding: 0 5px;
+            border-radius: 15px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(19, 80, 222);
+            color: rgb(255, 255, 255);
+            border: none;
+
+        }
+
+        .imgMood{
+            width: 14%;
+        }
+
+    </style>
+
+    <div class="main">
+
+       <div style="margin-bottom: 2vh;">
+
+            <div class="moodBlock">
+                 <img src="emoji3.gif" class="imgMood"><button class="changeMood">Изменить</button>
+            </div>
+            
+            <img class="cover" src="https://avatars.yandex.net/get-music-content/32236/226672a9.a.299441-1/m1000x1000?webp=false">
+                
+            <div class="controls">
+                <div class="about">
+                    <div class="name">Dream On</div>
+                    <div class="author">Aerosmith</div>
+                </div>
+                <div class="progressBar">
+                    <div class="progress" id="progress">
+                    </div>
+                </div>
+
+                <div class="playerBtns">
+                    <span class="material-symbols-outlined playerBtn">fast_rewind</span>
+
+                    <span class="material-symbols-outlined playerBtn" onmousedown="play()" id="playBtn">play_arrow</span>
+
+                    <span class="material-symbols-outlined playerBtn">fast_forward</span>
+
+                </div>
+
+
+            </div>
+            
+       </div>
+
+
+        
+
+    </div>
+
+    <script src="play.js"></script>    
+</body>
+</html>
