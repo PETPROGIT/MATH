@@ -238,7 +238,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     width: auto;
     border-radius: 15px;
-    padding: 3px 30px;
+    padding: 3px 24px;
     font-size: 14px;
     border: none;
     background-color: rgb(107, 0, 237);
