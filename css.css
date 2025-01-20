@@ -30,6 +30,11 @@ body::-webkit-scrollbar {
     width: 0;
 }
 
+.main::-webkit-scrollbar {
+    width: 0;
+}
+
+
 
 .bg{
     width: 100vw;
