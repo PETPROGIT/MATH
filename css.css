@@ -43,7 +43,7 @@ body::-webkit-scrollbar {
     height: 100vh;
     background: rgba(31, 0, 48);
     background: radial-gradient(circle, rgb(27, 0, 40, .9) 10%, rgb(10, 10, 10, 1) 70%);
-    padding: 12px;
+    padding: 4px 12px;
     min-height: 684px;
     backdrop-filter: blur(15px);
     z-index: 1000;
