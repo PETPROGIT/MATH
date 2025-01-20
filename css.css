@@ -228,7 +228,7 @@ body::-webkit-scrollbar {
     align-items: end;
     justify-content: center;
     height: 6vh;
-    min-height: 44px;
+    min-height: 52px;
 }
 
 .walletBtn{
