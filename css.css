@@ -24,8 +24,12 @@
 
 body{
     overflow-x: hidden;
-    scrollbar-width: 0;
 }
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
 
 .bg{
     width: 100vw;
