@@ -25,17 +25,10 @@
 body{
     overflow-x: hidden;
 }
-
 body::-webkit-scrollbar {
-    width: 0;
+    width: 0px;
     visibility: hidden;
 }
-
-.main::-webkit-scrollbar {
-    width: 0;
-}
-
-
 
 .bg{
     width: 100vw;
@@ -50,35 +43,41 @@ body::-webkit-scrollbar {
     height: 100vh;
     background: rgba(31, 0, 48);
     background: radial-gradient(circle, rgb(27, 0, 40, .9) 10%, rgb(10, 10, 10, 1) 70%);
-    padding: 2px 12px;
+    padding: 12px;
     min-height: 684px;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(15px);
     z-index: 1000;
 }
-
+/*--*/
 .logo{
     width: 76px;
     position: absolute;
     z-index: 1000;
     top: 0;
     right: 0;
+    margin-right: 5px;
     border-radius: 15px;
     opacity: .6;
     margin-top: 5px;
+    border: .5px solid rgb(100, 100, 100);
 }
 
 .userInfoBlock{
     width: 100%;
     height: 12.5vh;
     min-height: 86px;
-    background-color: rgba(110, 110, 110, 0.1);
-    border: 1.5px solid rgb(100, 100, 100);
+
     display: flex;
     align-items: center;
     border-radius: 18px;
     padding: 0 10px;
-    color: white;
     position: relative;
+    background-color: rgba(110, 110, 110, 0.1);
+    border: 1.5px solid rgb(100, 100, 100);
+    color: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.05) inset;
+    -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.05) inset;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.05) inset;
     
 }
 
@@ -89,6 +88,7 @@ body::-webkit-scrollbar {
     border-radius: 20%;
     border: 2px solid black;
     margin-right: 4%;
+    border: 1.5px solid rgb(100, 100, 100);
 }
 
 
@@ -102,16 +102,17 @@ body::-webkit-scrollbar {
     font-size: 19px;
 }
 
+/*--*/
 .energy{
     position: absolute;
     bottom: 0;
     width: 100%;
-    font-size: 12px;
+    font-size: 11.5px;
 }
 
 .progressBar{
     width: 100%;
-    height: 1.5vh;
+    height: 1.4vh;
     min-height: 10px;
     border: 1.5px solid rgb(255, 255, 255);
     border-radius: 10px;
@@ -129,11 +130,11 @@ body::-webkit-scrollbar {
 
 
 
-
+/*----*/
 .balance{
     width: 100%;
-    height: 22vh;
-    min-height: 150px;
+    height: 18vh;
+    min-height: 123px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,6 +143,7 @@ body::-webkit-scrollbar {
     margin-bottom: -10px;
 }
 
+/*----*/
 .tap{
     display: flex;
     align-items: center;
@@ -149,7 +151,7 @@ body::-webkit-scrollbar {
     height: 40vh;
     min-height: 273px;
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .tapImg{
@@ -162,9 +164,6 @@ body::-webkit-scrollbar {
 
 
 .inviteFriendsBtn{
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
-    -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
-    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
     width: 100%;
     height: 7vh;
     min-height: 50px;
@@ -181,6 +180,9 @@ body::-webkit-scrollbar {
     background-color: rgba(110, 110, 110, 0.1);
     border: 1.5px solid rgb(100, 100, 100);
     color: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
+    -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1) inset;
 
 }
 
@@ -208,10 +210,40 @@ body::-webkit-scrollbar {
 
     background-color: rgba(110, 110, 110, 0.1);
     border: 1.5px solid rgb(100, 100, 100);
-    color: white;
+    color: rgb(255, 255, 255);
 
 
 }
+
+
+
+
+
+
+
+/*----*/
+
+.walletBtnBlock{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 6vh;
+}
+
+.walletBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    border-radius: 15px;
+    padding: 3px 30px;
+    font-size: 14px;
+    border: none;
+    background-color: rgb(107, 0, 237);
+    color: white;
+}
+
 
 
 @media (max-width: 370px) {
