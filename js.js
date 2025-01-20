@@ -14,9 +14,9 @@ function site(){
 }
 
 
-let balance = 0;
+let balance = 11100;
 let balanceHTML = document.getElementById("balance");
-balanceHTML.style.fontSize = "38px";
+balanceHTML.style.fontSize = "40px";
 function updateBalance(){
     balanceSTR = balance.toString();
     if(balance >= 1000){
@@ -69,7 +69,7 @@ function tap(){
                 energy+=2;
                 updateEnergy();
                 console.log(energy);
-            }, 1000);
+            }, 60000);
         }
     }
 }
