@@ -85,7 +85,6 @@ body::-webkit-scrollbar {
     min-height: 70px;
     min-width: 70px;
     border-radius: 20%;
-    border: 2px solid black;
     margin-right: 4%;
 }
 
