@@ -14,7 +14,7 @@ function site(){
 }
 
 
-let balance = 11100;
+let balance = 0;
 let balanceHTML = document.getElementById("balance");
 balanceHTML.style.fontSize = "40px";
 function updateBalance(){
