@@ -235,7 +235,7 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
     width: auto;
-    border-radius: 15px;
+    border-radius: 12px;
     padding: 3px 24px;
     font-size: 14px;
     border: none;
