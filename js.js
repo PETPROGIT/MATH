@@ -14,7 +14,7 @@ function site(){
 }
 
 function inviteFriends(){
-    window.location.href = "https://t.me/share/url?url=&text=Привет!+🙂+Скорее+переходи+по+ссылке+и+присоединяйся+к+ФПИ+банку:+https://t.me/FPITAP_bot?startapp";
+    window.location.href = "https://t.me/share/url?url=&text=Привет!+🙂+Скорее+переходи+по+ссылке+и+присоединяйся+к+ФПИ+банку:+https://t.me/FPITAP_bot";
 }
 
 
