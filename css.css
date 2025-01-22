@@ -87,7 +87,6 @@ body::-webkit-scrollbar {
     min-width: 70px;
     border-radius: 20%;
     margin-right: 4%;
-    border: 1.5px solid rgb(100, 100, 100);
 }
 
 
@@ -121,7 +120,7 @@ body::-webkit-scrollbar {
 
 .progressB{
     height: 100%;
-    border-radius: 9px;
+    border-radius: 7px;
     width: 80%;
     background-color: rgb(255, 255, 255);
 }
@@ -240,7 +239,7 @@ body::-webkit-scrollbar {
     padding: 3px 22px;
     font-size: 13px;
     border: none;
-    background-color: rgb(106, 0, 255);
+    background-color: rgb(106, 0, 255, .9);
     color: white;
 }
 
