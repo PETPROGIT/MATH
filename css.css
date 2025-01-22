@@ -120,9 +120,10 @@ body::-webkit-scrollbar {
 
 .progressB{
     height: 100%;
-    border-radius: 7px;
+    border-radius: 5px;
     width: 80%;
     background-color: rgb(255, 255, 255);
+    transition: all .15s linear;
 }
 
 
