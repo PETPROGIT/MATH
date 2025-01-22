@@ -19,7 +19,7 @@
     background: rgb(31, 0, 48);
     background: radial-gradient(circle, rgb(12, 0, 18) 0%, rgb(10, 10, 10) 100%);
     color: white;
-
+    min-height: 684px;
 }
 
 body{
