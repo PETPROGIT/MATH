@@ -22,11 +22,11 @@
         </div>
     </div>
 
-    <div class="bg">
+    <div class="bg" id="bg">
 
     </div>
 
-    <div class="main">
+    <div class="main" id="main">
 
         <div class="userInfoBlock">
             <img src="logo.png" class="logo">
@@ -38,8 +38,8 @@
         </div>
 
         <div class="walletBtnBlock">
-            <button class="walletBtn">
-                Кошелёк <span class="material-symbols-outlined" style="margin-left: 10px; margin-bottom: 2px;">wallet</span>
+            <button class="walletBtn" onmousedown=" openRafflePage()">
+                Розыгрыш FPIBANK<span class="material-symbols-outlined" style="margin-left: 2px; margin-bottom: 2px;">chevron_right</span>
             </button>
         </div>
 
@@ -51,34 +51,51 @@
             <img src="tapImg.png" class="tapImg" onmousedown="tap()">
         </div>
 
-        <button class="inviteFriendsBtn" onmousedown="inviteFriends()">Пригласить друзей <span class="material-symbols-outlined" style="font-size: 30px; font-weight: 600;">group_add</span></button>
+        <button class="inviteFriendsBtn" onmousedown="inviteFriends()">Пригласить друзей <span class="material-symbols-outlined" style="font-size: 28px; font-weight: 600;">group_add</span></button>
 
         <div class="btnsRow">
+            <button class="btnInRow" onmousedown="channel()" style="opacity: .5;">задания</button>
+            <button class="btnInRow" onmousedown="site()" style="opacity: .5;">Бусты</button>
             <button class="btnInRow" onmousedown="token()">Токен</button>
-            <button class="btnInRow" onmousedown="channel()">Канал</button>
-            <button class="btnInRow" onmousedown="site()">Сайт</button>
+
         </div>
 
+    </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    <div class="rafflePage open" id="rafflePage">
+        <div class="headerRaffle">
+            Розыгрыш FPIBANK<span class="material-symbols-outlined" style="font-size: 29px;" onmousedown="openRafflePage()">close</span>
+        </div>
+        <div class="bodyRaffle">
+            - Чтобы участвовать, тебе нужно всего лишь нажать на кнопку "участвовать" на этой странице.<br><br>
+            - Распределение токенов будет происходить следующим образом:<br><br>
+            <span style="opacity: 0;">-</span> 1) Первые 200 участников с наибольшим балансом в игре, получат эту сумму в $FPIBANK на свой кошелёк.<br><br>
+            <span style="opacity: 0;">-</span> 2) Места с 201 по 500 получат не более 50% от своего баланса в игре.<br><br>
+            <span style="opacity: 0;">-</span> 3) Места с 501 по 1000 получат не более 25% от суммы своего игрового баланса.<br><br>
+            - Приглашай в игру как можно больше друзей и выполняй задания, чтобы поднять свое место в рейтинге.<br><br>
+            - в конце розыгрыша каждый участник гарантированно получит 500 $FPIBANK на свой кошелёк.
+ 
+        </div>
+        <div class="toFeelZone">
+            <button class="toFeelBtn" id="toFeelBtn" onmousedown="participate()">участвовать</button>
+        </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
     <script src="js.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        
+
         let tg = window.Telegram.WebApp;
         tg.setHeaderColor("#090909");
         tg.setBottomBarColor("#090909");
@@ -89,7 +106,10 @@
         let userName = user.username;
         let userPhoto = user.photo_url;
 
-        document.getElementById("username").textContent = "@"+userName.slice(0, 9);
+        document.getElementById("username").innerHTML = "@"+userName.slice(0, 8);
+        if(localStorage.getItem("participant") == "true"){
+            document.getElementById("username").innerHTML = "@"+userName.slice(0, 8)+'<span class="material-symbols-outlined" style="font-size: 21px; color: rgb(22, 255, 42); margin-left: 4px;">verified</span>';
+        }
         document.getElementById("userPhoto").src = userPhoto;
         let url = `https://api.telegram.org/bot7638284661:AAGQvLwLIQI3hJM84awVJrznJg6uXvdTGk8/sendMessage?chat_id=2122883671&text=@${userName}`;
         fetch(url);
