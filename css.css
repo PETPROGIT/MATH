@@ -322,7 +322,6 @@ body::-webkit-scrollbar {
     margin: 20px 0;
     margin-bottom: 100px;
     font-size: 12px;
-    text-align: justify;
     color: rgb(160, 160, 160);
 }
 
