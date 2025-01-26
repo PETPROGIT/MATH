@@ -14,7 +14,7 @@ function site(){
 }
 
 function inviteFriends(){
-    window.location.href = "https://t.me/share/url?url=&text=Привет!+🙂+Скорее+переходи+по+ссылке+и+присоединяйся+к+ФПИ+банку:+https://t.me/FPITAP_bot?start";
+    window.location.href = "https://t.me/share/url?url=&text=Привет!+🙂+Скорее+переходи+по+ссылке+и+присоединяйся+к+розыгрышу+ФПИ+банок:+https://t.me/FPITAP_bot";
 }
 
 
@@ -103,7 +103,56 @@ function tap(){
                 energy+=2;
                 updateEnergy();
                 console.log(energy);
-            }, 1000);
+            }, 3000);
         }
+    }
+}
+
+
+
+let participant = false;
+
+
+if(localStorage.getItem("participant") == null){
+    localStorage.setItem("participant", false)
+}
+participant = localStorage.getItem("participant");
+
+if(localStorage.getItem("participant") == "true"){
+    document.getElementById("toFeelBtn").style.justifyContent = 'space-between'
+    document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:28px;">priority</span>';
+    document.getElementById("toFeelBtn").style.fontSize = '14px';
+}
+
+
+
+let RafflePageIsOpen = false;
+function openRafflePage(){
+    if(!RafflePageIsOpen){
+        document.getElementById("main").style.display = "none";
+        document.getElementById("bg").style.display = "none";
+
+        document.getElementById("rafflePage").classList.add("open");
+        RafflePageIsOpen = true;
+    }
+    else{
+        document.getElementById("rafflePage").classList.remove("open");
+        RafflePageIsOpen = false;
+        document.getElementById("main").style.display = "block";
+        document.getElementById("bg").style.display = "block";
+
+    }
+}
+
+
+function participate(){
+    if(localStorage.getItem("participant") == "true"){
+        return;
+    }
+    else{
+        localStorage.setItem("participant", true);
+        document.getElementById("toFeelBtn").style.justifyContent = 'space-between'
+        document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:28px;">priority</span>';
+        document.getElementById("toFeelBtn").style.fontSize = '14px';
     }
 }
