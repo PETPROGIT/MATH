@@ -69,7 +69,7 @@ if(energy < 100){
         }
         energy=parseInt(energy)+2;
         updateEnergy();
-    }, 1000);
+    }, 3000);
 }
 let energyHTML = document.getElementById("energyBar");
 function updateEnergy(){
