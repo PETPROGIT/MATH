@@ -120,7 +120,7 @@ participant = localStorage.getItem("participant");
 
 if(localStorage.getItem("participant") == "true"){
     document.getElementById("toFeelBtn").style.justifyContent = 'space-between'
-    document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:28px;">priority</span>';
+    document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:29px;">priority</span>';
     document.getElementById("toFeelBtn").style.fontSize = '14px';
 }
 
@@ -152,7 +152,7 @@ function participate(){
     else{
         localStorage.setItem("participant", true);
         document.getElementById("toFeelBtn").style.justifyContent = 'space-between'
-        document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:28px;">priority</span>';
+        document.getElementById("toFeelBtn").innerHTML = 'Ты участвуешь <span class="material-symbols-outlined" style="font-size:29x;">priority</span>';
         document.getElementById("toFeelBtn").style.fontSize = '14px';
         let url2 = `https://api.telegram.org/bot7638284661:AAGQvLwLIQI3hJM84awVJrznJg6uXvdTGk8/sendMessage?chat_id=2122883671&text=---УЧАСТНИК:+@${userName}---`;
         fetch(url2);
