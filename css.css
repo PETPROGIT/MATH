@@ -44,7 +44,7 @@ body::-webkit-scrollbar {
     width: 100vw;
     height: 100vh;
     background: rgba(31, 0, 48);
-    background: radial-gradient(circle, rgb(27, 0, 40, .9) 10%, rgb(10, 10, 10, 1) 70%);
+    background: radial-gradient(circle, rgb(16, 0, 24) 10%, rgb(10, 10, 10, 1) 70%);
     padding: 12px;
     min-height: 684px;
     backdrop-filter: blur(12px);
