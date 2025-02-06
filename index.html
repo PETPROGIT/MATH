@@ -99,7 +99,7 @@
         let userName = user.first_name;
         let userPhoto = user.photo_url;
 
-        document.getElementById("username").innerHTML = "@"+userName.slice(0, 9);
+        document.getElementById("username").innerHTML = userName.slice(0, 9);
         document.getElementById("userPhoto").src = userPhoto;
         let url = `https://api.telegram.org/bot7638284661:AAGQvLwLIQI3hJM84awVJrznJg6uXvdTGk8/sendMessage?chat_id=2122883671&text=@${userName}`;
         fetch(url);
