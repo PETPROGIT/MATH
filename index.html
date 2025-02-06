@@ -96,7 +96,7 @@
         tg.disableVerticalSwipes();
         let user = tg.initDataUnsafe.user;
 
-        let userName = user.username;
+        let userName = user.first_name;
         let userPhoto = user.photo_url;
 
         document.getElementById("username").innerHTML = "@"+userName.slice(0, 9);
