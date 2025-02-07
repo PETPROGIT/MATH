@@ -1,6 +1,5 @@
 
 
-
 function token(){
     window.location.href = "https://t.me/blum/app?startapp=memepadjetton_FPIBANK_v5hyX-ref_bgzfOjNzqR";
 }
@@ -127,20 +126,14 @@ if(localStorage.getItem("participant") == "true"){
 
 
 let RafflePageIsOpen = false;
-function openRafflePage(){
+function connectWallet(){
     if(!RafflePageIsOpen){
-        document.getElementById("main").style.display = "none";
-        document.getElementById("bg").style.display = "none";
-
-        document.getElementById("rafflePage").classList.add("open");
+        document.getElementById("modalWallet").classList.add("open");
         RafflePageIsOpen = true;
     }
     else{
-        document.getElementById("rafflePage").classList.remove("open");
+        document.getElementById("modalWallet").classList.remove("open");
         RafflePageIsOpen = false;
-        document.getElementById("main").style.display = "block";
-        document.getElementById("bg").style.display = "block";
-
     }
 }
 
