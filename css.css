@@ -339,7 +339,7 @@ body::-webkit-scrollbar {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.75);
     top: 0;
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(6.5px);
     display: flex;
     align-items: center;
     justify-content: center;
