@@ -32,13 +32,13 @@
             <img src="logo.png" class="logo">
             <img class="userPhoto" src="Vibee.png" id="userPhoto">
             <div class="userInfo">
-                <div class="username" id="username">@VIBEE001</div>
+                <div class="username" id="username">...</div>
                 <div class="energy" id="energy">Энергия<div class="progressBar"><div class="progressB" id="energyBar"></div></div></div>
             </div>
         </div>
 
         <div class="walletBtnBlock">
-            <button class="walletBtn">
+            <button class="walletBtn" onmousedown="connectWallet()">
                 Подключить кошелёк<span class="material-symbols-outlined" style="margin-left: 5px; margin-bottom: 2px;">chevron_right</span>
             </button>
         </div>
@@ -76,6 +76,17 @@
 
     </div>
 
+
+    <div class="modalWallet" id="modalWallet">
+        <div class="windowModalWallet">
+            <div class="headerModal">
+                Уведомление <span class="material-symbols-outlined" style="font-size: 29px;" onmousedown="connectWallet()">close</span>
+            </div>
+            <div class="bodyModal">
+                Скоро будет доступно...
+            </div>
+        </div>
+    </div>
 
 
 
@@ -115,3 +126,4 @@
 
 </body>
 </html>
+
