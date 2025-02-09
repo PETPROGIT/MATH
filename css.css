@@ -361,7 +361,7 @@ body::-webkit-scrollbar {
     padding: 15px;
     font-size: 13px;
     color: white;
-    border: 1.5px solid rgb(100, 100, 100);
+    border: 1.5px solid rgb(120, 120, 120);
 }
 
 .headerModal{
