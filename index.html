@@ -414,13 +414,15 @@
                     );
                     
                     if (!exists) {
+
                         state.myPulls.push(state.currentPull);
                         localStorage.setItem('myPulls', JSON.stringify(state.myPulls));
                         updateMyPulls();
+                        alert('Вы приняли участие в пулле!');
                     }
-                    
-                    alert('Вы приняли участие в пулле!');
-                    closeModal();
+                    else {
+                        alert('Вы уже участвуете!');
+                    }
                 }
             }
             
