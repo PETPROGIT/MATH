@@ -183,10 +183,10 @@
         telegram.expand();
         let user = telegram.initDataUnsafe.user;
 
-        let userName = user.username;
+        let userName = user.first_name;
         let userPhoto = user.photo_url;
 
-        document.getElementById("username").textContent = "@" + toString(userName);
+        document.getElementById("username").textContent = (userName);
         document.getElementById("userphoto").src = userPhoto;
 
         // Функция для переключения между вкладками
@@ -211,4 +211,5 @@
     </script>
 </body>
 </html>
+
 
