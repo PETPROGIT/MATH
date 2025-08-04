@@ -27,16 +27,32 @@
             flex-direction: column;
         }
         
-        .content {
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .content-container {
             flex: 1;
             overflow-y: auto;
+            padding-bottom: 56px; /* Высота нижнего меню */
+        }
+        
+        .content {
             padding: 20px;
         }
         
         .navbar-bottom {
             background-color: var(--secondary-bg);
             border-top: 1px solid var(--accent-color);
-            padding: 3px 0;
+            padding: 0px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 100;
         }
         
         .nav-item {
@@ -46,7 +62,6 @@
         .nav-link {
             color: var(--text-color);
             font-size: 12px;
-            padding: 5px;
             opacity: .6;
             transition: ease-in-out .2s;
             font-weight: 500;
@@ -254,46 +269,86 @@
             font-size: 14px;
             color: #aaa;
         }
+        
+        /* Новые стили для выравнивания ширины */
+        .profile-content {
+            max-width: 100%;
+        }
+        
+        .my-pulls-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div id="home" class="tab-content">
-            <div class="empty-state">
-                <p>Здесь будет содержимое главной страницы</p>
+    <div class="app-container">
+        <div class="content-container">
+            <div class="content">
+                <div id="home" class="tab-content">
+                    <div class="empty-state">
+                        <p>Здесь будет содержимое главной страницы</p>
+                    </div>
+                </div>
+                
+                <div id="pulls" class="tab-content">
+                    <div class="pull-card" data-pull='{"title":"Plush Pepe #123","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp"}'>
+                        <img src="https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp" class="pull-image" alt="Пулл 1">
+                        <div class="pull-info">
+                            <div class="pull-title">Plush Pepe #123</div>
+                            <div class="pull-description">Участников 0 из 1000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp"}'>
+                        <img src="https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp" class="pull-image" alt="Пулл 2">
+                        <div class="pull-info">
+                            <div class="pull-title">Plush Pepe #1022</div>
+                            <div class="pull-description">Участников: 0 из 1000</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="profile" class="tab-content active">
+                    <div class="profile-content">
+                        <div class="profile-pic">
+                            <img src="" id="userphoto" class="profile-pic">
+                        </div>
+                        <div class="username" id="username">username</div>
+                        <div class="section-title">Мои пуллы</div>
+                        <div id="my-pulls-container" class="my-pulls-grid empty-state">
+                            <p>У вас пока нет пуллов</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div id="pulls" class="tab-content">
-            <div class="pull-card" data-pull='{"title":"Plush Pepe #123","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp"}'>
-                <img src="https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp" class="pull-image" alt="Пулл 1">
-                <div class="pull-info">
-                    <div class="pull-title">Plush Pepe #123</div>
-                    <div class="pull-description">Участников 0 из 1000</div>
+        <nav class="navbar navbar-bottom">
+            <div class="container-fluid">
+                <div class="row w-100">
+                    <div class="col-4 nav-item">
+                        <a href="#" class="nav-link" data-tab="home">
+                            <i class="bi bi-house"></i>
+                            Главная
+                        </a>
+                    </div>
+                    <div class="col-4 nav-item">
+                        <a href="#" class="nav-link" data-tab="pulls">
+                            <i class="bi bi-collection"></i>
+                            Пуллы
+                        </a>
+                    </div>
+                    <div class="col-4 nav-item">
+                        <a href="#" class="nav-link active" data-tab="profile">
+                            <i class="bi bi-person"></i>
+                            Профиль
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp"}'>
-                <img src="https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp" class="pull-image" alt="Пулл 2">
-                <div class="pull-info">
-                    <div class="pull-title">Plush Pepe #1022</div>
-                    <div class="pull-description">Участников: 0 из 1000</div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="profile" class="tab-content active">
-            <div style="max-width: 300px; margin: 0 auto;">
-                <div class="profile-pic">
-                    <img src="" id="userphoto" class="profile-pic">
-                </div>
-                <div class="username" id="username">username</div>
-                <div class="section-title">Мои пуллы</div>
-                <div id="my-pulls-container" class="empty-state">
-                    <p>У вас пока нет пуллов</p>
-                </div>
-            </div>
-        </div>
+        </nav>
     </div>
     
     <div id="modal-overlay" class="modal-overlay">
@@ -307,31 +362,6 @@
             <button class="participate-btn">Участвовать</button>
         </div>
     </div>
-    
-    <nav class="navbar fixed-bottom navbar-bottom">
-        <div class="container-fluid">
-            <div class="row w-100">
-                <div class="col-4 nav-item">
-                    <a href="#" class="nav-link" data-tab="home">
-                        <i class="bi bi-house"></i>
-                        Главная
-                    </a>
-                </div>
-                <div class="col-4 nav-item">
-                    <a href="#" class="nav-link" data-tab="pulls">
-                        <i class="bi bi-collection"></i>
-                        Пуллы
-                    </a>
-                </div>
-                <div class="col-4 nav-item">
-                    <a href="#" class="nav-link active" data-tab="profile">
-                        <i class="bi bi-person"></i>
-                        Профиль
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -414,7 +444,6 @@
                     );
                     
                     if (!exists) {
-
                         state.myPulls.push(state.currentPull);
                         localStorage.setItem('myPulls', JSON.stringify(state.myPulls));
                         updateMyPulls();
@@ -431,21 +460,23 @@
                 
                 if (state.myPulls.length === 0) {
                     container.innerHTML = '<p>У вас пока нет пуллов</p>';
-                    container.className = 'empty-state';
+                    container.className = 'my-pulls-grid empty-state';
                     return;
                 }
                 
                 container.innerHTML = '';
-                container.className = '';
+                container.className = 'my-pulls-grid';
                 
                 state.myPulls.forEach(pull => {
                     const card = document.createElement('div');
-                    card.className = 'my-pull-card';
+                    card.className = 'pull';
                     card.innerHTML = `
-                        <img src="${pull.image}" class="my-pull-image" alt="${pull.title}">
-                        <div class="my-pull-info">
-                            <div class="my-pull-title">${pull.title}</div>
-                            <div class="my-pull-description">${pull.description}</div>
+                        <div style='display: flex; align-items: center; justify-content: space-between; background-color: var(--secondary-bg); padding: 5px; border-radius: 13px 13px;'>
+                            <img src="${pull.image}" class="my-pull-image">
+                            <div class="my-pull-info">
+                                <div class="my-pull-title">${pull.title}</div>
+                                <div class="my-pull-description">${pull.description}</div>
+                            </div>
                         </div>
                     `;
                     container.appendChild(card);
