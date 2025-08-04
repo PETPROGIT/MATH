@@ -17,7 +17,7 @@
             --accent-color: #3a3a3a;
             --active-color: #4a4a4a;
         }
-        
+
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
@@ -107,17 +107,6 @@
             display: block;
         }
 
-
-        .pull {
-            width: 100%;
-            aspect-ratio: 4/2;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--accent-color);
-            border-radius: 20px 20px;
-        }
     </style>
 </head>
 <body>
@@ -128,24 +117,18 @@
             <div class="empty-state">
                 <p>Здесь будет содержимое главной страницы</p>
                 ХУЙ ЗНАЕТ ЧТО
+                
             </div>
+
         </div>
         
         <!-- Вкладка Пуллы -->
         <div id="pulls" class="tab-content">
             <div class="empty-state">
-                <div class="pull">
-                    ПУЛЛ
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <div class="pull">
-                    ПУЛЛ
-                </div>
-                <div class="pull">
-                    ПУЛЛ
-                </div>
-                <div class="pull">
-                    ПУЛЛ
-                </div>
+
             </div>
         </div>
         
@@ -210,7 +193,7 @@
         let userName = user.first_name;
         let userPhoto = user.photo_url;
 
-        document.getElementById("username").textContent = "@" + toString(userName);
+        document.getElementById("username").textContent = userName;
         document.getElementById("userphoto").src = userPhoto;
 
         // Функция для переключения между вкладками
