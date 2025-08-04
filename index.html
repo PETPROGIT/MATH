@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
-
-    <!-- Подключаем Bootstrap через CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Иконки Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         :root {
@@ -109,7 +106,6 @@
             display: block;
         }
 
-        /* Стили для карточек пуллов */
         .pull-card {
             background-color: var(--secondary-bg);
             border-radius: 12px;
@@ -131,7 +127,7 @@
 
         .pull-title {
             font-weight: 500;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .pull-description {
@@ -143,7 +139,6 @@
             overflow: hidden;
         }
 
-        /* Стили для модального окна */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -153,8 +148,6 @@
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             display: none;
-            justify-content: center;
-            align-items: center;
         }
 
         .modal-content {
@@ -171,6 +164,12 @@
             box-sizing: border-box;
             transform: translateY(100%);
             transition: transform 0.3s ease-out;
+        }
+
+        .modal-active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-active .modal-content {
@@ -222,26 +221,51 @@
             position: sticky;
             bottom: 20px;
         }
+
+        .my-pull-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .my-pull-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 12px;
+        }
+
+        .my-pull-info {
+            flex: 1;
+        }
+
+        .my-pull-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+            font-size: 16px;
+        }
+
+        .my-pull-description {
+            font-size: 14px;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
-    <!-- Основное содержимое -->
     <div class="content">
-        <!-- Вкладка Главная -->
         <div id="home" class="tab-content">
             <div class="empty-state">
                 <p>Здесь будет содержимое главной страницы</p>
             </div>
         </div>
         
-        <!-- Вкладка Пуллы -->
         <div id="pulls" class="tab-content">
-            <!-- Две статические карточки пуллов -->
-            <div class="pull-card" onclick="openModal({
-                title: 'Пулл 1',
-                description: 'пусто',
-                image: 'https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp'
-            })">
+            <div class="pull-card" data-pull='{"title":"Plush Pepe #123","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp"}'>
                 <img src="https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp" class="pull-image" alt="Пулл 1">
                 <div class="pull-info">
                     <div class="pull-title">Plush Pepe #123</div>
@@ -249,77 +273,58 @@
                 </div>
             </div>
             
-            <div class="pull-card" onclick="openModal({
-                title: 'Plush Pepe #1022',
-                description: 'пусто',
-                image: 'https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp'
-            })">
+            <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp"}'>
                 <img src="https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp" class="pull-image" alt="Пулл 2">
                 <div class="pull-info">
-                    <div class="pull-title">Plush Pepe #1223</div>
+                    <div class="pull-title">Plush Pepe #1022</div>
                     <div class="pull-description">Участников: 0 из 1000</div>
                 </div>
             </div>
         </div>
         
-        <!-- Вкладка Профиль -->
         <div id="profile" class="tab-content active">
             <div style="max-width: 300px; margin: 0 auto;">
-                <!-- Аватар профиля -->
                 <div class="profile-pic">
                     <img src="" id="userphoto" class="profile-pic">
                 </div>
-                
-                <!-- Имя пользователя -->
                 <div class="username" id="username">username</div>
-                
-                <!-- Раздел "Мои пуллы" -->
                 <div class="section-title">Мои пуллы</div>
-                <div class="empty-state">
+                <div id="my-pulls-container" class="empty-state">
                     <p>У вас пока нет пуллов</p>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Модальное окно для просмотра пулла -->
-    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal()">
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">
                 <i class="bi bi-arrow-left"></i>
             </button>
-            
             <img id="modal-image" class="modal-image" src="" alt="Pull image">
             <h3 id="modal-title" class="modal-title"></h3>
             <p id="modal-description" class="modal-description"></p>
-            
-            <button class="participate-btn" onclick="participate()">Участвовать</button>
+            <button class="participate-btn">Участвовать</button>
         </div>
     </div>
     
-    <!-- Нижнее меню -->
     <nav class="navbar fixed-bottom navbar-bottom">
         <div class="container-fluid">
             <div class="row w-100">
-                <!-- Кнопка Главная -->
                 <div class="col-4 nav-item">
-                    <a href="#" class="nav-link" onclick="switchTab('home')">
+                    <a href="#" class="nav-link" data-tab="home">
                         <i class="bi bi-house"></i>
                         Главная
                     </a>
                 </div>
-                
-                <!-- Кнопка Пуллы -->
                 <div class="col-4 nav-item">
-                    <a href="#" class="nav-link" onclick="switchTab('pulls')">
+                    <a href="#" class="nav-link" data-tab="pulls">
                         <i class="bi bi-collection"></i>
                         Пуллы
                     </a>
                 </div>
-                
-                <!-- Кнопка Профиль -->
                 <div class="col-4 nav-item">
-                    <a href="#" class="nav-link active" onclick="switchTab('profile')">
+                    <a href="#" class="nav-link active" data-tab="profile">
                         <i class="bi bi-person"></i>
                         Профиль
                     </a>
@@ -327,77 +332,138 @@
             </div>
         </div>
     </nav>
-    
+
     <script>
-        // Инициализация Telegram WebApp
-        let telegram = window.Telegram.WebApp;
-        telegram.expand();
-        
-        // Получаем данные пользователя
-        let user = telegram.initDataUnsafe.user;
-        let userName = user.first_name;
-        let userPhoto = user.photo_url;
-        
-        // Устанавливаем данные пользователя в профиль
-        document.getElementById("username").textContent = userName;
-        document.getElementById("userphoto").src = userPhoto;
-        
-        // Функция для открытия модального окна с информацией о пулле
-        function openModal(pull) {
-            const modal = document.getElementById('modal-overlay');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация Telegram WebApp
+            const telegram = window.Telegram.WebApp;
+            telegram.expand();
             
-            // Заполняем модальное окно данными
-            document.getElementById('modal-image').src = pull.image;
-            document.getElementById('modal-title').textContent = pull.title;
-            document.getElementById('modal-description').textContent = pull.description;
+            // Получаем данные пользователя
+            const user = telegram.initDataUnsafe.user;
+            if (user) {
+                document.getElementById("username").textContent = user.first_name || 'username';
+                if (user.photo_url) {
+                    document.getElementById("userphoto").src = user.photo_url;
+                }
+            }
             
-            // Показываем модальное окно
-            modal.style.display = 'flex';
+            // Состояние приложения
+            const state = {
+                currentPull: null,
+                myPulls: JSON.parse(localStorage.getItem('myPulls')) || []
+            };
             
-            // Анимация появления
-            setTimeout(() => {
-                modal.classList.add('modal-active');
-            }, 10);
-        }
-        
-        // Функция для закрытия модального окна
-        function closeModal() {
-            const modal = document.getElementById('modal-overlay');
+            // Инициализация интерфейса
+            updateMyPulls();
+            setupEventListeners();
             
-            // Анимация исчезновения
-            modal.classList.remove('modal-active');
+            function setupEventListeners() {
+                // Обработчики для карточек пуллов
+                document.querySelectorAll('.pull-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const pullData = JSON.parse(this.dataset.pull);
+                        openModal(pullData);
+                    });
+                });
+                
+                // Обработчики для модального окна
+                document.querySelector('.modal-close').addEventListener('click', closeModal);
+                document.querySelector('.participate-btn').addEventListener('click', participate);
+                document.getElementById('modal-overlay').addEventListener('click', function(e) {
+                    if (e.target === this) closeModal();
+                });
+                
+                // Обработчики для навигации
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        switchTab(this.dataset.tab);
+                    });
+                });
+            }
             
-            // После завершения анимации скрываем модальное окно
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-        
-        // Функция для участия в пулле
-        function participate() {
-            alert('Вы приняли участие в пулле!');
-            closeModal();
-        }
-        
-        // Функция для переключения между вкладками
-        function switchTab(tabId) {
-            // Скрываем все вкладки
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            function openModal(pull) {
+                state.currentPull = pull;
+                const modal = document.getElementById('modal-overlay');
+                
+                document.getElementById('modal-image').src = pull.image;
+                document.getElementById('modal-title').textContent = pull.title;
+                document.getElementById('modal-description').textContent = pull.description;
+                
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.classList.add('modal-active');
+                }, 10);
+            }
             
-            // Показываем выбранную вкладку
-            document.getElementById(tabId).classList.add('active');
+            function closeModal() {
+                const modal = document.getElementById('modal-overlay');
+                modal.classList.remove('modal-active');
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    state.currentPull = null;
+                }, 300);
+            }
             
-            // Обновляем активное состояние в навигации
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
+            function participate() {
+                if (state.currentPull) {
+                    const exists = state.myPulls.some(
+                        pull => pull.title === state.currentPull.title
+                    );
+                    
+                    if (!exists) {
+                        state.myPulls.push(state.currentPull);
+                        localStorage.setItem('myPulls', JSON.stringify(state.myPulls));
+                        updateMyPulls();
+                    }
+                    
+                    alert('Вы приняли участие в пулле!');
+                    closeModal();
+                }
+            }
             
-            // Отменяем стандартное поведение ссылки
-            event.preventDefault();
-        }
+            function updateMyPulls() {
+                const container = document.getElementById('my-pulls-container');
+                
+                if (state.myPulls.length === 0) {
+                    container.innerHTML = '<p>У вас пока нет пуллов</p>';
+                    container.className = 'empty-state';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                container.className = '';
+                
+                state.myPulls.forEach(pull => {
+                    const card = document.createElement('div');
+                    card.className = 'my-pull-card';
+                    card.innerHTML = `
+                        <img src="${pull.image}" class="my-pull-image" alt="${pull.title}">
+                        <div class="my-pull-info">
+                            <div class="my-pull-title">${pull.title}</div>
+                            <div class="my-pull-description">${pull.description}</div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+            
+            function switchTab(tabId) {
+                closeModal();
+                
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.nav-link[data-tab="${tabId}"]`).classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
