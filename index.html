@@ -1,183 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <title>МОРГЕНШТЕРН</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-</head>
-<body>
-
-    <!-- intro screen --------------------------------------------->
+    <!-- Подключаем Bootstrap через CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Иконки Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        .introScreen{
-            width: 100%;
-            height: 200vh;
-            background: rgb(31, 0, 48);
-            background: radial-gradient(circle, rgb(12, 0, 18) 0%, rgb(10, 10, 10) 100%);
-            background: radial-gradient(circle, rgb(3, 0, 4) 0%, rgb(10, 10, 10) 100%);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-
-            animation: intro .5s ease-in-out;
-            animation-duration: 2s;
-            display: block;
+        :root {
+            --bg-color: #1e1e1e;
+            --secondary-bg: #2d2d2d;
+            --text-color: #e1e1e1;
+            --accent-color: #3a3a3a;
+            --active-color: #4a4a4a;
         }
-        .logoIntro{
-            height: 9vh;
-            min-height: 60px;
-            border-radius: 16px;
-            margin-bottom: 20vh;
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .navbar-bottom {
+            background-color: var(--secondary-bg);
+            border-top: 1px solid var(--accent-color);
+            padding: 3px 0;
+        }
+        
+        .nav-item {
+            text-align: center;
+        }
+        
+        .nav-link {
+            color: var(--text-color);
+            font-size: 12px;
+            padding: 5px;
+            opacity: .6;
+        }
+        
+        .nav-link.active {
+            color: rgb(0, 145, 193);
             opacity: 1;
-            font-size: 25px;
         }
-        .screenContent{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+        
+        .nav-link i {
+            display: block;
+            font-size: 20px;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            font-size: 30px;
-            opacity: 1;
-            color: white;
-            word-spacing: -10px;
+            font-size: 40px;
+            color: var(--text-color);
+        }
+        
+        .username {
+            font-size: 22px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            font-size: 16px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
     </style>
-    <script>
-        setTimeout(() => {
-            document.getElementById("introScreen").style.display = "none";
-        }, 2000);
-    </script>
-    <div class="introScreen" id="introScreen">
-        <div class="screenContent">
-            FPI TAP
-        </div>
-    </div>
-
-
-
-
-
-    <!-- download screen-->
-    <div class="downloadScreen" id="downloadScreen">
-        <div class="spinner-border" role="status" style="width: 60px; height: 60px;">
-            <span class="visually-hidden"><span>
-        </div>
-    </div>
-
-    <div class="bg" id="bg">
-
-    </div>
-
-    <div class="main" id="main">
-
-        <div class="userInfoBlock">
-            <img src="logo.png" class="logo">
-            <img class="userPhoto" src="Vibee.png" id="userPhoto">
-            <div class="userInfo">
-                <div class="username" id="username">...</div>
-                <div class="energy" id="energy">Энергия:<div class="progressBar"><div class="progressB" id="energyBar"></div></div></div>
+</head>
+<body>
+    <!-- Основное содержимое -->
+    <div class="content">
+        <!-- Вкладка Главная -->
+        <div id="home" class="tab-content">
+            <div class="empty-state">
+                <p>Здесь будет содержимое главной страницы</p>
+                ХУЙ ЗНАЕТ ЧТО
             </div>
         </div>
-
-        <div class="walletBtnBlock">
-            <button class="walletBtn" onmousedown="connectWallet()">
-                Подключить кошелёк<span class="material-symbols-outlined" style="margin-left: 5px; margin-bottom: 2px;">chevron_right</span>
-            </button>
-        </div>
-
-        <div class="balance" id="balance">
-            ...
-        </div>
-
-        <div class="tap">
-            <img src="tapImg.png" class="tapImg" onmousedown="tap()">
-        </div>
-
-        <button class="inviteFriendsBtn" onmousedown="inviteFriends()">Пригласить друзей <span class="material-symbols-outlined" style="font-size: 28px; font-weight: 600;">group_add</span></button>
-
-        <div class="btnsRow">
-            <button class="btnInRow" style="opacity: .3;">задания</button>
-            <button class="btnInRow" style="opacity: .3;">Бусты</button>
-            <button class="btnInRow" onmousedown="token()">Токен</button>
-
-        </div>
-
-    </div>
-
-
-    <div class="rafflePage" id="rafflePage">
-        <div class="headerRaffle">
-            Розыгрыш FPIBANK<span class="material-symbols-outlined" style="font-size: 29px;" onmousedown="openRafflePage()">close</span>
-        </div>
-        <div class="bodyRaffle">
-           Условия розыгрыша совсем скоро появятся! А пока, ты можешь приглашать в игру своих друзей (это будет одним из главных условий розыгрыша)!
-        </div>
-        <div class="toFeelZone">
-            <button class="toFeelBtn" id="toFeelBtn" onmousedown="participate()">участвовать</button>
-        </div>
-
-    </div>
-
-
-    <div class="modalWallet" id="modalWallet">
-        <div class="windowModalWallet">
-            <div class="headerModal">
-                Уведомление <span class="material-symbols-outlined" style="font-size: 29px;" onmousedown="connectWallet()">close</span>
+        
+        <!-- Вкладка Пуллы -->
+        <div id="pulls" class="tab-content">
+            <div class="empty-state">
+                <p>Здесь будут отображаться доступные пуллы</p>
             </div>
-            <div class="bodyModal">
-                Скоро будет доступно...
+        </div>
+        
+        <!-- Вкладка Профиль -->
+        <div id="profile" class="tab-content active">
+            <div style="max-width: 300px; margin: 0 auto;">
+                <!-- Аватар профиля -->
+                <div class="profile-pic">
+                    <img src="", id="userphoto">
+                </div>
+                
+                <!-- Имя пользователя -->
+                <div class="username" id="username">username</div>
+                
+                <!-- Раздел "Мои пуллы" -->
+                <div class="section-title">Мои пуллы</div>
+                <div class="empty-state">
+                    <p>У вас пока нет пуллов</p>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-    <script src="js.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Нижнее меню -->
+    <nav class="navbar fixed-bottom navbar-bottom">
+        <div class="container-fluid">
+            <div class="row w-100">
+                <!-- Кнопка Главная -->
+                <div class="col-4 nav-item">
+                    <a href="#" class="nav-link" onclick="switchTab('home')">
+                        <i class="bi bi-house"></i>
+                        Главная
+                    </a>
+                </div>
+                
+                <!-- Кнопка Пуллы -->
+                <div class="col-4 nav-item">
+                    <a href="#" class="nav-link" onclick="switchTab('pulls')">
+                        <i class="bi bi-collection"></i>
+                        Пуллы
+                    </a>
+                </div>
+                
+                <!-- Кнопка Профиль -->
+                <div class="col-4 nav-item">
+                    <a href="#" class="nav-link active" onclick="switchTab('profile')">
+                        <i class="bi bi-person"></i>
+                        Профиль
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
     <script>
 
-        let tg = window.Telegram.WebApp;
-        tg.setHeaderColor("#090909");
-        tg.setBottomBarColor("#090909");
-        tg.expand();
-        tg.disableVerticalSwipes();
+
+        let telegram = window.Telegram.WebApp;
+        telegram.expand();
         let user = tg.initDataUnsafe.user;
 
-        let userName = user.first_name;
+        let userName = user.username;
         let userPhoto = user.photo_url;
 
-        document.getElementById("username").innerHTML = userName.slice(0, 9);
-        document.getElementById("userPhoto").src = userPhoto;
-        let url = `https://api.telegram.org/bot7638284661:AAGQvLwLIQI3hJM84awVJrznJg6uXvdTGk8/sendMessage?chat_id=2122883671&text=@${user.username}`;
-        fetch(url);
+        document.getElementById("username").textContent = username;
+        document.getElementById("userphoto").src = userPhoto;
 
+        // Функция для переключения между вкладками
+        function switchTab(tabId) {
+            // Скрываем все вкладки
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Показываем выбранную вкладку
+            document.getElementById(tabId).classList.add('active');
+            
+            // Обновляем активное состояние в навигации
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Отменяем стандартное поведение ссылки
+            event.preventDefault();
+        }
     </script>
-    <script>
-        window.addEventListener('load', () => {
-            document.getElementById("downloadScreen").style.visibility = "hidden";
-            document.getElementById("mainScreen").style.animation = "downloadAnimation .5s ease-in-out";
-            document.querySelector(".bg").style.opacity = ".4";
-        }) 
-    </script>
-
 </body>
 </html>
-
