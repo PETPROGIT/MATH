@@ -132,7 +132,7 @@
 
         .pull-image {
             width: 100%;
-            aspect-ratio: 4/2.7; /* Делает высоту равной ширине (квадрат) */
+            aspect-ratio: 4/2.6; /* Делает высоту равной ширине (квадрат) */
             object-fit: cover;
         }
 
@@ -194,7 +194,7 @@
 
         .modal-image {
             width: 100%;
-            aspect-ratio: 4/2.7; /* Делает высоту равной ширине (квадрат) */
+            aspect-ratio: 4/2.6; /* Делает высоту равной ширине (квадрат) */
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -317,7 +317,7 @@
                         <div class="profile-pic">
                             <img src="" id="userphoto" class="profile-pic">
                         </div>
-                        <div class="username" id="username">username</div>
+                        <div class="username" id="username">username</div> 
                         <div class="section-title">Мои пуллы</div>
                         <div id="my-pulls-container" class="my-pulls-grid empty-state">
                             <p>У вас пока нет пуллов</p>
@@ -351,7 +351,7 @@
                     </div>
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link active" data-tab="profile">
-                            <i class="bi bi-person-circle"></i>
+                            <i class="bi bi-person-square"></i>
                             Профиль
                         </a>
                     </div>
@@ -377,11 +377,17 @@
             // Инициализация Telegram WebApp
             const telegram = window.Telegram.WebApp;
             telegram.expand();
+            telegram.disableVerticalSwipes();
             
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             if (user) {
-                document.getElementById("username").textContent = user.first_name || 'username';
+                if (user.is_premium) {
+                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i>';
+                }
+                else {
+                    document.getElementById("username").innerHTML = user.first_name;
+                }
                 if (user.photo_url) {
                     document.getElementById("userphoto").src = user.photo_url;
                 }
