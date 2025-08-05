@@ -286,7 +286,7 @@
         }
         
         .my-pull-end-date {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--primary-color);
             font-weight: 500;
             white-space: nowrap;
@@ -349,16 +349,38 @@
             background-color: var(--primary-color);
             color: white;
             opacity: 1;
-            height: 38px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 16px;
             outline: none;
             border: none;
             width: 100%;
             font-weight: 500;
+        }
+
+        /* Новые стили для статусов */
+        .pull-status {
+            font-size: 12px;
+            padding: 0px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-left: 13px;
+        }
+        
+        .status-active {
+            color: #00c853;
+        }
+        
+        .status-completed {
+            color: #ff3d00;
+        }
+        
+        .completed-date {
+            color: #ff3d00 !important;
         }
     </style>
 </head>
@@ -461,6 +483,8 @@
             
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
+            const userId = user?.id || '000000';
+            
             if (user) {
                 // Форматирование имени пользователя
                 if (user.is_premium) {
@@ -480,7 +504,7 @@
                 }
                 
                 // Отображение ID пользователя
-                document.getElementById("userid").textContent = `ID: ${user.id}`;
+                document.getElementById("userid").textContent = `ID: ${userId}`;
             }
             
             // База данных пуллов
@@ -490,35 +514,54 @@
                     title: 'Eternal Roses #4123',
                     description: 'Участников: 435 из 1000',
                     image: 'https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp',
-                    end_date: 'до 25.08'
+                    end_date: '2025-08-25',
+                    status: 'active'
                 },
                 {
                     id: 'pull2',
                     title: 'Plush Pepe #1022',
                     description: 'Участников: 23 из 1000',
                     image: 'https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp',
-                    end_date: 'до 30.08'
+                    end_date: '2025-08-30',
+                    status: 'active'
                 },
                 {
                     id: 'pull3',
                     title: 'Lol Pops #12422',
                     description: 'Участников: 971 из 1000',
                     image: 'https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp',
-                    end_date: 'до 29.08'
+                    end_date: '2025-08-29',
+                    status: 'active'
                 }
             ];
+            
+            // Функция для проверки статуса пулла
+            function checkPullStatus(pull) {
+                const currentDate = new Date();
+                const endDate = new Date(pull.end_date);
+                return currentDate > endDate ? 'completed' : 'active';
+            }
+            
+            // Обновляем статусы пуллов в базе данных
+            pullsDatabase.forEach(pull => {
+                pull.status = checkPullStatus(pull);
+            });
+            
+            // Загружаем данные пользователя из localStorage
+            const userStorageKey = `user_${userId}`;
+            const savedUserData = JSON.parse(localStorage.getItem(userStorageKey)) || {
+                id: userId,
+                myPulls: [],
+                balance: 0,
+                totalContribution: 0,
+                activePulls: 0,
+                completedPulls: 0
+            };
             
             // Состояние приложения
             const state = {
                 currentPull: null,
-                myPulls: JSON.parse(localStorage.getItem('myPulls')) || [],
-                userData: {
-                    id: user?.id || '000000',
-                    balance: 0,
-                    totalContribution: 0,
-                    activePulls: 0,
-                    completedPulls: 0
-                }
+                userData: savedUserData
             };
             
             // Инициализация интерфейса
@@ -527,26 +570,36 @@
             updateMyPulls();
             setupEventListeners();
             
+            // Функция для сохранения данных пользователя
+            function saveUserData() {
+                localStorage.setItem(userStorageKey, JSON.stringify(state.userData));
+            }
+            
             // Функция для отрисовки всех пуллов
             function renderPulls() {
-                const pullsContainer = document.getElementById('pulls');
+                pullsContainer = document.getElementById('pulls');
                 pullsContainer.innerHTML = '';
                 
                 pullsDatabase.forEach(pull => {
-                    const pullCard = document.createElement('div');
-                    pullCard.className = 'pull-card';
-                    pullCard.dataset.pullId = pull.id;
-                    pullCard.innerHTML = `
-                        <img src="${pull.image}" class="pull-image" alt="${pull.title}">
-                        <div class="pull-info">
-                            <div>
-                                <div class="pull-title">${pull.title}</div>
-                                <div class="pull-description">${pull.description}</div>
+                    const status = checkPullStatus(pull);
+                    if (status != "completed") {
+                        const pullCard = document.createElement('div');
+                        pullCard.className = 'pull-card';
+                        pullCard.dataset.pullId = pull.id;
+                        pullCard.innerHTML = `
+                            <img src="${pull.image}" class="pull-image" alt="${pull.title}">
+                            <div class="pull-info">
+                                <div>
+                                    <div class="pull-title">${pull.title}</div>
+                                    <div class="pull-description">${pull.description}</div>
+                                </div>
+                                <div class="pull-end-date ${status === 'completed' ? 'completed-date' : ''}">
+                                    ${status === 'completed' ? 'Завершён' : 'до ' + pull.end_date.split('-').reverse().join('.')}
+                                </div>
                             </div>
-                            <div class="pull-end-date">${pull.end_date}</div>
-                        </div>
-                    `;
-                    pullsContainer.appendChild(pullCard);
+                        `;
+                        pullsContainer.appendChild(pullCard);
+                    }
                 });
             }
             
@@ -609,48 +662,38 @@
             }
             
             function participate() {
-                if (state.currentPull) {
-                    const exists = state.myPulls.some(
-                        pull => pull.id === state.currentPull.id
-                    );
-                    
-                    if (!exists) {
-                        // Добавляем пулл по ID
-                        const pullToAdd = pullsDatabase.find(p => p.id === state.currentPull.id);
-                        if (pullToAdd) {
-                            state.myPulls.push(pullToAdd);
-                            
-                            // Обновляем статистику
-                            state.userData.totalContribution += 1;
-                            state.userData.activePulls += 1;
-                            
-                            // Сохраняем в localStorage только ID пуллов
-                            localStorage.setItem('myPulls', JSON.stringify(state.myPulls.map(p => p.id)));
-                            localStorage.setItem('userData', JSON.stringify(state.userData));
-                            
-                            // Обновляем интерфейс
-                            updateUserStats();
-                            updateMyPulls();
-                            
-                            alert('Вы приняли участие в пулле!');
-                        }
-                    }
-                    else {
-                        alert('Вы уже участвуете в этом пулле!');
-                    }
+                if (!state.currentPull) return;
+                
+                // Проверяем, есть ли уже такой пулл в моих пуллах
+                const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
+                
+                if (alreadyParticipating) {
+                    telegram.showAlert("Вы уже участвуете в этом пулле!");
+                    return;
                 }
+                
+                // Добавляем ID пулла
+                state.userData.myPulls.push(state.currentPull.id);
+                
+                // Обновляем статистику
+                state.userData.totalContribution += 1;
+                state.userData.activePulls += 1;
+                
+                // Сохраняем данные
+                saveUserData();
+                
+                // Обновляем интерфейс
+                updateUserStats();
+                updateMyPulls();
+                
+                // Показываем подтверждение
+                telegram.showAlert("Вы успешно присоединились к пуллу!");
+                closeModal();
             }
             
             function updateUserStats() {
-                // Загружаем данные пользователя из localStorage
-                const savedData = JSON.parse(localStorage.getItem('userData'));
-                if (savedData) {
-                    state.userData = {...state.userData, ...savedData};
-                }
-                
-                // Обновляем отображение статистики
                 document.getElementById('total-contribution').textContent = 
-                    `${state.userData.totalContribution}`;
+                    state.userData.totalContribution;
                 document.getElementById('active-pulls').textContent = 
                     state.userData.activePulls;
                 document.getElementById('completed-pulls').textContent = 
@@ -660,7 +703,7 @@
             function updateMyPulls() {
                 const container = document.getElementById('my-pulls-container');
                 
-                if (state.myPulls.length === 0) {
+                if (state.userData.myPulls.length === 0) {
                     container.innerHTML = '<p>У вас пока нет пуллов</p>';
                     container.className = 'my-pulls-grid empty-state';
                     return;
@@ -670,13 +713,11 @@
                 container.className = 'my-pulls-grid';
                 
                 // Восстанавливаем полные данные пуллов из базы по ID
-                const fullPulls = state.myPulls.map(pullId => 
-                    typeof pullId === 'string' 
-                    ? pullsDatabase.find(p => p.id === pullId) 
-                    : pullId
-                ).filter(Boolean);
-                
-                fullPulls.forEach(pull => {
+                state.userData.myPulls.forEach(pullId => {
+                    const pull = pullsDatabase.find(p => p.id === pullId);
+                    if (!pull) return;
+                    
+                    const status = checkPullStatus(pull);
                     const card = document.createElement('div');
                     card.className = 'my-pull-card';
                     card.innerHTML = `
@@ -686,14 +727,18 @@
                                 <div class="my-pull-title">${pull.title}</div>
                                 <div class="my-pull-description">${pull.description}</div>
                             </div>
-                            <div class="my-pull-end-date">${pull.end_date}</div>
+                            <div>
+                                <span class="pull-status ${status === 'completed' ? 'status-completed' : 'status-active'}">
+                                    ${status === 'completed' ? 'Завершён' : 'Активен'}
+                                </span>
+                                <div class="my-pull-end-date ${status === 'completed' ? 'completed-date' : ''}">
+                                    ${status === 'completed' ? '' : 'до ' + pull.end_date.split('-').reverse().join('.')}
+                                </div>
+                            </div>
                         </div>
                     `;
                     
-                    card.addEventListener('click', function() {
-                        openModal(pull);
-                    });
-                    
+                    card.addEventListener('click', () => openModal(pull));
                     container.appendChild(card);
                 });
             }
@@ -715,4 +760,3 @@
     </script>
 </body>
 </html>
-
