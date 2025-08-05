@@ -345,8 +345,8 @@
                     </div>
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link" data-tab="friends">
-                            <i class="bi bi-people"></i>
-                            Друзья
+                            <i class="bi bi-globe"></i>
+                            Лидеры
                         </a>
                     </div>
                     <div class="col-3 nav-item">
@@ -383,10 +383,10 @@
             const user = telegram.initDataUnsafe.user;
             if (user) {
                 if (user.is_premium) {
-                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i>';
+                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
                 }
                 else {
-                    document.getElementById("username").innerHTML = user.first_name;
+                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
                 }
                 if (user.photo_url) {
                     document.getElementById("userphoto").src = user.photo_url;
