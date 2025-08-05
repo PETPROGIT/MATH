@@ -51,7 +51,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            height: 60px;
+            height: 62px;
             z-index: 100;
         }
         
@@ -63,7 +63,7 @@
             color: var(--text-color);
             font-size: 13px;
             opacity: .6;
-            transition: ease-in-out .2s;
+            transition: ease-in-out .1s;
             font-weight: 500;
         }
         
@@ -74,7 +74,7 @@
         
         .nav-link i {
             display: block;
-            font-size: 20px;
+            font-size: 21px;
         }
         
         .profile-pic {
@@ -95,7 +95,6 @@
             font-size: 22px;
             font-weight: 500;
             text-align: center;
-            margin-bottom: 30px;
         }
         
         .section-title {
@@ -125,19 +124,22 @@
             background-color: var(--secondary-bg);
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
 
         .pull-image {
             width: 100%;
-            aspect-ratio: 4/2.6; /* Делает высоту равной ширине (квадрат) */
+            aspect-ratio: 4/2.6;
             object-fit: cover;
         }
 
         .pull-info {
             padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .pull-title {
@@ -146,12 +148,20 @@
         }
 
         .pull-description {
-            font-size: 14px;
+            font-size: 13px;
             color: #aaa;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+
+        .pull-end-date {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 10px;
         }
 
         .modal-overlay {
@@ -194,7 +204,7 @@
 
         .modal-image {
             width: 100%;
-            aspect-ratio: 4/2.6; /* Делает высоту равной ширине (квадрат) */
+            aspect-ratio: 4/2.6;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -254,25 +264,35 @@
             height: 60px;
             object-fit: cover;
             border-radius: 10px;
-            margin-right: 12px;
+            margin-right: 10px;
         }
 
         .my-pull-info {
             flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .my-pull-title {
             font-weight: 500;
             margin-bottom: 2px;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .my-pull-description {
-            font-size: 14px;
+            font-size: 12px;
             color: #aaa;
         }
         
-        /* Новые стили для выравнивания ширины */
+        .my-pull-end-date {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+        
         .profile-content {
             max-width: 100%;
         }
@@ -281,6 +301,40 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
+        }
+        
+        /* Стили для блока общего вклада */
+        .user-stats {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .stat-value {
+            font-weight: 500;
+        }
+        
+        .user-id {
+            font-size: 13px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -295,19 +349,25 @@
                 </div>
                 
                 <div id="pulls" class="tab-content">
-                    <div class="pull-card" data-pull='{"title":"Plush Pepe #123","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp"}'>
+                    <div class="pull-card" data-pull='{"title":"Plush Pepe #123","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp","end_date":"до 25.08"}'>
                         <img src="https://cache.tonapi.io/imgproxy/Vv-ofLuzUJ2rVxHcl_zTVptJyn6Bqp54HjAeRtFZmB0/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTExMDIud2VicA.webp" class="pull-image" alt="Пулл 1">
                         <div class="pull-info">
-                            <div class="pull-title">Plush Pepe #123</div>
-                            <div class="pull-description">Участников 0 из 1000</div>
+                            <div>
+                                <div class="pull-title">Plush Pepe #123</div>
+                                <div class="pull-description">Участников 0 из 1000</div>
+                            </div>
+                            <div class="pull-end-date">до 25.08</div>
                         </div>
                     </div>
                     
-                    <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp"}'>
+                    <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp","end_date":"до 30.08"}'>
                         <img src="https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp" class="pull-image" alt="Пулл 2">
                         <div class="pull-info">
-                            <div class="pull-title">Plush Pepe #1022</div>
-                            <div class="pull-description">Участников: 0 из 1000</div>
+                            <div>
+                                <div class="pull-title">Plush Pepe #1022</div>
+                                <div class="pull-description">Участников: 0 из 1000</div>
+                            </div>
+                            <div class="pull-end-date">до 30.08</div>
                         </div>
                     </div>
                 </div>
@@ -317,7 +377,29 @@
                         <div class="profile-pic">
                             <img src="" id="userphoto" class="profile-pic">
                         </div>
-                        <div class="username" id="username">username</div> 
+                        <div class="username" id="username">username</div>
+                        <div class="user-id" id="userid">ID: loading...</div>
+                        
+                        <!-- Добавлен блок с общей статистикой -->
+                        <div class="user-stats">
+                            <div class="section-title">Моя статистика</div>
+                            <div class="stat-item">
+                                <span class="stat-label">Общий вклад:</span>
+                                <div style="display: flex; align-items: center; justify-content: center;">
+                                    <span class="stat-value" id="total-contribution">0</span> 
+                                    <img src="telegram-star-128.png" style="width: 15px; margin-left: 4px;">
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Активные пуллы:</span>
+                                <span class="stat-value" id="active-pulls">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Завершённые:</span>
+                                <span class="stat-value" id="completed-pulls">0</span>
+                            </div>
+                        </div>
+                        
                         <div class="section-title">Мои пуллы</div>
                         <div id="my-pulls-container" class="my-pulls-grid empty-state">
                             <p>У вас пока нет пуллов</p>
@@ -330,7 +412,6 @@
         <nav class="navbar navbar-bottom">
             <div class="container-fluid">
                 <div class="" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link" data-tab="home">
                             <i class="bi bi-house-door"></i>
@@ -341,12 +422,6 @@
                         <a href="#" class="nav-link" data-tab="pulls">
                             <i class="bi bi-collection"></i>
                             Пуллы
-                        </a>
-                    </div>
-                    <div class="col-3 nav-item">
-                        <a href="#" class="nav-link" data-tab="friends">
-                            <i class="bi bi-globe"></i>
-                            Лидеры
                         </a>
                     </div>
                     <div class="col-3 nav-item">
@@ -382,25 +457,42 @@
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             if (user) {
+                // Форматирование имени пользователя
                 if (user.is_premium) {
-                    document.getElementById("username").innerHTML = String(user.first_name).charAt(0).toUpperCase() + String(user.first_name).slice(1) + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
+                    document.getElementById("username").innerHTML = 
+                        String(user.first_name).charAt(0).toUpperCase() + 
+                        String(user.first_name).slice(1) + 
+                        '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px; color: var(--primary-color);"></i>';
+                } else {
+                    document.getElementById("username").innerHTML = 
+                        String(user.first_name).charAt(0).toUpperCase() + 
+                        String(user.first_name).slice(1);
                 }
-                else {
-                    document.getElementById("username").innerHTML = String(user.first_name).charAt(0).toUpperCase() + String(user.first_name).slice(1);
-                }
+                
+                // Установка аватарки
                 if (user.photo_url) {
                     document.getElementById("userphoto").src = user.photo_url;
                 }
+                
+                // Отображение ID пользователя
+                document.getElementById("userid").textContent = `ID: ${user.id}`;
             }
-            
             
             // Состояние приложения
             const state = {
                 currentPull: null,
-                myPulls: JSON.parse(localStorage.getItem('myPulls')) || []
+                myPulls: JSON.parse(localStorage.getItem('myPulls')) || [],
+                userData: {
+                    id: user?.id || '000000',
+                    balance: 0, // Начальный баланс
+                    totalContribution: 0, // Общий вклад в пуллы
+                    activePulls: 0, // Активные пуллы
+                    completedPulls: 0 // Завершенные пуллы
+                }
             };
             
             // Инициализация интерфейса
+            updateUserStats();
             updateMyPulls();
             setupEventListeners();
             
@@ -460,15 +552,43 @@
                     );
                     
                     if (!exists) {
+                        // Добавляем пулл
                         state.myPulls.push(state.currentPull);
+                        
+                        // Обновляем статистику
+                        state.userData.totalContribution += 1; // Пример: добавляем 1 TON
+                        state.userData.activePulls += 1;
+                        
+                        // Сохраняем в localStorage
                         localStorage.setItem('myPulls', JSON.stringify(state.myPulls));
+                        localStorage.setItem('userData', JSON.stringify(state.userData));
+                        
+                        // Обновляем интерфейс
+                        updateUserStats();
                         updateMyPulls();
+                        
                         alert('Вы приняли участие в пулле!');
                     }
                     else {
-                        alert('Вы уже участвуете!');
+                        alert('Вы уже участвуете в этом пулле!');
                     }
                 }
+            }
+            
+            function updateUserStats() {
+                // Загружаем данные пользователя из localStorage
+                const savedData = JSON.parse(localStorage.getItem('userData'));
+                if (savedData) {
+                    state.userData = {...state.userData, ...savedData};
+                }
+                
+                // Обновляем отображение статистики
+                document.getElementById('total-contribution').textContent = 
+                    `${state.userData.totalContribution}`;
+                document.getElementById('active-pulls').textContent = 
+                    state.userData.activePulls;
+                document.getElementById('completed-pulls').textContent = 
+                    state.userData.completedPulls;
             }
             
             function updateMyPulls() {
@@ -489,8 +609,11 @@
                     card.innerHTML = `
                         <img src="${pull.image}" class="my-pull-image">
                         <div class="my-pull-info">
-                            <div class="my-pull-title">${pull.title}</div>
-                            <div class="my-pull-description">${pull.description}</div>
+                            <div>
+                                <div class="my-pull-title">${pull.title}</div>
+                                <div class="my-pull-description">${pull.description}</div>
+                            </div>
+                            <div class="my-pull-end-date">${pull.end_date || 'до ...'}</div>
                         </div>
                     `;
                     
