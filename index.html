@@ -147,7 +147,7 @@
             margin-bottom: 2px;
         }
 
-        .pull-description {
+        .pull-participants {
             font-size: 13px;
             color: #aaa;
             display: -webkit-box;
@@ -179,7 +179,7 @@
         .modal-content {
             background-color: var(--secondary-bg);
             width: 100%;
-            height: 80%;
+            height: auto;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
             position: fixed;
@@ -255,7 +255,7 @@
             margin-bottom: -5px;
             display: flex;
             align-items: center;
-            padding: 5px;
+            padding: 5px 8px 5px 5px;
             cursor: pointer;
         }
 
@@ -280,7 +280,7 @@
             font-size: 15px;
         }
 
-        .my-pull-description {
+        .my-pull-participants {
             font-size: 12px;
             color: #aaa;
         }
@@ -391,8 +391,8 @@
                 <div id="home" class="tab-content active">
                     <div class="home-content">
                         <h1 style="color: white; font-size: 26px; margin-bottom: 32px;">Добро пожаловать в БОЙБА!</h1>
-                        <p style="margin-bottom: 32px;">Участвуй в пуллах и получай редкие NFT-подарки!</p>
-                        <button id="go-to-pulls" class="go-to-pulls-btn">Перейти к пуллам</button>
+                        <p style="margin-bottom: 32px;">Участвуй в пулах и выигрывай редкие NFT-подарки!</p>
+                        <button id="go-to-pulls" class="go-to-pulls-btn">Перейти к пулам</button>
                     </div>
                 </div>
                 
@@ -418,18 +418,18 @@
                                 </div>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-label">Активные пуллы:</span>
+                                <span class="stat-label">Активные пулы:</span>
                                 <span class="stat-value" id="active-pulls">0</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-label">Завершённые:</span>
+                                <span class="stat-label">Завершённые пулы:</span>
                                 <span class="stat-value" id="completed-pulls">0</span>
                             </div>
                         </div>
                         
-                        <div class="section-title">Мои пуллы</div>
+                        <div class="section-title">Мои пулы</div>
                         <div id="my-pulls-container" class="my-pulls-grid empty-state">
-                            <p>У вас пока нет пуллов</p>
+                            <p>У вас пока нет пулов</p>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,7 @@
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link" data-tab="pulls">
                             <i class="bi bi-collection"></i>
-                            Пуллы
+                            Пулы
                         </a>
                     </div>
                     <div class="col-3 nav-item">
@@ -512,7 +512,7 @@
                 {
                     id: 'pull1',
                     title: 'Eternal Roses #4123',
-                    description: 'Участников: 435 из 1000',
+                    participants: 171,
                     image: 'https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp',
                     end_date: '2025-08-25',
                     status: 'active'
@@ -520,17 +520,17 @@
                 {
                     id: 'pull2',
                     title: 'Plush Pepe #1022',
-                    description: 'Участников: 23 из 1000',
+                    participants: 21,
                     image: 'https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp',
-                    end_date: '2025-08-30',
+                    end_date: '2025-10-30',
                     status: 'active'
                 },
                 {
                     id: 'pull3',
                     title: 'Lol Pops #12422',
-                    description: 'Участников: 971 из 1000',
+                    participants: 971,
                     image: 'https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp',
-                    end_date: '2025-08-29',
+                    end_date: '2025-10-29',
                     status: 'active'
                 }
             ];
@@ -591,7 +591,7 @@
                             <div class="pull-info">
                                 <div>
                                     <div class="pull-title">${pull.title}</div>
-                                    <div class="pull-description">${pull.description}</div>
+                                    <div class="pull-participants">Участников: ${pull.participants} из 500</div>
                                 </div>
                                 <div class="pull-end-date ${status === 'completed' ? 'completed-date' : ''}">
                                     ${status === 'completed' ? 'Завершён' : 'до ' + pull.end_date.split('-').reverse().join('.')}
@@ -668,7 +668,7 @@
                 const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
                 
                 if (alreadyParticipating) {
-                    telegram.showAlert("Вы уже участвуете в этом пулле!");
+                    telegram.showAlert("Вы уже участвуете в этом пуле!");
                     return;
                 }
                 
@@ -687,7 +687,7 @@
                 updateMyPulls();
                 
                 // Показываем подтверждение
-                telegram.showAlert("Вы успешно присоединились к пуллу!");
+                telegram.showAlert("Вы успешно присоединились к пулу!");
                 closeModal();
             }
             
@@ -713,11 +713,19 @@
                 container.className = 'my-pulls-grid';
                 
                 // Восстанавливаем полные данные пуллов из базы по ID
+                let activePullsP = 0;
+                let completedPullsP = 0
                 state.userData.myPulls.forEach(pullId => {
                     const pull = pullsDatabase.find(p => p.id === pullId);
                     if (!pull) return;
                     
                     const status = checkPullStatus(pull);
+                    if (status == "completed") {
+                        completedPullsP += 1;
+                    }
+                    else {
+                        activePullsP += 1;
+                    }
                     const card = document.createElement('div');
                     card.className = 'my-pull-card';
                     card.innerHTML = `
@@ -725,7 +733,7 @@
                         <div class="my-pull-info">
                             <div>
                                 <div class="my-pull-title">${pull.title}</div>
-                                <div class="my-pull-description">${pull.description}</div>
+                                <div class="my-pull-participants">Участников: ${pull.participants} из 500</div>
                             </div>
                             <div>
                                 <span class="pull-status ${status === 'completed' ? 'status-completed' : 'status-active'}">
@@ -741,6 +749,10 @@
                     card.addEventListener('click', () => openModal(pull));
                     container.appendChild(card);
                 });
+                state.userData.completedPulls = completedPullsP;
+                state.userData.activePulls = activePullsP;
+                saveUserData();
+                updateUserStats();
             }
             
             function switchTab(tabId) {
