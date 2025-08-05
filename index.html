@@ -383,15 +383,16 @@
             const user = telegram.initDataUnsafe.user;
             if (user) {
                 if (user.is_premium) {
-                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
+                    document.getElementById("username").innerHTML = String(user.first_name).charAt(0).toUpperCase() + String(user.first_name).slice(1) + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
                 }
                 else {
-                    document.getElementById("username").innerHTML = user.first_name + '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px;  color: var(--primary-color);"></i';
+                    document.getElementById("username").innerHTML = String(user.first_name).charAt(0).toUpperCase() + String(user.first_name).slice(1);
                 }
                 if (user.photo_url) {
                     document.getElementById("userphoto").src = user.photo_url;
                 }
             }
+            
             
             // Состояние приложения
             const state = {
