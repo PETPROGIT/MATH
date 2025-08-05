@@ -37,7 +37,7 @@
         .content-container {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: 56px; /* Высота нижнего меню */
+            padding-bottom: 56px;
         }
         
         .content {
@@ -53,7 +53,6 @@
             width: 100%;
             height: 62px;
             z-index: 100;
-
         }
         
         .nav-item {
@@ -304,7 +303,6 @@
             gap: 15px;
         }
         
-        /* Стили для блока общего вклада */
         .user-stats {
             background-color: var(--secondary-bg);
             border-radius: 12px;
@@ -337,56 +335,47 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        
+        .home-content {
+            position: absolute;
+            top: 46%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            text-align: center;
+        }
+        
+        .go-to-pulls-btn {
+            background-color: var(--primary-color);
+            color: white;
+            opacity: 1;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            border: none;
+            width: 100%;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
         <div class="content-container">
             <div class="content">
-                <div id="home" class="tab-content active" style="position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); width: 94%;">
-                    <div class="empty-state">
-                        <div>
-                            <h1 style="color: white; font-size: 26px; margin-bottom: 32px;">Добро пожаловать в БОЙБА!</h1>
-                            <p style="margin-bottom: 32px;">Участвуй в пуллах и получай редкие NFT-подарки!</p>
-
-                            <button id="go-to-pulls" class="go-to-pulls-btn" style="background-color: var(--primary-color); color: white; opacity: 1; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px 10px; font-size: 14px; outline: none; border: none; width: 100%; font-weight: 500;">Перейти к пуллам</button>
-                        </div>
+                <div id="home" class="tab-content active">
+                    <div class="home-content">
+                        <h1 style="color: white; font-size: 26px; margin-bottom: 32px;">Добро пожаловать в БОЙБА!</h1>
+                        <p style="margin-bottom: 32px;">Участвуй в пуллах и получай редкие NFT-подарки!</p>
+                        <button id="go-to-pulls" class="go-to-pulls-btn">Перейти к пуллам</button>
                     </div>
                 </div>
                 
                 <div id="pulls" class="tab-content">
-                    <div class="pull-card" data-pull='{"title":"Eternal Roses #4123","description":"Участников: 435 из 1000","image":"https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp"}'>
-                        <img src="https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp" class="pull-image" alt="Пулл 1">
-                        <div class="pull-info">
-                            <div>
-                                <div class="pull-title">Eternal Roses #4123</div>
-                                <div class="pull-description">Участников 435 из 1000</div>
-                            </div>
-                            <div class="pull-end-date">до 25.08</div>
-                        </div>
-                    </div>
-                    
-                    <div class="pull-card" data-pull='{"title":"Plush Pepe #1022","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp","end_date":"до 30.08"}'>
-                        <img src="https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp" class="pull-image" alt="Пулл 2">
-                        <div class="pull-info">
-                            <div>
-                                <div class="pull-title">Plush Pepe #1022</div>
-                                <div class="pull-description">Участников: 23 из 1000</div>
-                            </div>
-                            <div class="pull-end-date">до 30.08</div>
-                        </div>
-                    </div>
-
-                    <div class="pull-card" data-pull='{"title":"Lol Pops #12422","description":"Участников: 0 из 1000","image":"https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp","end_date":"до 30.08"}'>
-                        <img src="https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp" class="pull-image" alt="Пулл 2">
-                        <div class="pull-info">
-                            <div>
-                                <div class="pull-title">Lol Pops #12422</div>
-                                <div class="pull-description">Участников: 971 из 1000</div>
-                            </div>
-                            <div class="pull-end-date">до 29.08</div>
-                        </div>
-                    </div>
+                    <!-- Пуллы будут добавляться динамически из JavaScript -->
                 </div>
                 
                 <div id="profile" class="tab-content">
@@ -397,7 +386,6 @@
                         <div class="username" id="username">username</div>
                         <div class="user-id" id="userid">ID: loading...</div>
                         
-                        <!-- Добавлен блок с общей статистикой -->
                         <div class="user-stats">
                             <div class="section-title">Моя статистика</div>
                             <div class="stat-item">
@@ -495,31 +483,89 @@
                 document.getElementById("userid").textContent = `ID: ${user.id}`;
             }
             
+            // База данных пуллов
+            pullsDatabase = [
+                {
+                    id: 'pull1',
+                    title: 'Eternal Roses #4123',
+                    description: 'Участников: 435 из 1000',
+                    image: 'https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp',
+                    end_date: 'до 25.08'
+                },
+                {
+                    id: 'pull2',
+                    title: 'Plush Pepe #1022',
+                    description: 'Участников: 23 из 1000',
+                    image: 'https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp',
+                    end_date: 'до 30.08'
+                },
+                {
+                    id: 'pull3',
+                    title: 'Lol Pops #12422',
+                    description: 'Участников: 971 из 1000',
+                    image: 'https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp',
+                    end_date: 'до 29.08'
+                }
+            ];
+            
             // Состояние приложения
             const state = {
                 currentPull: null,
                 myPulls: JSON.parse(localStorage.getItem('myPulls')) || [],
                 userData: {
                     id: user?.id || '000000',
-                    balance: 0, // Начальный баланс
-                    totalContribution: 0, // Общий вклад в пуллы
-                    activePulls: 0, // Активные пуллы
-                    completedPulls: 0 // Завершенные пуллы
+                    balance: 0,
+                    totalContribution: 0,
+                    activePulls: 0,
+                    completedPulls: 0
                 }
             };
             
             // Инициализация интерфейса
+            renderPulls();
             updateUserStats();
             updateMyPulls();
             setupEventListeners();
             
+            // Функция для отрисовки всех пуллов
+            function renderPulls() {
+                const pullsContainer = document.getElementById('pulls');
+                pullsContainer.innerHTML = '';
+                
+                pullsDatabase.forEach(pull => {
+                    const pullCard = document.createElement('div');
+                    pullCard.className = 'pull-card';
+                    pullCard.dataset.pullId = pull.id;
+                    pullCard.innerHTML = `
+                        <img src="${pull.image}" class="pull-image" alt="${pull.title}">
+                        <div class="pull-info">
+                            <div>
+                                <div class="pull-title">${pull.title}</div>
+                                <div class="pull-description">${pull.description}</div>
+                            </div>
+                            <div class="pull-end-date">${pull.end_date}</div>
+                        </div>
+                    `;
+                    pullsContainer.appendChild(pullCard);
+                });
+            }
+            
             function setupEventListeners() {
+                // Обработчик кнопки "Перейти к пуллам"
+                document.getElementById('go-to-pulls').addEventListener('click', function() {
+                    switchTab('pulls');
+                });
+                
                 // Обработчики для карточек пуллов
-                document.querySelectorAll('.pull-card').forEach(card => {
-                    card.addEventListener('click', function() {
-                        const pullData = JSON.parse(this.dataset.pull);
-                        openModal(pullData);
-                    });
+                document.addEventListener('click', function(e) {
+                    const pullCard = e.target.closest('.pull-card');
+                    if (pullCard) {
+                        const pullId = pullCard.dataset.pullId;
+                        const pullData = pullsDatabase.find(p => p.id === pullId);
+                        if (pullData) {
+                            openModal(pullData);
+                        }
+                    }
                 });
                 
                 // Обработчики для модального окна
@@ -565,26 +611,29 @@
             function participate() {
                 if (state.currentPull) {
                     const exists = state.myPulls.some(
-                        pull => pull.title === state.currentPull.title
+                        pull => pull.id === state.currentPull.id
                     );
                     
                     if (!exists) {
-                        // Добавляем пулл
-                        state.myPulls.push(state.currentPull);
-                        
-                        // Обновляем статистику
-                        state.userData.totalContribution += 1; // Пример: добавляем 1 TON
-                        state.userData.activePulls += 1;
-                        
-                        // Сохраняем в localStorage
-                        localStorage.setItem('myPulls', JSON.stringify(state.myPulls));
-                        localStorage.setItem('userData', JSON.stringify(state.userData));
-                        
-                        // Обновляем интерфейс
-                        updateUserStats();
-                        updateMyPulls();
-                        
-                        alert('Вы приняли участие в пулле!');
+                        // Добавляем пулл по ID
+                        const pullToAdd = pullsDatabase.find(p => p.id === state.currentPull.id);
+                        if (pullToAdd) {
+                            state.myPulls.push(pullToAdd);
+                            
+                            // Обновляем статистику
+                            state.userData.totalContribution += 1;
+                            state.userData.activePulls += 1;
+                            
+                            // Сохраняем в localStorage только ID пуллов
+                            localStorage.setItem('myPulls', JSON.stringify(state.myPulls.map(p => p.id)));
+                            localStorage.setItem('userData', JSON.stringify(state.userData));
+                            
+                            // Обновляем интерфейс
+                            updateUserStats();
+                            updateMyPulls();
+                            
+                            alert('Вы приняли участие в пулле!');
+                        }
                     }
                     else {
                         alert('Вы уже участвуете в этом пулле!');
@@ -620,7 +669,14 @@
                 container.innerHTML = '';
                 container.className = 'my-pulls-grid';
                 
-                state.myPulls.forEach(pull => {
+                // Восстанавливаем полные данные пуллов из базы по ID
+                const fullPulls = state.myPulls.map(pullId => 
+                    typeof pullId === 'string' 
+                    ? pullsDatabase.find(p => p.id === pullId) 
+                    : pullId
+                ).filter(Boolean);
+                
+                fullPulls.forEach(pull => {
                     const card = document.createElement('div');
                     card.className = 'my-pull-card';
                     card.innerHTML = `
@@ -630,11 +686,10 @@
                                 <div class="my-pull-title">${pull.title}</div>
                                 <div class="my-pull-description">${pull.description}</div>
                             </div>
-                            <div class="my-pull-end-date">${pull.end_date || 'до ...'}</div>
+                            <div class="my-pull-end-date">${pull.end_date}</div>
                         </div>
                     `;
                     
-                    // Добавляем обработчик клика для карточки в "Мои пуллы"
                     card.addEventListener('click', function() {
                         openModal(pull);
                     });
@@ -656,9 +711,6 @@
                 });
                 document.querySelector(`.nav-link[data-tab="${tabId}"]`).classList.add('active');
             }
-            document.getElementById('go-to-pulls').addEventListener('click', function() {
-                switchTab('pulls');
-            });
         });
     </script>
 </body>
