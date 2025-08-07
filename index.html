@@ -148,7 +148,7 @@
         }
 
         .pull-participants {
-            font-size: 13px;
+            font-size: 12px;
             color: #aaa;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -157,7 +157,7 @@
         }
 
         .pull-end-date {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--primary-color);
             font-weight: 500;
             white-space: nowrap;
@@ -213,13 +213,11 @@
         .modal-title {
             font-size: 20px;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .modal-description {
+        .modal-giftinfo {
             font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 30px;
         }
 
         .modal-close {
@@ -238,7 +236,7 @@
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 0;
+            padding: 11px 0;
             width: 100%;
             border-radius: 10px;
             font-weight: 500;
@@ -349,7 +347,7 @@
             background-color: var(--primary-color);
             color: white;
             opacity: 1;
-            height: 42px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -381,6 +379,49 @@
         
         .completed-date {
             color: #ff3d00 !important;
+        }
+        
+        /* Новые стили для поля ввода ставки */
+        .bet-input-container {
+            margin: 5px 0px 30px 0px;
+        }
+        
+        .bet-input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .bet-input-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: var(--accent-color);
+            border-radius: 10px;
+            padding: 0 15px;
+        }
+        
+        .bet-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 12px 0;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .bet-input-currency {
+            margin-left: 5px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .error-message {
+            color: #ff3d00;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -469,8 +510,19 @@
             </button>
             <img id="modal-image" class="modal-image" src="" alt="Pull image">
             <h3 id="modal-title" class="modal-title"></h3>
-            <p id="modal-description" class="modal-description"></p>
-            <button class="participate-btn">Участвовать</button>
+            <p id="modal-bg" class="modal-giftinfo"></p>
+            <p id="modal-pattern" class="modal-giftinfo" style="margin-top: -15px; margin-bottom: 20px;"></p>
+            
+            <div class="bet-input-container">
+                <label class="bet-input-label">Ваша ставка</label>
+                <div class="bet-input-wrapper">
+                    <input type="number" id="bet-input" class="bet-input" placeholder="Введите сумму" min="1">
+                    <img src="telegram-star-128.png" style="width: 20px; margin-left: 4px;">
+                </div>
+                <div id="bet-error" class="error-message">Введите положительное число</div>
+            </div>
+
+            <button id="participate-btn" class="participate-btn" disabled>Участвовать</button>
         </div>
     </div>
 
@@ -513,6 +565,8 @@
                     id: 'pull1',
                     title: 'Eternal Roses #4123',
                     participants: 171,
+                    background: "Фон: BG",
+                    pattern: "Узор: PATTERN",
                     image: 'https://cache.tonapi.io/imgproxy/jTjDaPXL-OyUKK7a1u8D10MM0-YOeuudsgzPYJrR2yc/rs:fill:1500:1500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvZXRlcm5hbHJvc2UtNTQ3OC53ZWJw.webp',
                     end_date: '2025-08-25',
                     status: 'active'
@@ -521,6 +575,8 @@
                     id: 'pull2',
                     title: 'Plush Pepe #1022',
                     participants: 21,
+                    background: "Фон: BG",
+                    pattern: "Узор: PATTERN",
                     image: 'https://cache.tonapi.io/imgproxy/KAGhr88N8C3Kdw-RrVKVXpHHpCQ24etJKa1ubfTR6vI/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvcGx1c2hwZXBlLTE3MzYud2VicA.webp',
                     end_date: '2025-10-30',
                     status: 'active'
@@ -529,6 +585,8 @@
                     id: 'pull3',
                     title: 'Lol Pops #12422',
                     participants: 971,
+                    background: "Фон: BG",
+                    pattern: "Узор: PATTERN",
                     image: 'https://cache.tonapi.io/imgproxy/ahFYNIv0isDkKINAVGpMoo3X63NfhqHT_s4YX8a6Xow/rs:fill:500:500:1/g:no/aHR0cHM6Ly9uZnQuZnJhZ21lbnQuY29tL2dpZnQvbG9scG9wLTEzMDk2LndlYnA.webp',
                     end_date: '2025-10-29',
                     status: 'active'
@@ -555,7 +613,8 @@
                 balance: 0,
                 totalContribution: 0,
                 activePulls: 0,
-                completedPulls: 0
+                completedPulls: 0,
+                pullContributions: {} // Хранит вклады по каждому пуллу
             };
             
             // Состояние приложения
@@ -623,7 +682,7 @@
                 
                 // Обработчики для модального окна
                 document.querySelector('.modal-close').addEventListener('click', closeModal);
-                document.querySelector('.participate-btn').addEventListener('click', participate);
+                document.getElementById('participate-btn').addEventListener('click', participate);
                 document.getElementById('modal-overlay').addEventListener('click', function(e) {
                     if (e.target === this) closeModal();
                 });
@@ -635,15 +694,59 @@
                         switchTab(this.dataset.tab);
                     });
                 });
+                
+                // Обработчик изменения поля ввода ставки
+                document.getElementById('bet-input').addEventListener('input', function() {
+                    validateBetInput();
+                });
+            }
+            
+            // Валидация ввода ставки
+            function validateBetInput() {
+                const input = document.getElementById('bet-input');
+                const error = document.getElementById('bet-error');
+                const button = document.getElementById('participate-btn');
+                
+                const value = parseFloat(input.value);
+                
+                if (isNaN(value) || value <= 0) {
+                    error.style.display = 'block';
+                    button.disabled = true;
+                    return false;
+                } else {
+                    error.style.display = 'none';
+                    button.disabled = false;
+                    return true;
+                }
             }
             
             function openModal(pull) {
                 state.currentPull = pull;
                 const modal = document.getElementById('modal-overlay');
+                const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
                 
                 document.getElementById('modal-image').src = pull.image;
                 document.getElementById('modal-title').textContent = pull.title;
-                document.getElementById('modal-description').textContent = pull.description;
+                document.getElementById('modal-bg').textContent = pull.background;
+                document.getElementById('modal-pattern').textContent = pull.pattern;
+                
+                // Сброс поля ввода
+                const betInput = document.getElementById('bet-input');
+                betInput.value = '';
+                document.getElementById('bet-error').style.display = 'none';
+                
+                if (alreadyParticipating) {
+                    // Если уже участвует, показываем сколько вложено
+                    const contribution = state.userData.pullContributions[pull.id] || 0;
+                    betInput.value = contribution;
+                    betInput.disabled = true;
+                    document.getElementById('participate-btn').textContent = 'Вы уже участвуете';
+                    document.getElementById('participate-btn').disabled = true;
+                } else {
+                    betInput.disabled = false;
+                    document.getElementById('participate-btn').textContent = 'Участвовать';
+                    document.getElementById('participate-btn').disabled = true;
+                }
                 
                 modal.style.display = 'flex';
                 setTimeout(() => {
@@ -664,6 +767,14 @@
             function participate() {
                 if (!state.currentPull) return;
                 
+                // Проверяем валидность ввода
+                if (!validateBetInput()) {
+                    return;
+                }
+                
+                const betInput = document.getElementById('bet-input');
+                const betValue = parseFloat(betInput.value);
+                
                 // Проверяем, есть ли уже такой пулл в моих пуллах
                 const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
                 
@@ -675,8 +786,15 @@
                 // Добавляем ID пулла
                 state.userData.myPulls.push(state.currentPull.id);
                 
+                // Записываем сумму ставки
+                if (!state.userData.pullContributions) {
+                    state.userData.pullContributions = {};
+                }
+                state.userData.pullContributions[state.currentPull.id] = betValue;
+                
                 // Обновляем статистику
-                state.userData.totalContribution += 1;
+                state.userData.totalContribution += betValue;
+                state.userData.balance += betValue;
                 state.userData.activePulls += 1;
                 
                 // Сохраняем данные
@@ -687,7 +805,7 @@
                 updateMyPulls();
                 
                 // Показываем подтверждение
-                telegram.showAlert("Вы успешно присоединились к пулу!");
+                telegram.showAlert(`Вы успешно присоединились к пулу с ставкой ${betValue} TKN!`);
                 closeModal();
             }
             
@@ -714,7 +832,7 @@
                 
                 // Восстанавливаем полные данные пуллов из базы по ID
                 let activePullsP = 0;
-                let completedPullsP = 0
+                let completedPullsP = 0;
                 state.userData.myPulls.forEach(pullId => {
                     const pull = pullsDatabase.find(p => p.id === pullId);
                     if (!pull) return;
@@ -726,6 +844,8 @@
                     else {
                         activePullsP += 1;
                     }
+                    
+                    const contribution = state.userData.pullContributions[pullId] || 0;
                     const card = document.createElement('div');
                     card.className = 'my-pull-card';
                     card.innerHTML = `
@@ -733,7 +853,7 @@
                         <div class="my-pull-info">
                             <div>
                                 <div class="my-pull-title">${pull.title}</div>
-                                <div class="my-pull-participants">Участников: ${pull.participants} из 500</div>
+                                <div class="my-pull-participants">Вклад: ${contribution} TKN</div>
                             </div>
                             <div>
                                 <span class="pull-status ${status === 'completed' ? 'status-completed' : 'status-active'}">
@@ -749,6 +869,7 @@
                     card.addEventListener('click', () => openModal(pull));
                     container.appendChild(card);
                 });
+                
                 state.userData.completedPulls = completedPullsP;
                 state.userData.activePulls = activePullsP;
                 saveUserData();
