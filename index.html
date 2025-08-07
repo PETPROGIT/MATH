@@ -278,7 +278,7 @@
             font-size: 15px;
         }
 
-        .my-pull-participants {
+        .my-pull-contribution {
             font-size: 12px;
             color: #aaa;
         }
@@ -560,7 +560,7 @@
                 document.getElementById("userid").textContent = `ID: ${userId}`;
             }
             
-            // База данных пуллов
+            // База данных пуллов (без изменений)
             pullsDatabase = [
                 {
                     id: 'pull1',
@@ -594,14 +594,14 @@
                 }
             ];
             
-            // Функция для проверки статуса пулла
+            // Функция для проверки статуса пулла (без изменений)
             function checkPullStatus(pull) {
                 const currentDate = new Date();
                 const endDate = new Date(pull.end_date);
                 return currentDate > endDate ? 'completed' : 'active';
             }
             
-            // Обновляем статусы пуллов в базе данных
+            // Обновляем статусы пуллов в базе данных (без изменений)
             pullsDatabase.forEach(pull => {
                 pull.status = checkPullStatus(pull);
             });
@@ -610,12 +610,11 @@
             const userStorageKey = `user_${userId}`;
             const savedUserData = JSON.parse(localStorage.getItem(userStorageKey)) || {
                 id: userId,
-                myPulls: [],
+                myPulls: [], // Теперь это массив объектов {pullId, contribution}
                 balance: 0,
                 totalContribution: 0,
                 activePulls: 0,
-                completedPulls: 0,
-                pullContributions: {} // Хранит вклады по каждому пуллу
+                completedPulls: 0
             };
             
             // Состояние приложения
@@ -635,7 +634,7 @@
                 localStorage.setItem(userStorageKey, JSON.stringify(state.userData));
             }
             
-            // Функция для отрисовки всех пуллов
+            // Функция для отрисовки всех пуллов (без изменений)
             function renderPulls() {
                 pullsContainer = document.getElementById('pulls');
                 pullsContainer.innerHTML = '';
@@ -702,7 +701,7 @@
                 });
             }
             
-            // Валидация ввода ставки
+            // Валидация ввода ставки (без изменений)
             function validateBetInput() {
                 const input = document.getElementById('bet-input');
                 const error = document.getElementById('bet-error');
@@ -724,7 +723,6 @@
             function openModal(pull) {
                 state.currentPull = pull;
                 const modal = document.getElementById('modal-overlay');
-                const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
                 
                 document.getElementById('modal-image').src = pull.image;
                 document.getElementById('modal-title').textContent = pull.title;
@@ -736,10 +734,12 @@
                 betInput.value = '';
                 document.getElementById('bet-error').style.display = 'none';
                 
-                if (alreadyParticipating) {
+                // Проверяем, участвует ли пользователь в этом пуле
+                const userPull = state.userData.myPulls.find(p => p.pullId === pull.id);
+                
+                if (userPull) {
                     // Если уже участвует, показываем сколько вложено
-                    const contribution = state.userData.pullContributions[pull.id] || 0;
-                    betInput.value = contribution;
+                    betInput.value = userPull.contribution;
                     betInput.disabled = true;
                     document.getElementById('participate-btn').textContent = 'Вы уже участвуете';
                     document.getElementById('participate-btn').disabled = true;
@@ -777,21 +777,18 @@
                 const betValue = parseFloat(betInput.value);
                 
                 // Проверяем, есть ли уже такой пулл в моих пуллах
-                const alreadyParticipating = state.userData.myPulls.includes(state.currentPull.id);
+                const alreadyParticipating = state.userData.myPulls.some(p => p.pullId === state.currentPull.id);
                 
                 if (alreadyParticipating) {
                     telegram.showAlert("Вы уже участвуете в этом пуле!");
                     return;
                 }
                 
-                // Добавляем ID пулла
-                state.userData.myPulls.push(state.currentPull.id);
-                
-                // Записываем сумму ставки
-                if (!state.userData.pullContributions) {
-                    state.userData.pullContributions = {};
-                }
-                state.userData.pullContributions[state.currentPull.id] = betValue;
+                // Добавляем информацию о пуле и вкладе
+                state.userData.myPulls.push({
+                    pullId: state.currentPull.id,
+                    contribution: betValue
+                });
                 
                 // Обновляем статистику
                 state.userData.totalContribution += betValue;
@@ -823,7 +820,7 @@
                 const container = document.getElementById('my-pulls-container');
                 
                 if (state.userData.myPulls.length === 0) {
-                    container.innerHTML = '<p>У вас пока нет пуллов</p>';
+                    container.innerHTML = '<p>У вас пока нет пулов</p>';
                     container.className = 'my-pulls-grid empty-state';
                     return;
                 }
@@ -834,8 +831,9 @@
                 // Восстанавливаем полные данные пуллов из базы по ID
                 let activePullsP = 0;
                 let completedPullsP = 0;
-                state.userData.myPulls.forEach(pullId => {
-                    const pull = pullsDatabase.find(p => p.id === pullId);
+                
+                state.userData.myPulls.forEach(userPull => {
+                    const pull = pullsDatabase.find(p => p.id === userPull.pullId);
                     if (!pull) return;
                     
                     const status = checkPullStatus(pull);
@@ -846,7 +844,6 @@
                         activePullsP += 1;
                     }
                     
-                    const contribution = state.userData.pullContributions[pullId] || 0;
                     const card = document.createElement('div');
                     card.className = 'my-pull-card';
                     card.innerHTML = `
@@ -854,7 +851,7 @@
                         <div class="my-pull-info">
                             <div>
                                 <div class="my-pull-title">${pull.title}</div>
-                                <div class="my-pull-participants">Вклад: ${contribution} TKN</div>
+                                <div class="my-pull-contribution" style = "display:flex; align-items: center;">Вклад: ${userPull.contribution}<img src="telegram-star-128.png" style="width: 12px; height: 12px; margin-left: 4px;"></div>
                             </div>
                             <div>
                                 <span class="pull-status ${status === 'completed' ? 'status-completed' : 'status-active'}">
