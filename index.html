@@ -250,10 +250,9 @@
             background-color: var(--secondary-bg);
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 5px 7px 5px 5px;
             cursor: pointer;
         }
 
@@ -559,10 +558,9 @@
             background-color: var(--secondary-bg);
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 5px 7px 5px 5px;
         }
 
         .win-image {
@@ -581,6 +579,9 @@
             font-weight: 500;
             margin-bottom: 2px;
             font-size: 15px;
+            display: flex;
+            align-items: center;
+
         }
 
         .win-date {
@@ -595,7 +596,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -614,8 +616,8 @@
 
         .win-modal-image {
             width: 100%;
-            height: 200px;
-            object-fit: contain;
+            aspect-ratio: 4/2.6;
+            object-fit: cover;
             margin-bottom: 15px;
             border-radius: 10px;
         }
@@ -628,6 +630,7 @@
 
         .win-modal-text {
             margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .win-modal-close {
@@ -1157,7 +1160,7 @@
                     winElement.innerHTML = `
                         <img src="${win.image}" class="win-image">
                         <div class="win-info">
-                            <div class="win-name">${win.name}</div>
+                            <div class="win-name">${win.name}<img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;"></div>
                             <div class="win-date">Получено: ${win.date}</div>
                         </div>
                     `;
