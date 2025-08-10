@@ -609,7 +609,7 @@
             const userData = {
                 wins: {}
             };
-
+            updateProfileInfo();
             // База данных всех предметов
             const itemsDatabase = {
                 'case1_25': {
@@ -751,7 +751,6 @@
                     
                     const data = await response.json();
                     userData.wins = data.wins || {};
-                    updateProfileInfo();
                     updateWins();
                     
                 } catch (error) {
