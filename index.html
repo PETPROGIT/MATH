@@ -588,8 +588,8 @@
         .getWinGiftBtn{
             border: none;
             background-color: var(--primary-color);
-            border-radius: 8px 8px;
-            padding: 5px 7px;
+            border-radius: 9px 9px;
+            padding: 6px 10px;
             color: white;
             font-size: 15px;
         }
@@ -635,7 +635,7 @@
         }
 
         .win-modal-image {
-            width: 80%;
+            width: 78%;
             aspect-ratio: 1/1;
             object-fit: cover;
             margin-bottom: 15px;
@@ -650,8 +650,13 @@
         }
 
         .win-modal-text {
-            margin-bottom: 20px;
-            font-size: 20px;
+            margin-bottom: 8px;
+            font-size: 23px;
+            font-weight: 500;
+        }
+        .win-modal-text2 {
+            margin-bottom: 14px;
+            font-size: 15px;
             font-weight: 500;
         }
 
@@ -722,7 +727,7 @@
                     
                     <button class="buy-btn" id="buyCase">Оплатить</button>
                     
-                    <div class="prizes-title">Возможные призы:</div>
+                    <div class="prizes-title">Возможные подарки:</div>
                     <div class="prizes-grid" id="prizesGrid">
                         <!-- Призы будут добавляться динамически -->
                     </div>
@@ -833,7 +838,9 @@
     <div id="win-modal-overlay" class="win-modal-overlay">
         <div class="win-modal-content">
             <img id="win-modal-image" class="win-modal-image" src="" alt="Выигрыш">
-            <p class="win-modal-text">Поздравляем с выигрышем!</p>
+            <p class="win-modal-text">Вы выиграли подарок!</p>
+            <p class="win-modal-text2">В профиле вы можете вывести его на свой аккаунт.</p>
+
             <button id="win-modal-close" class="win-modal-close">Закрыть</button>
         </div>
     </div>
@@ -1053,7 +1060,7 @@
             // Функция для отрисовки всех пуллов
             function renderPulls() {
                 const pullsContainer = document.getElementById('pulls');
-                pullsContainer.innerHTML = '<div style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(28, 28, 28, .8); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; font-size: 21px; font-weight: 500;"><i class="bi bi-laptop" style="margin-right: 10px;"></i> Режим в разработке...</div>'
+                pullsContainer.innerHTML = '<div style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(28, 28, 28, .9); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; font-size: 21px; font-weight: 500;"><div style="font-size: 21px; font-weight: 600; color: white; margin-top: -36px"><i class="bi bi-laptop" style="margin-right: 10px;"></i> Режим в разработке...</div></div>'
                 
                 pullsDatabase.forEach(pull => {
                     const status = checkPullStatus(pull);
@@ -1229,7 +1236,7 @@
                 const winsContainer = document.getElementById('wins-container');
                 
                 if (Object.keys(state.userData.wins).length === 0) {
-                    winsContainer.innerHTML = '<p>У вас пока нет выигрышей</p>';
+                    winsContainer.innerHTML = '<i class="bi bi-folder2-open" style="font-size: 50px;"></i> <p>У вас пока нет выигрышей</p>';
                     winsContainer.className = 'empty-state';
                     return;
                 }
