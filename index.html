@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         :root {
-            --bg-color: hsl(0, 0%, 12%);
+            --bg-color: rgb(31, 31, 31);
             --secondary-bg: #2d2d2d;
             --text-color: #e1e1e1;
             --accent-color: #3a3a3a;
@@ -702,6 +702,7 @@
     </style>
 </head>
 <body>
+
     <div class="app-container">
         <div class="content-container">
             <div class="content">
@@ -828,11 +829,9 @@
         </div>
     </div>
 
-    <!-- Модальное окно выигрыша -->
     <div id="win-modal-overlay" class="win-modal-overlay">
         <div class="win-modal-content">
             <img id="win-modal-image" class="win-modal-image" src="" alt="Выигрыш">
-            <h3 id="win-modal-title" class="win-modal-title"></h3>
             <p class="win-modal-text">Поздравляем с выигрышем!</p>
             <button id="win-modal-close" class="win-modal-close">Закрыть</button>
         </div>
@@ -844,10 +843,10 @@
             // Инициализация Telegram WebApp
             const telegram = window.Telegram.WebApp;
             telegram.expand();
-            
+            telegram.disableVerticalSwipes();
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
-            const userId = user?.id || '000000';
+            const userId = user?.id || '000000000';
             
             if (user) {
                 // Форматирование имени пользователя
@@ -885,102 +884,120 @@
                 },
             ];
             
+            // База данных всех предметов
+            const itemsDatabase = {
+                'case1_25': {
+                    id: 'case1_25',
+                    name: '15',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/22f5ef7a-279a-4473-b4f4-f5c3e9268365.png',
+                    chance: 20
+                },
+                'case2_25': {
+                    id: 'case2_25',
+                    name: '15',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/f619f2bb-b17b-45cd-983b-e139d5313df4.png',
+                    chance: 20
+                },
+                'case3_25': {
+                    id: 'case3_25',
+                    name: '25',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/515e0f01-7adf-4041-9748-6123094a1bb9.png',
+                    chance: 20
+                },
+                'case4_25': {
+                    id: 'case4_25',
+                    name: '25',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/16a452df-a730-47ca-aa74-11c6bb3fedd9.png',
+                    chance: 20
+                },
+                'case5_25': {
+                    id: 'case5_25',
+                    name: '50',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
+                    chance: 10
+                },
+                'case6_25': {
+                    id: 'case6_25',
+                    name: '50',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/7d70fce2-a21e-4be1-8f61-dec4b75ad8f2.png',
+                    chance: 10
+                },
+                'case7_25': {
+                    id: 'case7_25',
+                    name: '100',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
+                    chance: 5
+                },
+                'case8_25': {
+                    id: 'case8_25',
+                    name: '300',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/916abe04-0549-4a33-bdf8-2368e3430340.png',
+                    chance: 1
+                },
+                'case1_50': {
+                    id: 'case1_50',
+                    name: '25',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/16a452df-a730-47ca-aa74-11c6bb3fedd9.png',
+                    chance: 40
+                },
+                'case2_50': {
+                    id: 'case2_50',
+                    name: '50',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
+                    chance: 20
+                },
+                'case3_50': {
+                    id: 'case3_50',
+                    name: '50',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/0bff7e8e-4fca-4b3f-a512-f654d9c4d879.png',
+                    chance: 20
+                },
+                'case4_50': {
+                    id: 'case4_50',
+                    name: '100',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
+                    chance: 5
+                },
+                'case5_50': {
+                    id: 'case5_50',
+                    name: '100',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/4d0dd699-fdcf-4939-b1ef-7b095764dbd5.png',
+                    chance: 5
+                },
+                'case6_50': {
+                    id: 'case6_50',
+                    name: '300',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/916abe04-0549-4a33-bdf8-2368e3430340.png',
+                    chance: 1
+                },
+                'case7_50': {
+                    id: 'case7_50',
+                    name: '650',
+                    image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/120a7e91-25fd-41ab-b738-bd63bfa23c91.png',
+                    chance: 1
+                }
+            };
+            
             // База данных кейсов с учетом вероятностей
             const casesDatabase = {
                 '25': [
-                    {
-                        id: 'case1_25',
-                        name: '15',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/22f5ef7a-279a-4473-b4f4-f5c3e9268365.png',
-                        chance: 20 // 10% вероятность
-                    },
-                    {
-                        id: 'case2_25',
-                        name: '15',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/f619f2bb-b17b-45cd-983b-e139d5313df4.png',
-                        chance: 20 // 10% вероятность
-                    },
-                    {
-                        id: 'case3_25',
-                        name: '25',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/515e0f01-7adf-4041-9748-6123094a1bb9.png',
-                        chance: 20 // 20% вероятность
-                    },
-                    {
-                        id: 'case4_25',
-                        name: '25',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/16a452df-a730-47ca-aa74-11c6bb3fedd9.png',
-                        chance: 20 // 20% вероятность
-                    },
-                    {
-                        id: 'case5_25',
-                        name: '50',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
-                        chance: 10 // 20% вероятность
-                    },
-                    {
-                        id: 'case6_25',
-                        name: '50',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/7d70fce2-a21e-4be1-8f61-dec4b75ad8f2.png',
-                        chance: 10 // 20% вероятность
-                    },
-                    {
-                        id: 'case7_25',
-                        name: '100',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
-                        chance: 5 // 20% вероятность
-                    },
-                    {
-                        id: 'case8_25',
-                        name: '300',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/916abe04-0549-4a33-bdf8-2368e3430340.png',
-                        chance: 1 // 20% вероятность
-                    },
-
+                    itemsDatabase['case1_25'],
+                    itemsDatabase['case2_25'],
+                    itemsDatabase['case3_25'],
+                    itemsDatabase['case4_25'],
+                    itemsDatabase['case5_25'],
+                    itemsDatabase['case6_25'],
+                    itemsDatabase['case7_25'],
+                    itemsDatabase['case8_25']
                 ],
                 '50': [
-                    {
-                        id: 'case1_50',
-                        name: '25',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/16a452df-a730-47ca-aa74-11c6bb3fedd9.png',
-                        chance: 40 // 20% вероятность
-                    },
-                    {
-                        id: 'case2_50',
-                        name: '50',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
-                        chance: 20 // 20% вероятность
-                    },
-                    {
-                        id: 'case3_50',
-                        name: '50',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/0bff7e8e-4fca-4b3f-a512-f654d9c4d879.png',
-                        chance: 20 // 20% вероятность
-                    },
-                    {
-                        id: 'case4_50',
-                        name: '100',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
-                        chance: 5 // 20% вероятность
-                    },
-                    {
-                        id: 'case5_50',
-                        name: '100',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/4d0dd699-fdcf-4939-b1ef-7b095764dbd5.png',
-                        chance: 5 // 20% вероятность
-                    },
-                    {
-                        id: 'case6_50',
-                        name: '300',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/916abe04-0549-4a33-bdf8-2368e3430340.png',
-                        chance: 1 // 20% вероятность
-                    },
-                    {
-                        id: 'case7_50',
-                        name: '650',
-                        image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/120a7e91-25fd-41ab-b738-bd63bfa23c91.png',
-                        chance: 1 // 20% вероятность
-                    },
+                    itemsDatabase['case1_50'],
+                    itemsDatabase['case2_50'],
+                    itemsDatabase['case3_50'],
+                    itemsDatabase['case4_50'],
+                    itemsDatabase['case5_50'],
+                    itemsDatabase['case6_50'],
+                    itemsDatabase['case7_50']
                 ]
             };
             
@@ -997,12 +1014,11 @@
             });
             
             // Загружаем данные пользователя из localStorage
-            const userStorageKey = `user_${userId}`;
+            const userStorageKey = `${userId}`;
             const savedUserData = JSON.parse(localStorage.getItem(userStorageKey)) || {
                 id: userId,
                 myPulls: [], // Массив объектов {pullId, contribution}
-                wins: [],    // Массив объектов {id, name, image, date}
-                balance: 0,
+                wins: {},     // Объект с выигрышами {itemId: {date, status}}
                 totalContribution: 0,
                 activePulls: 0,
                 completedPulls: 0
@@ -1031,11 +1047,12 @@
             function saveUserData() {
                 localStorage.setItem(userStorageKey, JSON.stringify(state.userData));
             }
+            saveUserData();
             
             // Функция для отрисовки всех пуллов
             function renderPulls() {
                 const pullsContainer = document.getElementById('pulls');
-                pullsContainer.innerHTML = '<div style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(30, 30, 30, .8); backdrop-filter: blur(15px); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500;"><i class="bi bi-laptop" style="margin-right: 10px;"></i> Режим в разработке...</div>'
+                pullsContainer.innerHTML = '<div style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; background-color: rgba(30, 30, 30, .7); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; font-size: 21px; font-weight: 500;"><i class="bi bi-laptop" style="margin-right: 10px;"></i> Режим в разработке...</div>'
                 
                 pullsDatabase.forEach(pull => {
                     const status = checkPullStatus(pull);
@@ -1128,7 +1145,6 @@
             function openCase() {
                 if (state.isSpinning) return;
                 state.isSpinning = true;
-                fetch("http://178.49.211.113:8000/visit");
                 const caseRoulette = document.getElementById('caseRoulette');
                 const itemWidth = 130; // Ширина элемента + margin
                 const containerWidth = document.querySelector('.case-roulette-container').offsetWidth;
@@ -1175,14 +1191,12 @@
                         caseRoulette.style.transform = `translateX(${targetPosition}px)`;
                         
                         // Добавляем выигрыш в профиль пользователя
-                        const winData = {
-                            id: winItem.id,
-                            name: winItem.name,
-                            image: winItem.image,
-                            date: new Date().toLocaleDateString('ru-RU')
+                        const currentDate = new Date().toLocaleDateString('ru-RU');
+                        state.userData.wins[winItem.id] = {
+                            date: currentDate,
+                            status: 'new'
                         };
                         
-                        state.userData.wins.push(winData);
                         saveUserData();
                         updateWins();
                         
@@ -1200,9 +1214,7 @@
             // Функция для показа модального окна с выигрышем
             function showWinModal(winItem) {
                 const modal = document.getElementById('win-modal-overlay');
-                document.getElementById('win-modal-image').src = winItem.image;
-                //document.getElementById('win-modal-title').textContent = winItem.name;
-                
+                document.getElementById('win-modal-image').src = winItem.image;                
                 modal.style.display = 'flex';
             }
             
@@ -1215,7 +1227,7 @@
             function updateWins() {
                 const winsContainer = document.getElementById('wins-container');
                 
-                if (state.userData.wins.length === 0) {
+                if (Object.keys(state.userData.wins).length === 0) {
                     winsContainer.innerHTML = '<p>У вас пока нет выигрышей</p>';
                     winsContainer.className = 'empty-state';
                     return;
@@ -1224,15 +1236,22 @@
                 winsContainer.innerHTML = '';
                 winsContainer.className = 'my-pulls-grid';
                 
-                state.userData.wins.forEach(win => {
+                // Сортируем выигрыши по дате (новые сначала)
+                const sortedWins = Object.entries(state.userData.wins)
+                    .sort((a, b) => new Date(b[1].date) - new Date(a[1].date));
+                
+                sortedWins.forEach(([itemId, winData]) => {
+                    const item = itemsDatabase[itemId];
+                    if (!item) return;
+                    
                     const winElement = document.createElement('div');
                     winElement.className = 'win-item';
                     winElement.innerHTML = `
-                        <img src="${win.image}" class="win-image">
+                        <img src="${item.image}" class="win-image">
                         <div class="win-info">
                             <div>
-                                <div class="win-name">${win.name}<img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;"></div>
-                                <div class="win-date">Получено: ${win.date}</div>
+                                <div class="win-name">${item.name}<img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;"></div>
+                                <div class="win-date">Получено: ${winData.date}</div>
                             </div>
                             <button class="getWinGiftBtn">Вывести</button>
                         </div>
