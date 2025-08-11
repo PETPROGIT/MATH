@@ -559,7 +559,7 @@
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link active" data-tab="cases">
                             <i class="bi bi-box-seam"></i>
-                            Кейсы
+                            Кейсыs
                         </a>
                     </div>
                     <div class="col-3 nav-item">
@@ -593,7 +593,7 @@
 
 
     <script>
-        const API_URL = 'http://178.49.211.113:8000';
+        const API_URL = 'https://aardvark-apparent-easily.ngrok-free.app';
 
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация Telegram WebApp
@@ -785,7 +785,13 @@
             async function updateWins() {
                 const winsContainer = document.getElementById('wins-container');
                 try {
-                    const response = await fetch(`${API_URL}/getUserWins?user_id=${userId}`);
+                    const response = await fetch(`${API_URL}/getUserWins?user_id=${userId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'User-Agent': navigator.userAgent
+                        }
+                    },);
                     const data = await response.json();
                     userData.wins = data.wins || {};
                     
