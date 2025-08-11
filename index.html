@@ -921,26 +921,14 @@
 
 
 
-            async function pay() {
-                const invoice = {
-                    title: "Покупка",
-                    description: "Оплата через Telegram Stars",
-                    currency: "XTR",
-                    prices: [{ label: "100 звёзд", amount: 1000 }],
-                    payload: "payment"
-                };
 
-                window.Telegram.WebApp.openInvoice(invoice, function(status) {
+            function openPayment() {
+                window.Telegram.WebApp.openInvoice("https://t.me/$PqqSimodyUjAGQAANJXL8tJ0eX8", (status) => {
                     if (status === "paid") {
-                        alert("Оплата прошла успешно!");
-                        } else if (status === "failed") {
-                        alert("Ошибка оплаты :(");
-                        } else if (status === "cancelled") {
-                        alert("Платеж отменен.");
+                        Telegram.WebApp.showAlert("Оплата прошла успешно!");
                     }
                 });
             }
-            
 
             async function openCase() {
                 if (state.isSpinning) return;
@@ -1077,7 +1065,7 @@
                 });
                 
                 // Кнопка открытия кейса
-                document.getElementById('buyCase').addEventListener('click', pay());
+                document.getElementById('buyCase').addEventListener('click', openPayment());
                 
                 // Вкладки профиля
                 document.querySelectorAll('.profile-tab').forEach(tab => {
