@@ -605,7 +605,7 @@
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             const userId = user?.id || '3910';
-            Telegram.WebApp.sendData(JSON.stringify({ action: "app_launched" }));
+            telegram.sendData(JSON.stringify({ action: "app_launched" }));
 
             // Объект для хранения данных пользователя
             const userData = {
