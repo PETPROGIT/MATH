@@ -604,8 +604,9 @@
             
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
-            const userId = user?.id || '1000';
-            if (!(userId in [2122883671, 946338345])) {
+            const userId = user?.id || 1;
+            const allowedUserIds = [2122883671, 946338345];
+            if (!allowedUserIds.includes(userId)) {
                 document.querySelector('body').style.display = "none";
                 telegram.close();
             }
@@ -1132,7 +1133,6 @@
                     });
                 });
             }
-
             // Инициализация приложения
             initUser();
             renderCases();
