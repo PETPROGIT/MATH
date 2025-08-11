@@ -952,12 +952,14 @@
                     try {
                         Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
                             if (status === "paid") {
-                                Telegram.WebApp.showAlert("Оплата прошла успешно!");
+                                openCase();
+                            }
+                            else {
+                                return;
                             }
                         });
                     } catch {NaN};
                 });
-                return;
 
                 if (state.isSpinning) return;
                 state.isSpinning = true;
