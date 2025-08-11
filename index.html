@@ -594,7 +594,6 @@
 
     <script>
         const API_URL = 'https://aardvark-apparent-easily.ngrok-free.app';
-
         document.addEventListener('DOMContentLoaded', function() {
 
             // Инициализация Telegram WebApp
@@ -605,7 +604,11 @@
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             const userId = user?.id || '3910';
-
+            
+            telegram.postEvent("web_app_launched", { 
+                event: "app_started", 
+                user_id: 12345 
+            });
             // Объект для хранения данных пользователя
             const userData = {
                 wins: {}
