@@ -930,7 +930,7 @@
                     payload: "payment"
                 };
 
-                Telegram.WebApp.openInvoice(invoice, function(status) {
+                window.Telegram.WebApp.openInvoice(invoice, function(status) {
                     if (status === "paid") {
                         alert("Оплата прошла успешно!");
                         } else if (status === "failed") {
