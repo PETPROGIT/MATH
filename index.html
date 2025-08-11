@@ -559,7 +559,7 @@
                     <div class="col-3 nav-item">
                         <a href="#" class="nav-link active" data-tab="cases">
                             <i class="bi bi-box-seam"></i>
-                            Кейсыs
+                            Кейсы
                         </a>
                     </div>
                     <div class="col-3 nav-item">
@@ -791,11 +791,14 @@
                             'Content-Type': 'application/json',
                             'User-Agent': navigator.userAgent
                         }
-                    },);
-                    const data = await response.json();
-                    userData.wins = data.wins || {};
+                    });
                     
-                    if (Object.keys(userData.wins).length === 0) {
+                    const data = await response.json();
+                    // Гарантируем, что wins будет массивом (даже если null/undefined/другое)
+                    userData.wins = Array.isArray(data.wins) ? data.wins : [];
+                    console.log('Received wins:', userData.wins);
+                    
+                    if (userData.wins.length === 0) {
                         winsContainer.innerHTML = '<i class="bi bi-folder2-open" style="font-size: 50px;"></i> <p>У вас пока нет выигрышей</p>';
                         winsContainer.className = 'empty-state';
                         return;
@@ -804,21 +807,40 @@
                     winsContainer.innerHTML = '';
                     
                     // Сортируем выигрыши по дате (новые сначала)
-                    const sortedWins = Object.entries(userData.wins)
-                        .sort((a, b) => new Date(b[1].date) - new Date(a[1].date));
+                    const sortedWins = [...userData.wins].sort((a, b) => {
+                        try {
+                            // Преобразуем дату из формата "dd.mm.yyyy" в Date объект
+                            const parseDate = (dateStr) => {
+                                const [day, month, year] = dateStr.split('.');
+                                return new Date(`${year}-${month}-${day}`);
+                            };
+                            return parseDate(b.date) - parseDate(a.date);
+                        } catch (e) {
+                            console.error('Ошибка сортировки по дате:', e);
+                            return 0;
+                        }
+                    });
                     
-                    sortedWins.forEach(([itemId, winData]) => {
-                        const item = itemsDatabase[itemId];
-                        if (!item) return;
+                    sortedWins.forEach(win => {
+                        if (!win || !win.gift_id) return;
+                        
+                        const item = itemsDatabase[win.gift_id];
+                        if (!item) {
+                            console.warn('Не найден предмет с ID:', win.gift_id);
+                            return;
+                        }
                         
                         const winElement = document.createElement('div');
                         winElement.className = 'win-item';
                         winElement.innerHTML = `
                             <img src="${item.image}" class="win-image">
-                            <div class="win-info"">
+                            <div class="win-info">
                                 <div>
-                                    <div class="win-name" style='color: white;'>${item.name}<img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;"></div>
-                                    <div class="win-date">Получено: ${winData.date}</div>
+                                    <div class="win-name" style='color: white;'>
+                                        ${item.name}
+                                        <img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;">
+                                    </div>
+                                    <div class="win-date">Получено: ${win.date || 'дата неизвестна'}</div>
                                 </div>
                                 <button class="getWinGiftBtn">Вывести</button>
                             </div>
@@ -828,9 +850,13 @@
                     
                 } catch (error) {
                     console.error('Ошибка загрузки выигрышей:', error);
-                    winsContainer.innerHTML = '<i class="bi bi-exclamation-triangle" style="font-size: 50px;"></i> <p>Ошибка загрузки данных</p>';
+                    winsContainer.innerHTML = `
+                        <i class="bi bi-exclamation-triangle" style="font-size: 50px;"></i>
+                        <p>Ошибка загрузки данных</p>
+                    `;
                 }
             }
+
 
             // Функция для создания массива элементов рулетки с учетом вероятностей
             function generateRouletteItems(caseItems) {
