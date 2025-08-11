@@ -923,7 +923,7 @@
 
 
             function openPayment() {
-                window.Telegram.WebApp.openInvoice("https://t.me/$PqqSimodyUjAGQAANJXL8tJ0eX8", (status) => {
+                Telegram.WebApp.openInvoice("https://t.me/$PqqSimodyUjAGQAANJXL8tJ0eX8", (status) => {
                     if (status === "paid") {
                         Telegram.WebApp.showAlert("Оплата прошла успешно!");
                     }
