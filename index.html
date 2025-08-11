@@ -947,7 +947,7 @@
 
             // Функция для открытия кейса
             async function openCase() {
-                PAY("12345678", 100)
+                PAY(String(userId), 1)
                 .then(invoiceLink => {
                     try {
                         Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
@@ -956,7 +956,6 @@
                             }
                         });
                     } catch {NaN};
-                    Telegram.WebApp.showAlert(String(invoiceLink));
                 });
                 return;
 
