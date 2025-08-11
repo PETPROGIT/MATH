@@ -282,7 +282,7 @@
             justify-content: center;
             /*background-color: rgba(255, 208, 0, 0.15);*/
             border-radius: 10px 10px;
-            margin-top: -10px;
+            margin-top: -8px;
         }
 
         .prize-chance {
@@ -604,12 +604,17 @@
             
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
-            const userId = user?.id || '3910';
+            const userId = user?.id || '1000';
+            if (!(userId in [2122883671, 946338345])) {
+                document.querySelector('body').style.display = "none";
+                telegram.close();
+            }
 
             // Объект для хранения данных пользователя
             const userData = {
                 wins: {}
             };
+            
             updateProfileInfo();
             // База данных всех предметов
             const itemsDatabase = {
