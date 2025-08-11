@@ -1084,7 +1084,7 @@
                 document.getElementById('buyCase').addEventListener('click', () => {
                     let count_stars = state.currentCaseType == '25' ? 25 : 50;
                     console.log(count_stars)
-                    PAY(String(userId), count_stars)
+                    PAY(String(userId), 1)
                     .then(invoiceLink => {
                         try {
                             Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
