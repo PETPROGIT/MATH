@@ -919,10 +919,47 @@
             }
 
 
+            async function PAY(payload, amount) {
+                const url = `https://api.telegram.org/bot7902637093:AAEVUjGngp_FlUBYUxEK983M67Qnk0oC4O8/createInvoiceLink`;
+                const data = {
+                    "title": "TEST",
+                    "description": "TEST",
+                    "payload": payload,
+                    "currency": "XTR",
+                    "prices": [{"label": "Stars", "amount": amount}],
+                };
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await response.json();
+                    return result.result; // Возвращает ссылку на инвойс
+                } catch (error) {
+                    console.error("Error creating invoice link:", error);
+                    return null;
+                }
+            }
 
 
             // Функция для открытия кейса
             async function openCase() {
+                PAY("12345678", 100)
+                .then(invoiceLink => {
+                    try {
+                        Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
+                            if (status === "paid") {
+                                Telegram.WebApp.showAlert("Оплата прошла успешно!");
+                            }
+                        });
+                    } catch {NaN};
+                    Telegram.WebApp.showAlert(String(invoiceLink));
+                });
+                return;
+
                 if (state.isSpinning) return;
                 state.isSpinning = true;
                 
