@@ -922,8 +922,8 @@
             async function PAY(payload, amount) {
                 const url = `https://api.telegram.org/bot7902637093:AAEVUjGngp_FlUBYUxEK983M67Qnk0oC4O8/createInvoiceLink`;
                 const data = {
-                    "title": "TEST",
-                    "description": "TEST",
+                    "title": "Открытие кейса",
+                    "description": "Открытие кейса",
                     "payload": payload,
                     "currency": "XTR",
                     "prices": [{"label": "Stars", "amount": amount}],
@@ -1082,7 +1082,9 @@
                 
                 // Кнопка открытия кейса
                 document.getElementById('buyCase').addEventListener('click', () => {
-                    PAY(String(userId), 1)
+                    let count_stars = state.currentCaseType == '25' ? 25 : 50;
+                    console.log(count_stars)
+                    PAY(String(userId), count_stars)
                     .then(invoiceLink => {
                         try {
                             Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
