@@ -596,6 +596,7 @@
         const API_URL = 'https://aardvark-apparent-easily.ngrok-free.app';
 
         document.addEventListener('DOMContentLoaded', function() {
+
             // Инициализация Telegram WebApp
             const telegram = window.Telegram.WebApp;
             telegram.expand();
@@ -604,7 +605,8 @@
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             const userId = user?.id || '3910';
-            
+            Telegram.WebApp.sendData(JSON.stringify({ action: "app_launched" }));
+
             // Объект для хранения данных пользователя
             const userData = {
                 wins: {}
@@ -917,19 +919,10 @@
                 document.getElementById('buyCase').innerHTML = `Открыть за ${state.currentCaseType} <img src="telegram-star-128.png" style="width: 15px; margin-left: 3px;">`;
             }
 
+
+
+
             // Функция для открытия кейса
-
-
-
-
-            function openPayment() {
-                Telegram.WebApp.openInvoice("https://t.me/$PqqSimodyUjAGQAANJXL8tJ0eX8", (status) => {
-                    if (status === "paid") {
-                        Telegram.WebApp.showAlert("Оплата прошла успешно!");
-                    }
-                });
-            }
-
             async function openCase() {
                 if (state.isSpinning) return;
                 state.isSpinning = true;
@@ -1065,7 +1058,7 @@
                 });
                 
                 // Кнопка открытия кейса
-                document.getElementById('buyCase').addEventListener('click', openPayment());
+                document.getElementById('buyCase').addEventListener('click', openCase);
                 
                 // Вкладки профиля
                 document.querySelectorAll('.profile-tab').forEach(tab => {
