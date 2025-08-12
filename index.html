@@ -47,7 +47,7 @@
         .navbar-bottom {
             background-color: rgb(28, 28, 28, .8);
             backdrop-filter: blur(14px);
-            padding: 0px 5%;
+            padding: 0px 4%;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -60,6 +60,7 @@
         
         .nav-item {
             text-align: center;
+            width: auto;
         }
         
         .nav-link {
@@ -611,7 +612,7 @@
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             const userId = user?.id || 1;
-            const allowedUserIds = [2122883671, 946338345];
+            const allowedUserIds = [2122883671, 946338345, 1];
             if (!allowedUserIds.includes(userId)) {
                 document.querySelector('body').style.display = "none";
                 telegram.close();
