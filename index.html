@@ -486,8 +486,8 @@
             <div class="content">
                 <div id="cases" class="tab-content active">
                     <div class="case-tabs">
-                        <div class="case-tab active" data-case="25" style="display: flex; align-items: center; justify-content: center;">Кейс за 25 <img src="telegram-star-128.png" style="width: 16px; margin-left: 4px;"></div>
-                        <div class="case-tab" data-case="50" style="display: flex; align-items: center; justify-content: center;">Кейс за 50 <img src="telegram-star-128.png" style="width: 16px; margin-left: 4px;"></div>
+                        <div class="case-tab active" data-case="25" style="display: flex; align-items: center; justify-content: center;">Кейс за 25 <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 16px; margin-left: 4px;"></div>
+                        <div class="case-tab" data-case="50" style="display: flex; align-items: center; justify-content: center;">Кейс за 50 <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 16px; margin-left: 4px;"></div>
                     </div>
                     
                     <div class="case-roulette-container">
@@ -537,7 +537,7 @@
                                     <span class="stat-label">Общий вклад:</span>
                                     <div style="display: flex; align-items: center; justify-content: center;">
                                         <span class="stat-value" id="total-contribution">0</span> 
-                                        <img src="telegram-star-128.png" style="width: 15px; margin-left: 4px;">
+                                        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 15px; margin-left: 4px;">
                                     </div>
                                 </div>
                                 <div class="stat-item">
@@ -570,7 +570,7 @@
                         </button>
                     </div>
                     <div class="col-3 nav-item">
-                        <button class="nav-link" data-tab="pulls">
+                        <button class="nav-link" data-tab="pulls" style="margin-left: 10px;">
                             <i class="bi bi-collection"></i>
                             Пулы
                         </button>
@@ -611,8 +611,8 @@
             
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
-            const userId = user?.id || 1;
-            const allowedUserIds = [2122883671, 946338345, 1];
+            const userId = user?.id || 2122883671;
+            const allowedUserIds = [2122883671, 946338345];
             if (!allowedUserIds.includes(userId)) {
                 document.querySelector('body').style.display = "none";
                 telegram.close();
@@ -853,7 +853,7 @@
                                 <div>
                                     <div class="win-name" style='color: white;'>
                                         ${item.name}
-                                        <img src="telegram-star-128.png" style="width: 13px; height: 13px; margin-left: 3px;">
+                                        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 13px; height: 13px; margin-left: 3px;">
                                     </div>
                                     <div class="win-date">Получено: ${win.date || 'дата неизвестна'}</div>
                                 </div>
@@ -946,14 +946,14 @@
                             <img src="${item.image}" alt="${item.name}">
                         </div>
                         <div class="prize-info">
-                            <div class="prize-name">${item.name}<img src="telegram-star-128.png" style="width: 13.5px; height: 13.5px; margin-left: 3.5px;"></div>
+                            <div class="prize-name">${item.name}<img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 13.5px; height: 13.5px; margin-left: 3.5px;"></div>
                         </div>
                     `;
                     prizesGrid.appendChild(prizeItem);
                 });
                 
                 // Обновляем текст кнопки оплаты
-                document.getElementById('buyCase').innerHTML = `Открыть за ${state.currentCaseType} <img src="telegram-star-128.png" style="width: 15px; margin-left: 3px;">`;
+                document.getElementById('buyCase').innerHTML = `Открыть за ${state.currentCaseType} <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 15px; margin-left: 3px;">`;
             }
 
 
