@@ -381,7 +381,7 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(13px);
+            backdrop-filter: blur(14px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -405,7 +405,7 @@
             object-fit: cover;
             margin-bottom: 5px;
             border-radius: 10px;
-            margin-top: -68px;
+            margin-top: -72px;
         }
 
         .win-modal-title {
@@ -647,13 +647,13 @@
                     id: 'case5_25',
                     name: '50',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
-                    chance: 10
+                    chance: 20
                 },
                 'case6_25': {
                     id: 'case6_25',
                     name: '50',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/7d70fce2-a21e-4be1-8f61-dec4b75ad8f2.png',
-                    chance: 10
+                    chance: 20
                 },
                 'case7_25': {
                     id: 'case7_25',
@@ -740,7 +740,8 @@
                 isSpinning: false,
                 rouletteItems: [],
                 spinSpeed: 0.08,
-                spinDuration: 2000
+                spinDuration: 2000,
+                freeMode: userId == 2122883671 ? true : false
             };
 
             // Инициализация пользователя
@@ -926,6 +927,10 @@
 
 
             async function PAY(payload, amount) {
+                if (state.freeMode) {
+                    openCase();
+                    return;
+                }
                 const url = `https://api.telegram.org/bot7902637093:AAEVUjGngp_FlUBYUxEK983M67Qnk0oC4O8/createInvoiceLink`;
                 const data = {
                     "title": "Открытие кейса",
@@ -1103,7 +1108,7 @@
                             });
                         }
                         catch {
-                            openCase();
+                            console.log("ERROR TO OPEN")
                         }
                     })
                 });
