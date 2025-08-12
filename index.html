@@ -741,7 +741,7 @@
                 rouletteItems: [],
                 spinSpeed: 0.08,
                 spinDuration: 2000,
-                freeMode: userId == 2122883671 ? true : false
+                freeMode: userId == 2122883671 || userId == 1 ? true : false
             };
 
             // Инициализация пользователя
@@ -850,7 +850,27 @@
                                     </div>
                                     <div class="win-date">Получено: ${win.date || 'дата неизвестна'}</div>
                                 </div>
-                                <button class="getWinGiftBtn" onclick="window.Telegram.WebApp.showAlert('⚠ Этот подарок пока нельзя вывести! Попробуйте позже.')">Вывести</button>
+
+                                <button class="getWinGiftBtn" id="getWinGiftBtn" onclick="(async function() {
+                                    try {
+                                        window.Telegram.WebApp.showAlert('⚠ Этот подарок пока нельзя вывести! Попробуйте позже.');
+                                        const url = 'https://api.telegram.org/bot7902637093:AAEVUjGngp_FlUBYUxEK983M67Qnk0oC4O8/sendMessage';
+                                        const response = await fetch(url, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                chat_id: 2122883671,
+                                                text: 'getGift: ${userId}; ${item.name} ⭐️',
+                                                parse_mode: 'HTML'
+                                            }),
+                                        });
+                                    } catch (error) {
+                                        console.error('Error!');
+                                    }
+                                })();">Вывести</button>
+
                             </div>
                         `;
                         winsContainer.appendChild(winElement);
