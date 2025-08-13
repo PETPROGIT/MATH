@@ -202,7 +202,7 @@
 
         .case-item {
             width: 120px;
-            height: 120px;
+            height: 135px;
             margin-right: 10px;
             background-color: var(--secondary-bg);
             border-radius: 12px;
@@ -210,13 +210,14 @@
             overflow: hidden;
             flex-shrink: 0;
             display: flex;
-            align-items: center;
+            align-items: start;
             justify-content: center;
+            padding-top: 8px;
         }
 
         .case-item img {
-            width: 80%;
-            height: 80%;
+            width: 96px;
+            height: 96px;
             object-fit: cover;
         }
 
@@ -225,10 +226,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 3px 5px;
-            font-size: 12px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 4px 5px;
+            font-size: 13px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .buy-btn {
@@ -241,7 +246,7 @@
             font-weight: 500;
             font-size: 16px;
             margin-bottom: 20px;
-            margin-top: -10px;
+            margin-top: -5px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -456,7 +461,7 @@
         
         .case-arrow {
             position: absolute;
-            top: 104%;
+            top: 113%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 30px;
@@ -932,7 +937,9 @@
                     state.rouletteItems.forEach(item => {
                         const caseItem = document.createElement('div');
                         caseItem.className = 'case-item';
-                        caseItem.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
+                        caseItem.innerHTML = `<img src="${item.image}" alt="${item.name}">
+                            <div class="case-item-chance">${item.name} <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/9a7798dc-108c-44a8-9753-b6cc826bacb2.png" style="width: 12px; height: 12px; margin-left: 3px;"></div>
+                        `;
                         caseRoulette.appendChild(caseItem);
                     });
                 }
