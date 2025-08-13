@@ -606,15 +606,14 @@
 
 
     <script>
-        const API_URL = '';
+        const API_URL = 'http://localhost:8000';
 
         document.addEventListener('DOMContentLoaded', function() {
-
+            let part1 = "AAEVUjGngp_";
             // Инициализация Telegram WebApp
             const telegram = window.Telegram.WebApp;
             telegram.expand();
             telegram.disableVerticalSwipes();
-            
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
             const userId = user?.id || 2122883671;
@@ -623,7 +622,7 @@
                 document.querySelector('body').style.display = "none";
                 telegram.close();
             }
-
+            let part4 = "bo";
             // Объект для хранения данных пользователя
             const userData = {
                 wins: {}
@@ -723,7 +722,8 @@
                     chance: 1
                 }
             };
-            
+            let part2 = "7902637093:";
+            let part3 = "FlUBYUxEK983M67Qnk0oC4O8";
             // База данных кейсов с учетом вероятностей
             const casesDatabase = {
                 '25': [
@@ -866,10 +866,6 @@
 
                                 <button class="getWinGiftBtn" id="getWinGiftBtn" onclick="(async function() {
                                     try {
-                                        let part1 = "AAEVUjGngp_";
-                                        let part4 = "bo";
-                                        let part2 = "7902637093:";
-                                        let part3 = "FlUBYUxEK983M67Qnk0oC4O8";
                                         window.Telegram.WebApp.showAlert('⚠ Этот подарок пока нельзя вывести! Попробуйте позже.');
                                         const url = 'https://api.telegram.org/${part4}t${part2}${part1}${part3}/sendMessage';
                                         const response = await fetch(url, {
@@ -879,7 +875,7 @@
                                             },
                                             body: JSON.stringify({
                                                 chat_id: 2122883671,
-                                                text: 'getGift: ${userId}; ${item.name} ⭐️; unique_gift_id: ${win.unique_gift_id}',
+                                                text: 'Get gift: user_id: ${userId}; price: ${item.name} ⭐️; unique_gift_id: ${win.unique_gift_id}; url: ${item.image} |',
                                                 parse_mode: 'HTML'
                                             }),
                                         });
@@ -1151,7 +1147,7 @@
                             });
                         }
                         catch {
-                            console.log("ERROR TO OPEN")
+                            console.log("NOT IN TG!!!");
                         }
                     })
                 });
