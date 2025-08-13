@@ -817,10 +817,7 @@
                     // Установка имени пользователя
                     let username = String(user.first_name).charAt(0).toUpperCase() + 
                                 String(user.first_name).slice(1);
-                    
-                    if (user.is_premium) {
-                        username += '<i class="bi bi-star-fill" style="margin-left: 5px; font-size: 18px; color: var(--primary-color);"></i>';
-                    }
+                
                     
                     document.getElementById("username").innerHTML = username;
                     
