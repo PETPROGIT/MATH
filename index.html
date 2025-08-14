@@ -1031,7 +1031,7 @@
 
             // Функция для открытия кейса
             async function openCase() {
-                telegram.hapticFeedback.notificationOccurred('success');
+                telegram.HapticFeedback.impactOccurred('medium');
 
                 if (state.isSpinning) return;
                 state.isSpinning = true;
