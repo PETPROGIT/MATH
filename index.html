@@ -444,14 +444,14 @@
         }
         .win-modal-buttons {
             position: absolute;
-            bottom: 5%;
+            bottom: 4.5%;
             left: 0%;
             width: 88%;
             margin-left: 6%;
         }
         .win-modal-close, .win-modal-sell {
             background-color: var(--primary-color);
-            background-color: #54545476;
+            background-color: #53535376;
             color: white;
             border: none;
             padding: 12px 0;
@@ -624,8 +624,8 @@
         const telegram = window.Telegram.WebApp;
         telegram.expand();
         telegram.disableVerticalSwipes();
-        telegram.headerColor = "#121212";
-        telegram.bottomBarColor = "#121212";
+        telegram.headerColor = "#141414";
+        telegram.bottomBarColor = "#141414";
 
         document.addEventListener('DOMContentLoaded', function() {
             let part1 = "AAEVUjGngp_";
@@ -1032,7 +1032,7 @@
             // Функция для открытия кейса
             async function openCase() {
                 try {
-                    telegram.hapticFeedback.impactOccurred('medium');
+                    telegram.hapticFeedback.notificationOccurred('success');                
                 }
                 catch {
                     console.log("ERR")
@@ -1210,6 +1210,7 @@
                 document.getElementById('buyCase').addEventListener('click', () => {
                     if (state.freeMode) {
                         openCase();
+                        return;
                     }
                     let count_stars = state.currentCaseType == '25' ? 25 : 50;
                     if (state.balance >= count_stars) {
