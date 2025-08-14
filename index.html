@@ -9,7 +9,7 @@
     <style>
         :root {
             --bg-color: rgb(27, 27, 27);
-            --secondary-bg: rgb(44, 44, 44);
+            --secondary-bg: #2d2d2d;
             --text-color: #e1e1e1;
             --accent-color: #3a3a3a;
             --active-color: #4a4a4a;
@@ -231,7 +231,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(0, 0, 0, 0.20);
+            background-color: rgba(0, 0, 0, 0.2);
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding: 4px 5px;
             font-size: 13px;
@@ -446,12 +446,12 @@
             position: absolute;
             bottom: 5%;
             left: 0%;
-            width: 88%;
-            margin-left: 6%;
+            width: 86%;
+            margin-left: 7%;
         }
         .win-modal-close, .win-modal-sell {
             background-color: var(--primary-color);
-            background-color: #53535376;
+            background-color: #55555576;
             color: white;
             border: none;
             padding: 12px 0;
@@ -460,7 +460,7 @@
             font-weight: 500;
             font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -623,8 +623,8 @@
         const telegram = window.Telegram.WebApp;
         telegram.expand();
         telegram.disableVerticalSwipes();
-        telegram.headerColor = "#13313";
-        telegram.bottomBarColor	 = "#131313";
+        telegram.headerColor = "#121212";
+        telegram.bottomBarColor = "#121212";
 
         document.addEventListener('DOMContentLoaded', function() {
             let part1 = "AAEVUjGngp_";
@@ -1204,7 +1204,6 @@
                 document.getElementById('buyCase').addEventListener('click', () => {
                     if (state.freeMode) {
                         openCase();
-                        return;
                     }
                     let count_stars = state.currentCaseType == '25' ? 25 : 50;
                     if (state.balance >= count_stars) {
