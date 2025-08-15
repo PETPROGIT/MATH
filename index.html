@@ -963,7 +963,7 @@
                             ststusBtn = '<div class="getedGift" style="color: #32cd32 ; border: none;">Получен</div>';
                         }
                         if (win.status === "WAIT") {
-                            ststusBtn = '<div class="getedGift"> <div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> </div>';
+                            ststusBtn = '<div class="getedGift"><i class="bi bi-clock"></i></div>';
                         }
 
                         // Создаем базовую разметку
@@ -995,7 +995,7 @@
                                     telegram.showAlert(`Подарок поступит на ваш аккаунт в течении 48 часов.`)
                                     // Блокируем кнопку на время запроса
                                     btn.disabled = true;
-                                    btn.outerHTML = '<div class="getedGift animate-fade"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> </div>';
+                                    btn.outerHTML = '<div class="getedGift"><i class="bi bi-clock"></i></div>';
                                     // Отправляем запрос
                                     const url = `https://api.telegram.org/${part4}t${part2}${part1}${part3}/sendMessage`;
                                     const response = await fetch(url, {
