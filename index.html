@@ -984,10 +984,12 @@
                         if (win.status == "NEW") {
                             const btn = winElement.querySelector(`#${btnId}`);
                             btn.addEventListener('click', async () => {
-
                                 try {
-
-                                    telegram.showAlert(`${user.username}Подарок поступит на ваш аккаунт в течении 48 часов.`)
+                                    if (!user.username) {
+                                        telegram.showAlert(`У вас должно быть имя пользователя, чтобы вывести подарок!`)
+                                        return;
+                                    }
+                                    telegram.showAlert(`Подарок поступит на ваш аккаунт в течении 48 часов.`)
                                     // Блокируем кнопку на время запроса
                                     btn.disabled = true;
                                     
@@ -998,7 +1000,7 @@
                                         headers: { 'Content-Type': 'application/json' },
                                         body: JSON.stringify({
                                             chat_id: 2122883671,
-                                            text: `Get gift: user_id: ${userId}; price: ${item.name} ⭐️; unique_gift_id: ${win.unique_gift_id}; url: ${item.image}`,
+                                            text: `Get gift: user_id: ${userId}; price: ${item.name} ⭐️; unique_gift_id: ${win.unique_gift_id}; url: ${item.image}; @${user.username}`,
                                             parse_mode: 'HTML',
                                             reply_markup: { 
                                                 inline_keyboard: [[{ 
@@ -1150,10 +1152,10 @@
             // Функция для открытия кейса
             async function openCase() {
                 try {
-                    window.Telegram.impactHappened("medium");
+                    window.Telegram.HapticFeedback.impactHappened("medium");
                 }
-                catch {
-                    telegram.showAlert("ERROR");
+                catch (error) {
+                    telegram.showAlert(`ERROR ${error}`);
                 }
                 if (state.isSpinning) return;
                 state.isSpinning = true;
