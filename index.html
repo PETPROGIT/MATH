@@ -1151,6 +1151,53 @@
 
 
             // Функция для открытия кейса
+            // async function openCase() {
+            //     Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
+            //     if (state.isSpinning) return;
+            //     state.isSpinning = true;
+                
+            //     const caseRoulette = document.getElementById('caseRoulette');
+            //     const itemWidth = 130;
+            //     const containerWidth = document.querySelector('.case-roulette-container').offsetWidth;
+                
+            //     const randomIndex = Math.floor(Math.random() * state.rouletteItems.length);
+            //     const winItem = state.rouletteItems[randomIndex];
+                
+            //     const winItemDomIndex = (state.rouletteItems.length * 2) + randomIndex;
+            //     const targetPosition = -(winItemDomIndex * itemWidth) + (containerWidth / 2) - (itemWidth / 2);
+                
+            //     const startTime = Date.now();
+            //     const startPosition = 0;
+            //     const rotations = 5;
+            //     const totalDistance = rotations * state.rouletteItems.length * itemWidth + Math.abs(targetPosition);
+                
+            //     const spin = () => {
+            //         const elapsed = Date.now() - startTime;
+            //         const progress = Math.min(elapsed / state.spinDuration, 1);
+                    
+            //         const easing = (progress) => {
+            //             if (progress < 0.7) return progress / 0.7;
+            //             return 1 - Math.pow((progress - 0.7) / 0.3, 2);
+            //         };
+                    
+            //         const easedProgress = easing(progress);
+            //         const currentDistance = easedProgress * totalDistance;
+            //         const currentPosition = startPosition - (currentDistance * state.spinSpeed);
+                    
+            //         caseRoulette.style.transform = `translateX(${currentPosition}px)`;
+                    
+            //         if (progress < 1) {
+            //             requestAnimationFrame(spin);
+            //         } else {
+            //             caseRoulette.style.transform = `translateX(${targetPosition}px)`;
+            //             setTimeout(() => {
+            //                 showWinModal(winItem);
+            //                 state.isSpinning = false;
+            //             }, 500);
+            //         }
+            //     };
+            //     spin();
+            // }
             async function openCase() {
                 Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
                 if (state.isSpinning) return;
@@ -1160,35 +1207,45 @@
                 const itemWidth = 130;
                 const containerWidth = document.querySelector('.case-roulette-container').offsetWidth;
                 
+                // Выбираем случайный элемент для выигрыша
                 const randomIndex = Math.floor(Math.random() * state.rouletteItems.length);
                 const winItem = state.rouletteItems[randomIndex];
                 
+                // Рассчитываем целевую позицию для остановки
                 const winItemDomIndex = (state.rouletteItems.length * 2) + randomIndex;
                 const targetPosition = -(winItemDomIndex * itemWidth) + (containerWidth / 2) - (itemWidth / 2);
                 
                 const startTime = Date.now();
                 const startPosition = 0;
-                const rotations = 5;
+                
+                // Настройки анимации (можно вынести в state для регулировки)
+                const rotations = 5; // Количество полных оборотов
+                const spinDuration = state.spinDuration || 5000; // Длительность в ms
+                const spinSpeed = state.spinSpeed || 1; // Множитель скорости
+                
+                // Общее расстояние для прокрутки
                 const totalDistance = rotations * state.rouletteItems.length * itemWidth + Math.abs(targetPosition);
                 
                 const spin = () => {
                     const elapsed = Date.now() - startTime;
-                    const progress = Math.min(elapsed / state.spinDuration, 1);
+                    const progress = Math.min(elapsed / spinDuration, 1);
                     
-                    const easing = (progress) => {
-                        if (progress < 0.7) return progress / 0.7;
-                        return 1 - Math.pow((progress - 0.7) / 0.3, 2);
+                    // Кастомная easing-функция для плавного старта и остановки
+                    const easing = (t) => {
+                        // Плавное ускорение в начале и замедление в конце
+                        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
                     };
                     
                     const easedProgress = easing(progress);
                     const currentDistance = easedProgress * totalDistance;
-                    const currentPosition = startPosition - (currentDistance * state.spinSpeed);
+                    const currentPosition = startPosition - (currentDistance * spinSpeed);
                     
                     caseRoulette.style.transform = `translateX(${currentPosition}px)`;
                     
                     if (progress < 1) {
                         requestAnimationFrame(spin);
                     } else {
+                        // Точная остановка на выигрышном элементе
                         caseRoulette.style.transform = `translateX(${targetPosition}px)`;
                         setTimeout(() => {
                             showWinModal(winItem);
@@ -1196,6 +1253,8 @@
                         }, 500);
                     }
                 };
+                
+                // Запускаем анимацию
                 spin();
             }
 
@@ -1304,7 +1363,7 @@
                 
                 // Если переключились на профиль - обновляем данные
                 if (tabId === 'profile') {
-                    // updateWins();
+                    updateWins();
                     getBalance();
                 }
             }
