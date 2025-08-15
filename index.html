@@ -1351,10 +1351,10 @@
                 
                 // Кнопка открытия кейса
                 document.getElementById('buyCase').addEventListener('click', () => {
-                    if (state.freeMode) {
-                        openCase();
-                        return;
-                    }
+                    // if (state.freeMode) {
+                    //     openCase();
+                    //     return;
+                    // }
                     let count_stars = state.currentCaseType == '25' ? 25 : 50;
                     if (state.balance >= count_stars) {
                         state.balance -= count_stars;
@@ -1369,7 +1369,7 @@
                             function(isConfirmed) {
                                 if (isConfirmed) {
                                     count_stars = count_stars - state.balance;
-                                    PAY(String(userId), 1)
+                                    PAY(String(userId), count_stars)
                                     .then(invoiceLink => {
                                         try {
                                             Telegram.WebApp.openInvoice(String(invoiceLink), (status) => {
