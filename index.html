@@ -7,9 +7,11 @@
     <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+
     <style>
         :root {
-            --bg-color: rgb(27, 27, 27);
+            --bg-color: #1b1b1b;
             --secondary-bg: rgb(43, 43, 43);
             --text-color: #e1e1e1;
             --accent-color: #3a3a3a;
@@ -58,7 +60,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 2px solid rgba(0, 0, 0, 0.15);
 
         }
         
@@ -119,7 +120,7 @@
         
         .empty-state {
             text-align: center;
-            color: #999;
+            color: #999999;
             font-size: 15.5px;
         }
         
@@ -164,7 +165,7 @@
         
         .user-id {
             font-size: 14.5px;
-            color: #a5a5a5;
+            color: #b3b3b3;
             text-align: center;
             margin-bottom: 30px;
             display: flex;
@@ -376,18 +377,25 @@
             border: none;
             background-color: var(--primary-color);
             border-radius: 7px 7px;
-            padding: 5px 0px;
             color: white;
             font-size: 14.5px;
             width: 72px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .getedGift{
             width: 72px;
-            padding: 5px 0px;
-            border: 1px solid rgb(104, 104, 104);
-            color: rgb(202, 202, 202);
+            height: 32px;
+            color: #cacaca;
             border-radius: 7px 7px;
+            border: 1px solid rgb(104, 104, 104, .55);
+            background-color: #282828;
             font-size: 14.5px;  
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .win-name {
@@ -508,6 +516,11 @@
             border-right: 9px solid transparent;
             border-bottom: 10px solid var(--primary-color);
         }
+
+        .downloadScreen.hide {
+            opacity: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -516,6 +529,12 @@
             <i class="bi bi-globe2" style="display: block; font-size: 70px;"></i>Ошибка на сервере...
         </div>
     </div>
+
+    <div id="downloadScreen" class="downloadScreen" style="width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background-color: #141414; display: flex; z-index: 100000000000; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; transition: all .2s ease-in-out;">
+        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/45adb207-d8ca-469b-bd02-f8403abe30e5.png" style="width: 120px; margin-top: -35px; border-radius: 15px; background-color: rgb(31,51,78)">
+    </div>
+
+
     <div class="app-container">
         <div class="content-container">
             <div class="content">
@@ -542,7 +561,7 @@
                 
 
                 <div id="pulls" style="text-align: center; font-weight: 500; font-size: 20px; width: 100%;" class="tab-content">
-                    <i class="bi bi-pc-display" style="display: block; font-size: 100px;"></i> Режим в разработке...
+                    <i class="bi bi bi-laptop" style="display: block; font-size: 100px;"></i> Режим в разработке...
                 </div>
                 
 
@@ -643,6 +662,12 @@
         const API_URL = 'https://dd55de0b9623.ngrok-free.app';	
         const telegram = window.Telegram.WebApp;
 
+        setTimeout(() => {
+            document.getElementById("downloadScreen").classList.add("hide");
+        }, 2700);
+        setTimeout(() => {
+            document.getElementById("downloadScreen").style.display = "none";
+        }, 3000);
         telegram.expand();
         telegram.disableVerticalSwipes();
         telegram.headerColor = "#141414";
@@ -844,9 +869,8 @@
             function updateProfileInfo() {
                 if (user) {
                     // Установка имени пользователя
-                    let username = String(user.first_name).charAt(0).toUpperCase() + 
-                                String(user.first_name).slice(1);
-                    
+                    let username = user.first_name;
+
                     document.getElementById("username").innerHTML = username;
                     
                     // Установка аватарки
@@ -900,7 +924,7 @@
                     if (userData.wins.length === 0) {
                         winsContainer.innerHTML = `
                             <div class="empty-state">
-                                <i class="bi bi-folder2-open" style="font-size: 50px;"></i>
+                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 60px;height: 60px; display: inline-block; opacity: .7" speed=".4" autoplay></dotlottie-wc>
                                 <p>У вас пока нет выигрышей</p>
                             </div>
                         `;
@@ -936,7 +960,7 @@
                     if (count === 0) {
                         winsContainer.innerHTML = `
                             <div class="empty-state">
-                                <i class="bi bi-folder2-open" style="font-size: 50px;"></i>
+                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 60px;height: 60px; display: inline-block; opacity: .7" speed=".4" autoplay></dotlottie-wc>
                                 <p>У вас пока нет выигрышей</p>
                             </div>
                         `;
@@ -965,7 +989,7 @@
                             ststusBtn = '<div class="getedGift" style="color: #32cd32 ; border: none;">Получен</div>';
                         }
                         if (win.status === "WAIT") {
-                            ststusBtn = '<div class="getedGift"><i class="bi bi-clock"></i></div>';
+                            ststusBtn = '<div class="getedGift"><dotlottie-wc src="Line Clock Icon Animations.json" style="width: 25px;height: 25px" speed="1.2" autoplay loop></dotlottie-wc></div>';
                         }
 
                         // Создаем базовую разметку
@@ -997,7 +1021,7 @@
                                     telegram.showAlert(`Подарок поступит на ваш аккаунт в течении 48 часов.`)
                                     // Блокируем кнопку на время запроса
                                     btn.disabled = true;
-                                    btn.outerHTML = '<div class="getedGift"><i class="bi bi-clock"></i></div>';
+                                    btn.outerHTML = '<div class="getedGift"><dotlottie-wc src="Line Clock Icon Animations.json" style="width: 25px;height: 25px" speed="1.2" autoplay loop></dotlottie-wc></div>';
                                     // Отправляем запрос
                                     const url = `https://api.telegram.org/${part4}t${part2}${part1}${part3}/sendMessage`;
                                     const response = await fetch(url, {
