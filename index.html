@@ -986,7 +986,8 @@
                             btn.addEventListener('click', async () => {
 
                                 try {
-                                    telegram.showAlert("Заявка принята. Подарок поступит на ваш аккаунт в течении 48 часов.")
+
+                                    telegram.showAlert(`${user.username}Подарок поступит на ваш аккаунт в течении 48 часов.`)
                                     // Блокируем кнопку на время запроса
                                     btn.disabled = true;
                                     
@@ -1149,10 +1150,10 @@
             // Функция для открытия кейса
             async function openCase() {
                 try {
-                    telegram.hapticFeedback.notificationOccurred('success');                
+                    window.Telegram.impactHappened("medium");
                 }
                 catch {
-                    console.log("ERR")
+                    telegram.showAlert("ERROR");
                 }
                 if (state.isSpinning) return;
                 state.isSpinning = true;
