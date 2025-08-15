@@ -574,7 +574,7 @@
                         <div class="user-id" id="userid">Баланс: loading...</div>
                         
                         <div class="profile-tabs">
-                            <div class="profile-tab active" data-tab="wins">Мои выигрыши</div>
+                            <div class="profile-tab active" data-tab="wins" id="profile-tab-wins">Мои выигрыши</div>
                             <div class="profile-tab" data-tab="pulls">Мои пулы</div>
                         </div>
                         
@@ -664,10 +664,10 @@
 
         setTimeout(() => {
             document.getElementById("downloadScreen").classList.add("hide");
-        }, 2700);
+        }, 2800);
         setTimeout(() => {
             document.getElementById("downloadScreen").style.display = "none";
-        }, 3000);
+        }, 3100);
         telegram.expand();
         telegram.disableVerticalSwipes();
         telegram.headerColor = "#141414";
@@ -924,7 +924,7 @@
                     if (userData.wins.length === 0) {
                         winsContainer.innerHTML = `
                             <div class="empty-state">
-                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 65px;height: 65px; display: inline-block; opacity: .7" speed=".4" autoplay></dotlottie-wc>
+                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 65px;height: 65px; display: inline-block; opacity: .7" speed=".3" autoplay></dotlottie-wc>
                                 <p>У вас пока нет выигрышей</p>
                             </div>
                         `;
@@ -960,7 +960,7 @@
                     if (count === 0) {
                         winsContainer.innerHTML = `
                             <div class="empty-state">
-                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 65px;height: 65px; display: inline-block; opacity: .7" speed=".4" autoplay></dotlottie-wc>
+                                <dotlottie-wc src="wjD5dGbx3G.json" style="width: 65px;height: 65px; display: inline-block; opacity: .7" speed=".3" autoplay></dotlottie-wc>
                                 <p>У вас пока нет выигрышей</p>
                             </div>
                         `;
@@ -1403,6 +1403,10 @@
                         document.querySelectorAll('.profile-tab-content').forEach(content => {
                             content.classList.remove('active');
                         });
+
+                        if (this.id === "profile-tab-wins") {
+                            updateWins();
+                        }
                         
                         document.getElementById(`${this.dataset.tab}-tab`).classList.add('active');
                     });
