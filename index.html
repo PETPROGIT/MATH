@@ -429,12 +429,12 @@
         }
 
         .win-modal-image {
-            width: 75%;
+            width: 73%;
             aspect-ratio: 1/1;
             object-fit: cover;
             margin-bottom: 5px;
             border-radius: 10px;
-            margin-top: -72px;
+            margin-top: -78px;
         }
 
         .win-modal-title {
@@ -1152,7 +1152,7 @@
             // Функция для открытия кейса
             async function openCase() {
                 try {
-                    window.Telegram.HapticFeedback.impactHappened("medium");
+                    Telegram.WebApp.HapticFeedback.impactOccurred('light');
                 }
                 catch (error) {
                     telegram.showAlert(`ERROR ${error}`);
