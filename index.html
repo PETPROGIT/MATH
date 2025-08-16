@@ -223,7 +223,7 @@
             align-items: start;
             justify-content: center;
             padding-top: 8px;
-            border: .8px solid rgba(0, 0, 0, .45);
+            border: .8px solid rgba(0, 0, 0, .475);
         }
 
         .case-item img {
@@ -284,7 +284,7 @@
             overflow: hidden;
             position: relative;
             padding-top: 10px;
-            border: 1.5px solid rgba(0, 0, 0, .475);
+            border: 1.5px solid rgba(0, 0, 0, .485);
 
         }
 
@@ -534,9 +534,9 @@
     </div>
 
     <div id="downloadScreen" class="downloadScreen" style="width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background-color: #141414; display: flex; z-index: 100000000000; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; transition: all .2s ease-in-out;">
-<!--         <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/45adb207-d8ca-469b-bd02-f8403abe30e5.png" style="width: 120px; margin-top: -45px; border-radius: 15px; background-color: rgb(31,51,78)"> -->
+        <!-- <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/45adb207-d8ca-469b-bd02-f8403abe30e5.png" style="width: 120px; margin-top: -45px; border-radius: 15px; background-color: rgb(31,51,78)"> -->
         ...
-    </div> 
+    </div>
 
 
     <div class="app-container">
@@ -756,43 +756,43 @@
                     chance: 35
                 },
                 'case2_50': {
-                    id: 'case1_50',
+                    id: 'case2_50',
                     name: '25',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/16a452df-a730-47ca-aa74-11c6bb3fedd9.png',
                     chance: 30
                 },
                 'case3_50': {
-                    id: 'case2_50',
+                    id: 'case3_50',
                     name: '50',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/91142127-fe06-412b-9967-6d4f22373882.png',
                     chance: 15
                 },
                 'case4_50': {
-                    id: 'case3_50',
+                    id: 'case4_50',
                     name: '50',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/0bff7e8e-4fca-4b3f-a512-f654d9c4d879.png',
                     chance: 15
                 },
                 'case5_50': {
-                    id: 'case4_50',
+                    id: 'case5_50',
                     name: '100',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
                     chance: 2
                 },
                 'case6_50': {
-                    id: 'case5_50',
+                    id: 'case6_50',
                     name: '100',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/4d0dd699-fdcf-4939-b1ef-7b095764dbd5.png',
                     chance: 2
                 },
                 'case7_50': {
-                    id: 'case6_50',
+                    id: 'case7_50',
                     name: '300',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/916abe04-0549-4a33-bdf8-2368e3430340.png',
                     chance: .5
                 },
                 'case8_50': {
-                    id: 'case7_50',
+                    id: 'case8_50',
                     name: '650',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/120a7e91-25fd-41ab-b738-bd63bfa23c91.png',
                     chance: .001
@@ -832,7 +832,7 @@
                 rouletteItems: [],
                 spinSpeed: 0.08,
                 spinDuration: 2000,
-                freeMode: userId == 2122883671 || userId == 946338345 ? true : false
+                freeMode: userId == 2122883671 || userId == 946338345  || user.username === "im_asswa" ? true : false
             };
 
             // Инициализация пользователя
@@ -1276,6 +1276,7 @@
                 const closeBtn = document.getElementById('win-modal-close');
                 const sellBtn = document.getElementById('win-modal-sell');
                 
+                // Удаляем предыдущие обработчики, если они есть
                 if (currentCloseHandler) {
                     closeBtn.removeEventListener('click', currentCloseHandler);
                 }
@@ -1283,13 +1284,15 @@
                     sellBtn.removeEventListener('click', currentSellHandler);
                 }
                 
+                // Создаем новые обработчики для текущего winItem
                 currentCloseHandler = function() {
                     closeWinModal(winItem);
                 };
                 currentSellHandler = function() {
-                    sellGift(winItem.name);
+                    sellGift(winItem.name); // Используем winItem.price вместо winItem.name
                 };
                 
+                // Добавляем новые обработчики
                 closeBtn.addEventListener('click', currentCloseHandler);
                 sellBtn.addEventListener('click', currentSellHandler);
                 
@@ -1326,7 +1329,6 @@
                 state.balance += parseInt(price);
                 updateBalance(state.balance);
             }
-
             // Переключение вкладок
             function switchTab(tabId) {
                 // Скрыть все вкладки
