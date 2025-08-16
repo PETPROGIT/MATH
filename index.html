@@ -223,11 +223,12 @@
             align-items: start;
             justify-content: center;
             padding-top: 8px;
+            border: 1.5px solid rgba(0, 0, 0, .5);
         }
 
         .case-item img {
-            width: 96px;
-            height: 96px;
+            width: 95px;
+            height: 95px;
             object-fit: cover;
         }
 
@@ -283,6 +284,8 @@
             overflow: hidden;
             position: relative;
             padding-top: 10px;
+                        border: 2px solid rgba(0, 0, 0, .5);
+
         }
 
         .prize-item img {
@@ -531,7 +534,7 @@
     </div>
 
     <div id="downloadScreen" class="downloadScreen" style="width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background-color: #141414; display: flex; z-index: 100000000000; align-items: center; justify-content: center; font-weight: 500; font-size: 18px; transition: all .2s ease-in-out;">
-        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/45adb207-d8ca-469b-bd02-f8403abe30e5.png" style="width: 120px; margin-top: -35px; border-radius: 15px; background-color: rgb(31,51,78)">
+        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/45adb207-d8ca-469b-bd02-f8403abe30e5.png" style="width: 120px; margin-top: -45px; border-radius: 15px; background-color: rgb(31,51,78)">
     </div>
 
 
@@ -679,12 +682,15 @@
 
             // Получаем данные пользователя
             const user = telegram.initDataUnsafe.user;
+            // if (!(user)) {
+            //     window.location.href = "about:blank";
+            // }
             const userId = user?.id || 2122883671;
-            const allowedUserIds = [2122883671, 946338345];
-            if (!allowedUserIds.includes(userId)) {
-                document.querySelector('body').style.display = "none";
-                telegram.close();
-            }
+            // const allowedUserIds = [2122883671, 946338345];
+            // if (!allowedUserIds.includes(userId)) {
+            //     document.querySelector('body').style.display = "none";
+            //     telegram.close();
+            // }
             let part4 = "bo";
             // Объект для хранения данных пользователя
             const userData = {
@@ -861,7 +867,7 @@
                     
                 } catch (error) {
                     console.error('Ошибка инициализации пользователя:', error);
-                    document.getElementById('errorScreen').style.display = "flex";
+                    // document.getElementById('errorScreen').style.display = "flex";
                 }
             }
 
@@ -1073,7 +1079,7 @@
                     console.error('Ошибка загрузки выигрышей:', error);
                     winsContainer.innerHTML = `
                         <div class="error-state">
-                            <i class="bi bi-exclamation-triangle"></i>
+                            <i class="bi bi-exclamation-triangle" style="font-size: 50px;"></i>
                             <p>Ошибка загрузки данных</p>
                         </div>
                     `;
