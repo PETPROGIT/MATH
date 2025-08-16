@@ -223,7 +223,7 @@
             align-items: start;
             justify-content: center;
             padding-top: 8px;
-            border: .8px solid rgba(0, 0, 0, .45);
+            border: .8px solid rgba(0, 0, 0, .5);
         }
 
         .case-item img {
@@ -284,7 +284,7 @@
             overflow: hidden;
             position: relative;
             padding-top: 10px;
-            border: 1.5px solid rgba(0, 0, 0, .45);
+            border: 1.5px solid rgba(0, 0, 0, .5);
 
         }
 
@@ -770,13 +770,13 @@
                     id: 'case3_50',
                     name: '50',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/0bff7e8e-4fca-4b3f-a512-f654d9c4d879.png',
-                    chance: 16
+                    chance: 15
                 },
                 'case5_50': {
                     id: 'case4_50',
                     name: '100',
                     image: 'https://cdn-editing-temp.picsart.com/editing-temp-landings/032b2874-756b-4767-8a60-c238b1c0d921.png',
-                    chance: 4
+                    chance: 5
                 },
                 'case6_50': {
                     id: 'case5_50',
@@ -1098,7 +1098,7 @@
                 const rouletteItems = [];
                 
                 caseItems.forEach(item => {
-                    const count = parseFloat(item.chance);
+                    const count = (item.chance);
                     for (let i = 0; i < count; i++) {
                         rouletteItems.push(item);
                     }
@@ -1194,67 +1194,49 @@
                 Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
                 if (state.isSpinning) return;
                 state.isSpinning = true;
-
+                
                 const caseRoulette = document.getElementById('caseRoulette');
                 const itemWidth = 130;
-                const container = document.querySelector('.case-roulette-container');
-                const containerWidth = container.offsetWidth;
+                const containerWidth = document.querySelector('.case-roulette-container').offsetWidth;
                 
-                let currentPosition = 0;
-                let spinVelocity = 0;
-                let startTime = Date.now();
-                let spinDuration = 3000 + Math.random() * 1000; // 2–3 сек
-
+                const randomIndex = Math.floor(Math.random() * state.rouletteItems.length);
+                const winItem = state.rouletteItems[randomIndex];
+                
+                const winItemDomIndex = (state.rouletteItems.length * 2) + randomIndex;
+                const targetPosition = -(winItemDomIndex * itemWidth) + (containerWidth / 2) - (itemWidth / 2);
+                
+                const startTime = Date.now();
+                const startPosition = 0;
+                const rotations = 5;
+                const totalDistance = rotations * state.rouletteItems.length * itemWidth + Math.abs(targetPosition);
+                
                 const spin = () => {
                     const elapsed = Date.now() - startTime;
-                    const progress = Math.min(elapsed / spinDuration, 1);
-
-                    // 1. Разгон (первые 0.3 сек)
-                    if (elapsed < 300) {
-                        spinVelocity = easeOutQuad(elapsed / 300) * 25;
-                    } 
-                    // 2. Замедление (последние 0.5 сек)
-                    else if (elapsed > spinDuration - 500) {
-                        const decelProgress = (elapsed - (spinDuration - 500)) / 500;
-                        spinVelocity = 25 * (1 - easeInCubic(decelProgress));
-                    }
-                    // 3. Равномерное вращение (остальное время)
-                    else {
-                        spinVelocity = 25;
-                    }
-
-                    // Двигаем вперёд
-                    currentPosition -= spinVelocity;
+                    const progress = Math.min(elapsed / state.spinDuration, 1);
+                    
+                    const easing = (progress) => {
+                        if (progress < 0.7) return progress / 0.7;
+                        return 1 - Math.pow((progress - 0.7) / 0.3, 2);
+                    };
+                    
+                    const easedProgress = easing(progress);
+                    const currentDistance = easedProgress * totalDistance;
+                    const currentPosition = startPosition - (currentDistance * state.spinSpeed);
+                    
                     caseRoulette.style.transform = `translateX(${currentPosition}px)`;
-
-                    // Завершение
+                    
                     if (progress < 1) {
                         requestAnimationFrame(spin);
                     } else {
-                        // Определяем выигрышный элемент под стрелкой
-                        const scrollOffset = Math.abs(currentPosition) % (itemWidth * state.rouletteItems.length);
-                        const winIndex = Math.floor((scrollOffset + containerWidth / 2) / itemWidth) % state.rouletteItems.length;
-                        const targetPosition = -(winIndex * itemWidth) + (containerWidth / 2) - (itemWidth / 2);
-
-                        // Плавная фиксация позиции
-                        caseRoulette.style.transition = 'transform 0.3s ease-out';
                         caseRoulette.style.transform = `translateX(${targetPosition}px)`;
-                        
                         setTimeout(() => {
-                            caseRoulette.style.transition = '';
-                            showWinModal(state.rouletteItems[winIndex]);
+                            showWinModal(winItem);
                             state.isSpinning = false;
                         }, 500);
                     }
                 };
-
-                // Функции плавности
-                function easeOutQuad(t) { return t * (2 - t); }
-                function easeInCubic(t) { return t * t * t; }
-
                 spin();
             }
-
             // Добавление выигрыша пользователю через API
             async function addGiftToUser(giftId) {
                 try {
